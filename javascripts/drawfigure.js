@@ -1235,7 +1235,6 @@
 			{
 				var a = avatar.physique.horns;
 				if (a == 0) return;
-				a = 1;
 				
 				ctx.fillStyle=NIPPLESHADOW;
 				ctx.strokeStyle=NIPPLESHADOW;
