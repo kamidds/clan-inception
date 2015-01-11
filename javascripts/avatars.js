@@ -68,6 +68,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"hairc": getRandomInt(1, 20),
 		"skin": getRandomInt(1, 20),
 		"breastrows": 0,
+		"hornstype": 0,
 		"horns": 0
   }
 
@@ -275,7 +276,10 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.pushorientation)) that.Mods.pushorientation = 0;
 		if (isNaN(that.Mods.ironwill)) that.Mods.ironwill = 0;
 		if (isNaN(that.physique.breastrows)) that.physique.breastrows = 0;
-		if (isNaN(that.physique.horns)) that.physique.horns = 0;
+		if (isNaN(that.physique.horns)) {
+			that.physique.horns = 0;
+			that.physique.hornstype = 0;
+		}
 	}
 	
 	// Initialise

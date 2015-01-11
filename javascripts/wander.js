@@ -67,7 +67,7 @@ function Wander()
 
 function WanderBattle()
 {
-	player.round += 1;
+	advanceRound();
   if (player.women.length == 0){
 		MeetThoth();
 		return;
@@ -83,7 +83,7 @@ function WanderBattle()
 
 function WanderNothing()
 {
-	player.round += 1;
+	advanceRound();
 	new Message("Camp()", "<h1>Failure</h1><p>You failed to hunt anything or anyone, and return to camp</p>");
 }
 
@@ -93,7 +93,7 @@ function WanderNothing()
 function WanderFood(desc, actionyou, actionwoman)
 {
 	$(".stats").hide();
-	player.round += 1;
+	advanceRound();
   $("#output").html(desc);
 	$("#output").append("<h2>Who will eat it?</h2>\
 	<div id='eat_buttons' class='push--top'>\
@@ -142,7 +142,7 @@ function eatMelonWoman(index)
 		rival.Mods.breasts += 5;
 		if (rival.Mods.breasts > 200) rival.Mods.breasts = 200;
 		if (rival.physique.breasts > 30 && getRandomInt(1, 100) < 20) {
-			rival.Mods.breastrows += 1;
+			rival.physique.breastrows += 1;
 			new Message("", 
 				"<h1>" + rival.name + " Eats the Melon</h1>\
 				<p>" + rival.name + " eats the melon....</p>", true);
@@ -431,6 +431,8 @@ function nameThoth(){
 
   $("#name_woman").click(function(){
     rival.name = $("#woman_name").val().length > 0 ? $("#woman_name").val() : randomFemaleName();
+    rival.dysphoria = 0;
+    rival.activity = "She make camp feel warm again.";
 		redraw();
 		$(".stats").hide();
     player.women.push(rival);
