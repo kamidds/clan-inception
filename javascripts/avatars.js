@@ -59,7 +59,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	this.physique = {
 		"irisc": getRandomInt(1, 20),
 		"hairc": getRandomInt(1, 20),
-		"skin": getRandomInt(1, 20)
+		"skin": getRandomInt(1, 20),
+		"horns": 0
   }
 
 	// Methods
@@ -182,11 +183,17 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Traits
 	this.capTraits = function()
 	{
+		// Limit stats
 		$.each(AVATAR_TRAITS, function( index, trait ) {
 			that[trait] = minValue(that[trait], -4);
 			that[trait] = maxValue(Math.floor(that[trait]), 100);
 		});
 		
+		that["changra"] = minValue(that["changra"], 0);
+		that["changra"] = Math.floor(maxValue(that["changra"], 120 + that.Mods.changra + (that.women.length / 2) - that.femininity()));
+
+		
+		// Following needed to upgrade save games
 		if (isNaN(that.Mods.changra)) that.Mods.changra = 0;
 		if (isNaN(that.Mods.breasts)) that.Mods.breasts = 0;
 		if (isNaN(that.Mods.perception)) that.Mods.perception = 0;
@@ -200,9 +207,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.pushorientation)) that.Mods.pushorientation = 0;
 		if (isNaN(that.Mods.ironwill)) that.Mods.ironwill = 0;
 		if (isNaN(that.Mods.breastrows)) that.Mods.breastrows = 0;
-
-		that["changra"] = minValue(that["changra"], 0);
-		that["changra"] = Math.floor(maxValue(that["changra"], 120 + that.Mods.changra + (that.women.length / 2) - that.femininity()));
+		if (isNaN(that.physique.horns)) that.physique.horns = 0;
 	}
 	
 	// Initialise

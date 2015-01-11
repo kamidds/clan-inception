@@ -1231,6 +1231,31 @@
 				}
 			}
 			
+			function drawHorns(ctx)
+			{
+				var a = avatar.physique.horns;
+				if (a == 0) return;
+				a = 1;
+				
+				ctx.fillStyle=NIPPLESHADOW;
+				ctx.strokeStyle=NIPPLESHADOW;
+				ctx.beginPath();
+				
+				var b = a / 5;
+				
+				ctx.moveTo(62, 1 - b);
+				ctx.quadraticCurveTo(62, 13,
+														 68, 13
+														 );
+				ctx.moveTo(62, 8 - b);
+				ctx.quadraticCurveTo(67, 13,
+														 73, 13
+														 );
+				ctx.moveTo(68, 13);
+				ctx.stroke();
+				ctx.fill();
+			}
+			
 			function drawHalfFigure1(ctx)
 			{
 				ctx.fillStyle=SKINC;
@@ -1291,6 +1316,8 @@
 				ctx.fill();
 				drawHairFront(ctx);
 				ctx.stroke();
+				
+				drawHorns(ctx);				
 			}
 			
 			var canvas = document.getElementById(canvasname);
@@ -1376,12 +1403,12 @@
 						if (face < 10) heightread+=((11-face)/10);
 						var heightft = "" + Math.floor(heightread/12)+"\'";
 						var heightin = "" + Math.floor(heightread-(Math.floor(heightread/12)*12))+"\"";
-						heightread= heightft + heightin;
+						heightread = heightft + heightin;
 						ctx.font = "bold 400 12px/2 Unknown Font, serif";
 						ctx.fillText(heightread, 136, 19);
 						if (avatar.name != "rival") {
 							ctx.font = "bold 18px Unknown Font, serif";
-							ctx.fillText(avatar.name, 6, 24);
+							ctx.fillText(avatar.name, 6, 14);
 						}
 						ctx.beginPath();
 						var pos = 20;
