@@ -27,7 +27,7 @@ function Wander()
 			else if (val > 5 && val < 11) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
 			else if (val > 10 && val < 16) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
 			else if (val > 15 && val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else WanderBattle();
+			else WanderBattle("snow forest");
 		}
 	);
 	$("#wander_button_hills").click(
@@ -38,7 +38,7 @@ function Wander()
 			else if (val > 9 && val < 16) WanderFood("<h1>Found: Long Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatOrientationNutYou", "eatOrientationNutWoman");
 			else if (val > 15 && val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val > 19 && val < 25) WanderFood("<h1>Found: White Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatMilkNutYou", "eatMilkNutWoman");
-			else WanderBattle();
+			else WanderBattle("snow hills");
 		}
 	);
 	$("#wander_button_swamp").click(
@@ -48,7 +48,7 @@ function Wander()
 			else if (val > 5 && val < 15) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
 			else if (val > 14 && val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val > 19 && val < 25) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
-			else WanderBattle();
+			else WanderBattle("cold swamp");
 		}
 	);
 	$("#wander_button_beach").click(
@@ -58,7 +58,7 @@ function Wander()
 			else if (val > 5 && val < 10) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
 			else if (val > 9 && val < 15) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val > 14 && val < 20) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
-			else WanderBattle();
+			else WanderBattle("chilly beach");
 		}
 	);	
 }
@@ -66,7 +66,7 @@ function Wander()
 
 // Find a rival
 
-function WanderBattle()
+function WanderBattle(plc)
 {
 	advanceRound();
   if (player.women.length == 0){
@@ -75,7 +75,7 @@ function WanderBattle()
 	}
 	
   new Message("new Battle(getRandomInt(15, 35))", "<h1>Wandering</h1>\
-		<p>You wander through snow forest until spot lone man. He see you and grin. He think \
+		<p>You wander through " + plc + " until spot lone man. He see you and grin. He think \
 		you become womanfolk of his clan. He wrong.</p>");
 }
 
