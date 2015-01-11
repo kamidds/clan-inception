@@ -16,9 +16,11 @@ function Victory()
 
   $("#name_woman").click(function() {
     rival.name = $("#woman_name").val().length > 0 ? $("#woman_name").val() : getUnusedFemaleName();
+    rival.dysphoria = rival.dysphoria - rival.masculinity();
     player.women.push(rival);
     player.experience += minValue(Math.floor(rival.femininity() / 10), 5);
     rival.round = player.round;		// day captured
+    rival.setActivity();
     Camp();
   })
 }

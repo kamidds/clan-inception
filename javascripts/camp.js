@@ -45,22 +45,11 @@ function displayWomen(){
 		//editWoman();
 		
 		// Description
-		var fate = "";
-		if (rival.submissiveness > 75) {
-			fate += rival.name + " obedient. ";
-		}
-		if (rival.domesticity > 75) {
-			fate += "She tend dutifully to camp. ";
-		}
-		if (rival.allure > 75) {
-			fate += "She spread legs for you every night. ";
-		}
-		if (rival.maternalism > 75) {
-			fate += "She already swelling with your child.";
-		};
-		if (fate.length === 0) fate = "She useless and willful.";
+		var fate = rival.activity;
 		
 		if (rival.round > 0) fate += "<br>Brought to clan on day " + rival.round;
+		if (rival.pregnancy > 30) fate += "<br>Is swelling with child.";
+		if (rival.children > 0) fate += "<br>Has already birthed " + rival.children + " child.";
 
 		$("#woman_display").append("<p>"+fate+"</p>");
 		redraw();
