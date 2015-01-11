@@ -630,7 +630,8 @@ function Battle(rivalFemininity) {
 		if (perceptionRate >= getRandomInt(0, 100))  {
 			return accurateTell();
     } 
-		return deceptiveTell();
+		if (player.Mods.perception < 4) return deceptiveTell();
+		return "";
   }
 
   function Round(playerAction) {
