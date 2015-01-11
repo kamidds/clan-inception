@@ -1231,9 +1231,7 @@
 			function drawHorns(ctx)
 			{
 				var a = avatar.physique.horns;
-				var c = avatar.physique.hornstype;
-				
-				//if (a == 0) return;
+				if (a == 0) return;
 				ctx.lineWidth = 1.5;
 
 				ctx.fillStyle=IRISCOLOR;
@@ -1241,6 +1239,7 @@
 				ctx.beginPath();
 				
 				var b = a / 2;
+				var c = avatar.physique.hornstype;
 				
 				if (c == 1) {
 					// Cow
