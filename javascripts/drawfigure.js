@@ -101,13 +101,11 @@
 					ctx.quadraticCurveTo(83-d, 202+f/*-e*/ + l,
 															 83-d, 200+f);
 				} else {
-					if (avatar.isPregnant() == false) {
-						x = 0;
-						ctx.moveTo(75+e,200+f);
-						ctx.quadraticCurveTo(76+d,202+f-(d+d),73+d+e,234+f-(a+a+d));
-						ctx.lineTo(84-(d+e),234+f-(a+a+d));
-						ctx.quadraticCurveTo(83-d,202+f-(d+d),83-d,200+f);
-					}
+					x = 0;
+					ctx.moveTo(75+e,200+f);
+					ctx.quadraticCurveTo(76+d,202+f-(d+d),73+d+e,234+f-(a+a+d));
+					ctx.lineTo(84-(d+e),234+f-(a+a+d));
+					ctx.quadraticCurveTo(83-d,202+f-(d+d),83-d,200+f);
 				}
 				ctx.fill();
 				ctx.stroke();
@@ -207,19 +205,13 @@
 				ctx.quadraticCurveTo(79, 209+a, 74-(b+c), 200-a);
 			}
 			
-			function drawPregs(ctx)
-			{
+			function drawPregs(ctx){
 				ctx.beginPath();
 				
 				//Pregnancy
-				var aw = 0;
-				if (avatar.name != "rival" && avatar.maternalism > 70) aw = (avatar.maternalism - 70) * -1;
 				
-				if (aw < 0) {/*Upper Waist*/
-					var lw = (aw * -1)/10;
-					if (lw < 1) lw = 1;
-					else if (lw > 2) lw = 2;
-					ctx.lineWidth = lw;
+				if (waist<0){/*Upper Waist*/
+					ctx.lineWidth = (waist*-1)/10;
 					
 					var a = shoulders;
 					var b = a/2;
@@ -232,11 +224,13 @@
 					var y = 0;
 					var z = 0;
 					var h = 0;
-					if (aw < 0) h = aw * -.5;
-					if (a < 11) ctx.moveTo(47+(c*3)-(h/4),149-(h+a));
+					if (waist<0){h=waist*-.5;}
+					if (a < 11){
+						ctx.moveTo(47+(c*3)-(h/4),149-(h+a));
+					}
 					else{
 						a = shoulders-11;
-						if (shoulders>20) a=9;
+						if (shoulders>20){a=9;}
 						a = a*.9;
 						b = a/2;
 						c = a/3;
@@ -244,62 +238,65 @@
 						e = a/10;
 						f = a*2;
 						g = 0;
-						if ((hips*3)+ass>70) g = (a/9)*((((hips*3)+ass)-70)/5);
-						if (7-legs>0) g+=(7-legs);
-						if (g>14) g=14;
+						if ((hips*3)+ass>70){g = (a/9)*((((hips*3)+ass)-70)/5);}
+						if (7-legs>0){g+=(7-legs);}
+						if (g>14){g=14;}
 						z = g/2;
 						x = a;
 						y = x/2;
 						var m = 0;
-						if (shoulders>20) m=(shoulders-20)/10;
+						if (shoulders>20){m=(shoulders-20)/10;}
 						ctx.moveTo(56-(d+(h/4)),138-(b+h));
 					}
-							
+					
+					
 					/*Waist*/
 					a = 0;
 					if (shoulders < 11) {
 						a=(11-shoulders);
-						if (aw < 1) {
-							a+=aw/4;
-							if (a < 0) a=0;
+						if (waist<1){
+							a+=waist/4;
+							if (a<0){a=0;}
 						}
 					}
 					b = (hips+ass)*3;
-					if (ass>20) b+=(ass-20)*8;
-					c = aw/3;
-					if (c<-5) c=-5;
+					if (ass>20){b+=(ass-20)*8};
+					c = waist/3;
+					if (c<-5){c=-5;}
 					d = hips/2;
-					if (hips>20) d=10;
+					if (hips>20){d=10;}
 					f = 0;
 					
 					y = b;
-					if (y>100) y=100;
+					if (y>100){y=100;}
 					ctx.bezierCurveTo(53+c-((a/1.2)+(y/40.7)+(f/5)+(b/60)),145+(c/5)+(y/27.5),52+c-((a/1.6)+(f/2)+(b/40)),161-((y/6.875)),50.3+(c/2)-((a/2)+(b/20)+(f/2)),175-((y/22)+d));
 					
 					a = (hips+ass)/2;
-					if (a > 25) a=25;
-					if (legs < 5) a+=5-legs;
+					if (a > 25){a=25;}
+					if (legs < 5){a+=5-legs;}
 					b = a/2;
 					c = a/3;
 					d = a/5;
 					e = a/10;
 					g = hips/20;
-					var h = aw*-1.7;
+					var h = waist*-1.7;
 					var i = 0;
 					var j = .0001;
-					if (legs > 11) j = ((legs-11)/2)-((21-hips)/4);
-					if (j < .0001) j=.0001;
-					if (legs > 11) i = (legs-11)*2;
-					if (i > 9) i=9;
-					if (ass>hips) g = (ass)/20;
-					if (g>1) g=1;
+					if (legs > 11){j = ((legs-11)/2)-((21-hips)/4);}
+					if (j < .0001){j=.0001;}
+					if (legs > 11){i = (legs-11)*2;}
+					if (i > 9){i=9;}
+					if (ass>hips){g = (ass)/20;}
+					if (g>1){g=1;}
 					x = ass/5;
 					y = ass/15;
 					z = 0;
-					if (legs < 11) z = (11-legs)/2;
-					if (a>15 && z > 20-a) z=20-a;
+					if (legs < 11){z = (11-legs)/2;}
+					if (a>15 && z > 20-a){z=20-a;}
 					ctx.quadraticCurveTo(65-((ass/8)+(hips/12)+(h/2)+f),197+f+f,79,206);
 				}
+				
+				return ctx;
 			}
 			
 			function drawBellyButton(ctx)
@@ -1235,6 +1232,7 @@
 			{
 				var a = avatar.physique.horns;
 				if (a == 0) return;
+				a = 1;
 				
 				ctx.fillStyle=NIPPLESHADOW;
 				ctx.strokeStyle=NIPPLESHADOW;
@@ -1299,7 +1297,7 @@
 				drawPregs(ctx);
 				ctx.stroke();
 				
-				for (var i = avatar.Mods.breastrows; i > 0; i--) {
+				for (var i = avatar.physique.breastrows; i > 0; i--) {
 					var sz = breasts * (1.0 - (i * 0.1));
 					if (sz < (breasts / 2)) sz = breasts / 2;
 					var pos = (16 - i) * i;
@@ -1316,7 +1314,7 @@
 				drawHairFront(ctx);
 				ctx.stroke();
 				
-				drawHorns(ctx);				
+				drawHorns(ctx);		
 			}
 			
 			var canvas = document.getElementById(canvasname);
@@ -1402,12 +1400,12 @@
 						if (face < 10) heightread+=((11-face)/10);
 						var heightft = "" + Math.floor(heightread/12)+"\'";
 						var heightin = "" + Math.floor(heightread-(Math.floor(heightread/12)*12))+"\"";
-						heightread = heightft + heightin;
+						heightread= heightft + heightin;
 						ctx.font = "bold 400 12px/2 Unknown Font, serif";
 						ctx.fillText(heightread, 136, 19);
 						if (avatar.name != "rival") {
 							ctx.font = "bold 18px Unknown Font, serif";
-							ctx.fillText(avatar.name, 6, 14);
+							ctx.fillText(avatar.name, 6, 24);
 						}
 						ctx.beginPath();
 						var pos = 20;
@@ -1468,12 +1466,10 @@
 						// Draw central/common parts of the body, part 2
 						ctx.strokeStyle=SKINCB;
 						ctx.fillStyle=SKINC;
-						if (avatar.isPregnant() == false) {
-							drawBelly(ctx);
-							ctx.fill();
-							drawBelly(ctx);
-							ctx.stroke();
-						}					
+						drawBelly(ctx);
+						ctx.fill();
+						drawBelly(ctx);
+						ctx.stroke();		
 						drawNose(ctx);
 						ctx.stroke();
 						drawCleavage(ctx);

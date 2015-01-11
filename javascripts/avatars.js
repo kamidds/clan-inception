@@ -22,6 +22,13 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Power
   this.changra = getRandomInt(75, 100);
 
+  // Motherhood
+  this.pregnancy = 0;
+  this.children = 0;
+
+  // Desire
+  this.desire = 0;
+
 	// Traits
   this.submissiveness = submissiveness;
   this.domesticity = domesticity;
@@ -30,6 +37,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
   this.orientation = orientation;
 	
 	this.description = { }
+  this.activity = "";
   this.natural = { }
   this.minimums = { }
   this.maximums = { }
@@ -39,7 +47,6 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	this.Mods = {
 		"ironwill": 0,
 		"breasts": 0,
-		"breastrows": 0,
 		"changra": 0,
 		"perception": 0,
 		"amazon": 0,
@@ -60,6 +67,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"irisc": getRandomInt(1, 20),
 		"hairc": getRandomInt(1, 20),
 		"skin": getRandomInt(1, 20),
+		"breastrows": 0,
 		"horns": 0
   }
 
@@ -87,12 +95,74 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     })
     this.capTraits();
   }
-	
-	this.isPregnant = function() {
-		var aw = 0;
-		if (this.name != "rival" && this.maternalism > 70) aw = (this.maternalism - 70) * -1;
-		return aw < 0;
-	}
+
+  this.isPregnant = function() {
+    return this.pregnancy > 0;
+  }
+
+  this.advancePregnancy = function() {
+    if (this.isPregnant()) {
+      this.pregnancy += 2.5;
+      if (this.pregnancy >= getRandomInt(90, 105)) {
+        this.pregnancy = 0;
+        this.children += 1;
+      }
+    }
+  }
+
+  this.advanceDesire = function() {
+    function calcDesire(subject, object) {
+      var objectGender = object.masculinity() - 50;
+      var desire = 0;
+      if (subject.orientation < 50) {
+       desire = objectGender < 0 ? objectGender * -2 : (objectGender * 2) * ((50 - subject.orientation) / 50)
+      }
+      else {
+       desire = objectGender > 0 ? objectGender * 2 : (objectGender * -2) * ((subject.orientation - 50) / 50)
+      }
+      return (desire * ((110 - subject.submissiveness) / 100)) / 2;
+    }
+
+    var herDesire = calcDesire(this, player);
+    var playerDesire = calcDesire(player, this);
+
+    this.desire += herDesire + playerDesire;
+  }
+
+  this.fornicate = function() {
+    if (!this.isPregnant()){
+      var prob = this.maternalism - getRandomInt(50, 100);
+      if (prob > 0) { this.pregnancy = 2.5; }
+    }
+    this.desire = 0;
+  }
+
+  this.confused = function(avatar) {
+    avatar.activity = "She spend week wandering camp, muttering to self about how she man. Strong man. But she walk more and more like woman. She cry easier and easier like woman. Soon she forget how be man and only be woman for you."
+    avatar.dysphoria -= getRandomInt(1, 10);
+  }
+
+  this.tend = function(avatar) {
+    avatar.activity = "She dutifully tend camp for you."
+  }
+
+  this.fuck = function(avatar) {
+    avatar.activity = "She come to you every night and spread legs. You fuck like animal."
+    avatar.fornicate();
+  }
+
+  this.setActivity = function() {
+    var probs = [
+      { action: this.confused, prob: this.dysphoria },
+      { action: this.tend, prob: this.domesticity + getRandomInt(-25, 25) },
+      { action: this.fuck, prob: this.desire + getRandomInt(-25, 25) }
+    ]
+
+    probs = probs.sort(function(a,b) {
+      return b.prob - a.prob;
+    });
+    probs[0].action(this);
+  }
 	
 	// Physique
 
@@ -147,7 +217,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     }
 
     this.calcWaist = function() {
-      return (this.allure * 3)/10;
+      return ((this.allure * 3) - this.pregnancy * 5)/10;
     }
 
     this.calcHips = function() {
@@ -183,7 +253,6 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Traits
 	this.capTraits = function()
 	{
-		// Limit stats
 		$.each(AVATAR_TRAITS, function( index, trait ) {
 			that[trait] = minValue(that[trait], -4);
 			that[trait] = maxValue(Math.floor(that[trait]), 100);
@@ -191,9 +260,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		
 		that["changra"] = minValue(that["changra"], 0);
 		that["changra"] = Math.floor(maxValue(that["changra"], 120 + that.Mods.changra + (that.women.length / 2) - that.femininity()));
-
 		
-		// Following needed to upgrade save games
+			// Following needed to upgrade save games
 		if (isNaN(that.Mods.changra)) that.Mods.changra = 0;
 		if (isNaN(that.Mods.breasts)) that.Mods.breasts = 0;
 		if (isNaN(that.Mods.perception)) that.Mods.perception = 0;
@@ -206,7 +274,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.pushallure)) that.Mods.pushallure = 0;
 		if (isNaN(that.Mods.pushorientation)) that.Mods.pushorientation = 0;
 		if (isNaN(that.Mods.ironwill)) that.Mods.ironwill = 0;
-		if (isNaN(that.Mods.breastrows)) that.Mods.breastrows = 0;
+		if (isNaN(that.physique.breastrows)) that.physique.breastrows = 0;
 		if (isNaN(that.physique.horns)) that.physique.horns = 0;
 	}
 	
@@ -230,6 +298,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     "allure": getRandomInt(35, 95),
     "orientation": getRandomInt(50, 95)
   }
+
+  this.dysphoria = this.masculinity();
 	
   this.pushPreference = getRandomInt(0, 2);
   this.drainPreference = getRandomInt(0, 2);
