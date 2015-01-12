@@ -24,7 +24,7 @@ function loadGame()
 		if (sg != undefined) {
 			cnt++;
 			var temp = JSON.parse(sg.player);
-			$("#loading").append("<button myid='" + id + "' id='load_button_"+id+"' class='btn btn-woman push--right' title='" + temp.name + ", day " + temp.round + "'>Save Game "+id+"</button>");
+			$("#loading").append("<button myid='" + id + "' id='load_button_"+id+"' class='btn btn-woman push--right' title='" + temp.name + ", week " + temp.round + "'>Save Game "+id+"</button>");
 			
 			$("#load_button_"+id).click(
 				function() { loadGameId($(this).attr("myid")); }
@@ -54,7 +54,7 @@ function loadGameId(id)
 		if (player.women[i].activity == "") player.women[i].setActivity();
 		if (player.women[i].name == "") player.women[i].name = getUnusedFemaleName();
 	}
-	alert("Loaded Game " + id + ", day " + player.round);
+	alert("Loaded Game " + id + ", week " + player.round);
 	resetRival();
 	rival.name = "";
 	new Camp();

@@ -7,7 +7,7 @@ function Camp(){
   player.rest();
 	resetRival();
 	
-	$("#output").html("<h1>Camp - Day " + player.round + "</h1>");
+	$("#output").html("<h1>Camp - Week " + player.round + "</h1>");
 	
 	//editPlayer();
 
@@ -47,7 +47,7 @@ function displayWomen(){
 		// Description
 		var fate = rival.activity;
 		
-		if (rival.round > 0) fate += "<br>Brought to clan on day " + rival.round;
+		if (rival.round > 0) fate += "<br>Brought to clan on week " + rival.round;
 		if (rival.pregnancy > 30) fate += "<br>Is swelling with child.";
 		if (rival.children > 0) fate += "<br>Has already birthed " + rival.children + " child.";
 
