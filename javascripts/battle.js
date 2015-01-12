@@ -349,7 +349,7 @@ function Battle(rivalFemininity) {
 		var resist = rate > 0 ? avatar.Mods["resist" + trait] : 0;
 		rate = rate - resist;
 		if (rate < 2) rate = 2;		// minimum change
-		alert(avatar.name + " " + trait + " changes " + rate);
+		//alert(avatar.name + " " + trait + " changes " + rate);
     var projectedTotal = avatar[trait] + rate;
     if (special === true) {
       if (projectedTotal > avatar.maximums[trait]) {
