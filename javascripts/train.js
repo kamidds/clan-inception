@@ -175,7 +175,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)	
+	)
 	// Push Orientation
 	$("#train_buttons").append("<button id='train_button_11' class='btn btn-woman push--right' title='Force Orientation more!'>Orientation+</button>");
 	$("#train_button_11").click(
@@ -188,7 +188,76 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)	
+	)
+	
+	$("#train_buttons").append("<br>");
+	
+	// Resist Dominance
+	$("#train_buttons").append("<button id='train_button_13' class='btn btn-woman push--right' title='Resist Submissiveness!'>Resist Submissiveness</button>");
+	$("#train_button_13").click(
+		function(){
+			if (player.experience >= 5) {
+				player.experience -= 5;
+				player.Mods.resistsubmissiveness += 1;
+				$("#train_display").append("<p>You not beome a follower so easily!</p>");
+				drawStats();
+			}
+			IsDoneTraining();
+		}
+	)
+	
+	// Resist Domesticity
+	$("#train_buttons").append("<button id='train_button_14' class='btn btn-woman push--right' title='Resist Domesticity!'>Resist Domesticity</button>");
+	$("#train_button_14").click(
+		function(){
+			if (player.experience >= 5) {
+				player.experience -= 5;
+				player.Mods.resistdomesticity += 1;
+				$("#train_display").append("<p>You not become one to look after camp so easily!</p>");
+				drawStats();
+			}
+			IsDoneTraining();
+		}
+	)
+	// Resist Maternalism
+	$("#train_buttons").append("<button id='train_button_15' class='btn btn-woman push--right' title='Resist Maternalism!'>Resist Maternalism</button>");
+	$("#train_button_15").click(
+		function(){
+			if (player.experience >= 5) {
+				player.experience -= 5;
+				player.Mods.resistmaternalism += 1;
+				$("#train_display").append("<p>You not become a mother so easily!</p>");
+				drawStats();
+			}
+			IsDoneTraining();
+		}
+	)
+	// Resist Allure
+	$("#train_buttons").append("<button id='train_button_16' class='btn btn-woman push--right' title='Resist Alure!'>Resist Allure</button>");
+	$("#train_button_16").click(
+		function(){
+			if (player.experience >= 5) {
+				player.experience -= 5;
+				player.Mods.resistallure += 1;
+				$("#train_display").append("<p>You not become pretty so easily!</p>");
+				drawStats();
+			}
+			IsDoneTraining();
+		}
+	)
+	// Resist Orientation
+	$("#train_buttons").append("<button id='train_button_17' class='btn btn-woman push--right' title='Resist Orientation!'>Resist Orientation</button>");
+	$("#train_button_17").click(
+		function(){
+			if (player.experience >= 5) {
+				player.experience -= 5;
+				player.Mods.resistorientation += 1;
+				$("#train_display").append("<p>You not gain desire as much</p>");
+				drawStats();
+			}
+			IsDoneTraining();
+		}
+	)
 }
 
 function IsDoneTraining()

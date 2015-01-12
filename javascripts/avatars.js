@@ -56,7 +56,12 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"pushdomesticity": 0,
 		"pushmaternalism": 0,
 		"pushallure": 0,
-		"pushorientation": 0
+		"pushorientation": 0,
+		"resistsubmissiveness": 0,
+		"resistdomesticity": 0,
+		"resistmaternalism": 0,
+		"resistallure": 0,
+		"resistorientation": 0		
 	}
 
 	// Your women
@@ -280,6 +285,12 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 			that.physique.horns = 0;
 			that.physique.hornstype = 0;
 		}
+		if (isNaN(that.Mods.resistsubmissiveness)) that.Mods.resistsubmissiveness = 0;
+		if (isNaN(that.Mods.resistdomesticity)) that.Mods.resistdomesticity = 0;
+		if (isNaN(that.Mods.resistmaternalism)) that.Mods.resistmaternalism = 0;
+		if (isNaN(that.Mods.resistallure)) that.Mods.resistallure = 0;
+		if (isNaN(that.Mods.resistorientation)) that.Mods.resistorientation = 0;
+		
 	}
 	
 	// Initialise

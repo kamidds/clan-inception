@@ -339,8 +339,17 @@ function Battle(rivalFemininity) {
     }
   }
 
+	// Apply a change from combat where
+	// avatar = affected party
+	// trait = "submissiveness" etc
+	// rate = amount
+	// special
   function processAction(avatar, trait, rate, special) {
     rate = Math.ceil(rate);
+		var resist = rate > 0 ? avatar.Mods["resist" + trait] : 0;
+		rate = rate - resist;
+		if (rate < 2) rate = 2;		// minimum change
+		alert(avatar.name + " " + trait + " changes " + rate);
     var projectedTotal = avatar[trait] + rate;
     if (special === true) {
       if (projectedTotal > avatar.maximums[trait]) {
@@ -411,14 +420,17 @@ function Battle(rivalFemininity) {
 
     this.standard = function() {
       if (this.avatar[this.trait] > 50) {
-        var rate = standardChange() * (this.avatar[this.trait]/50)
+        var rate = standardChange() * (this.avatar[this.trait]/50);
+        if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);
         processAction(this.opponent, this.trait, rate)
         processAction(this.avatar, this.trait, rate * -1)
         this.avatar[this.trait] = minValue(this.avatar[this.trait], 50);
         description += this.avatar === player ? "You push "+this.trait+" into rival man. " : "Rival man push "+this.trait+" into you. ";
       }
       else {
-        processAction(this.opponent, this.trait, standardChange())
+				var rate = standardChange();
+        if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);				
+        processAction(this.opponent, this.trait, rate)
         description += this.avatar === player ? "You summon mother ancestors, which fill rival man with "+this.trait+". " : "Rival man summon mother ancestors, which whisper to you secrets of "+this.trait+". ";
       }
     }
