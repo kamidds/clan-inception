@@ -51,8 +51,11 @@ function loadGameId(id)
 	for (var i = 0; i < temp.women.length; i += 1 ) {
 		player.women[i] = new Avatar(50, 95, 90, 75, 80);
 		jQuery.extend(player.women[i], temp.women[i]);
+		if (player.women[i].activity == "") player.women[i].setActivity();
+		if (player.women[i].name == "") player.women[i].name = getUnusedFemaleName();
 	}
 	alert("Loaded Game " + id + ", day " + player.round);
+	resetRival();
 	rival.name = "";
 	new Camp();
 }
@@ -78,6 +81,7 @@ function saveGameId(id)
 	var str = JSON.stringify(JSON.decycle(sg));
 	localStorage.setItem('clani' + id, str);
 	alert("Saved.");
+	resetRival();
 	rival.name = "";
 	Camp();
 }

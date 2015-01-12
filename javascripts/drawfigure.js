@@ -1228,6 +1228,38 @@
 				}
 			}
 			
+			function drawHorns(ctx)
+			{
+				var a = avatar.physique.horns;
+				if (a == 0) return;
+				ctx.lineWidth = 1.5;
+
+				ctx.fillStyle=IRISCOLOR;
+				ctx.strokeStyle=NIPPLESHADOW;
+				ctx.beginPath();
+				
+				var b = a / 2;
+				var c = avatar.physique.hornstype;
+				
+				if (c == 1) {
+					// Cow
+					ctx.moveTo(62, 1 - b);
+					ctx.quadraticCurveTo(61, 20, 65, 20);
+					ctx.moveTo(62, 8 - b);
+					ctx.quadraticCurveTo(65, 15, 71, 15);
+					ctx.lineTo(65, 20);
+				} else {
+					// Demon
+					ctx.moveTo(62, 1 - b);
+					ctx.lineTo(65, 20);
+					ctx.moveTo(62, 1 - b);
+					ctx.lineTo(71, 15);
+					ctx.lineTo(65, 20);					
+				}
+				ctx.stroke();
+				ctx.fill();
+			}
+			
 			function drawHalfFigure1(ctx)
 			{
 				ctx.fillStyle=SKINC;
@@ -1272,7 +1304,7 @@
 				drawPregs(ctx);
 				ctx.stroke();
 				
-				for (var i = avatar.Mods.breastrows; i > 0; i--) {
+				for (var i = avatar.physique.breastrows; i > 0; i--) {
 					var sz = breasts * (1.0 - (i * 0.1));
 					if (sz < (breasts / 2)) sz = breasts / 2;
 					var pos = (16 - i) * i;
@@ -1288,6 +1320,8 @@
 				ctx.fill();
 				drawHairFront(ctx);
 				ctx.stroke();
+				
+				drawHorns(ctx);		
 			}
 			
 			var canvas = document.getElementById(canvasname);

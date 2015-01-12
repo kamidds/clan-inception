@@ -73,7 +73,6 @@ function displayWomen(){
 	});
 }
 
-/*
 function editPlayer()
 {
 	$("#output").append(
@@ -95,6 +94,11 @@ function editPlayer()
 				<tr><td>Push Allure</td><td><div id='slider_pallure_p'></div></td></tr>\
 				<tr><td>Push Orientation</td><td><div id='slider_porientation_p'></div></td></tr>\
 				<tr><td>Iron Will+</td><td><div id='slider_ironwill_p'></div></td></tr>\
+				<tr><td>Resist Submissiveness</td><td><div id='slider_psubmissiveness_r'></div></td></tr>\
+				<tr><td>Resist Domesticity</td><td><div id='slider_pdomesticity_r'></div></td></tr>\
+				<tr><td>Resist Maternalism</td><td><div id='slider_pmaternalism_r'></div></td></tr>\
+				<tr><td>Resist Allure</td><td><div id='slider_pallure_r'></div></td></tr>\
+				<tr><td>Resist Orientation</td><td><div id='slider_porientation_r'></div></td></tr>\
 			</table></font><br/>\
 	");
 	
@@ -162,6 +166,26 @@ function editPlayer()
 		player.Mods.ironwill = ui.value; 
 		redraw();
 	}});
+	$("#slider_psubmissiveness_r").slider({value:player.Mods.resistsubmissiveness,min:0,max:20,slide:function(event, ui) {
+		player.Mods.resistsubmissiveness = ui.value; 
+		redraw();
+	}});
+	$("#slider_pdomesticity_r").slider({value:player.Mods.resistdomesticity,min:0,max:20,slide:function(event, ui) {
+		player.Mods.resistdomesticity = ui.value; 
+		redraw();
+	}});
+	$("#slider_pmaternalism_r").slider({value:player.Mods.resistmaternalism,min:0,max:20,slide:function(event, ui) {
+		player.Mods.resistmaternalism = ui.value; 
+		redraw();
+	}});	
+	$("#slider_pallure_r").slider({value:player.Mods.resistallure,min:0,max:20,slide:function(event, ui) {
+		player.Mods.resistallure = ui.value; 
+		redraw();
+	}});	
+	$("#slider_porientation_r").slider({value:player.Mods.resistorientation,min:0,max:20,slide:function(event, ui) {
+		player.Mods.resistorientation = ui.value; 
+		redraw();
+	}});	
 }
 
 function editWoman()
@@ -179,6 +203,7 @@ function editWoman()
 			<tr><td>Breast Rows</td><td><div id='slider_rows'></div></td></tr>\
 			<tr><td>Futa+</td><td><div id='slider_futa'></div></td></tr>\
 			<tr><td>Amazon+</td><td><div id='slider_amazon'></div></td></tr>\
+			<tr><td>Horns</td><td><div id='slider_horns'></div></td></tr>\
 		</table></font>\
 		");
 	$('#expandwoman').click(function(){
@@ -217,9 +242,12 @@ function editWoman()
 		rival.Mods.futa = ui.value; 
 		redraw();
 	}});
-	$("#slider_rows").slider({value:rival.Mods.breastrows,min:0,max:6,slide:function(event, ui) {
-		rival.Mods.breastrows = ui.value; 
+	$("#slider_rows").slider({value:rival.physique.breastrows,min:0,max:6,slide:function(event, ui) {
+		rival.physique.breastrows = ui.value; 
+		redraw();
+	}});
+	$("#slider_horns").slider({value:rival.physique.horns,min:0,max:10,slide:function(event, ui) {
+		rival.physique.horns = ui.value; 
 		redraw();
 	}});	
 }
-*/

@@ -47,7 +47,6 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	this.Mods = {
 		"ironwill": 0,
 		"breasts": 0,
-		"breastrows": 0,
 		"changra": 0,
 		"perception": 0,
 		"amazon": 0,
@@ -57,7 +56,12 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"pushdomesticity": 0,
 		"pushmaternalism": 0,
 		"pushallure": 0,
-		"pushorientation": 0
+		"pushorientation": 0,
+		"resistsubmissiveness": 0,
+		"resistdomesticity": 0,
+		"resistmaternalism": 0,
+		"resistallure": 0,
+		"resistorientation": 0		
 	}
 
 	// Your women
@@ -67,7 +71,10 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	this.physique = {
 		"irisc": getRandomInt(1, 20),
 		"hairc": getRandomInt(1, 20),
-		"skin": getRandomInt(1, 20)
+		"skin": getRandomInt(1, 20),
+		"breastrows": 0,
+		"hornstype": 0,
+		"horns": 0
   }
 
 	// Methods
@@ -257,6 +264,10 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 			that[trait] = maxValue(Math.floor(that[trait]), 100);
 		});
 		
+		that["changra"] = minValue(that["changra"], 0);
+		that["changra"] = Math.floor(maxValue(that["changra"], 120 + that.Mods.changra + (that.women.length / 2) - that.femininity()));
+		
+			// Following needed to upgrade save games
 		if (isNaN(that.Mods.changra)) that.Mods.changra = 0;
 		if (isNaN(that.Mods.breasts)) that.Mods.breasts = 0;
 		if (isNaN(that.Mods.perception)) that.Mods.perception = 0;
@@ -269,10 +280,17 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.pushallure)) that.Mods.pushallure = 0;
 		if (isNaN(that.Mods.pushorientation)) that.Mods.pushorientation = 0;
 		if (isNaN(that.Mods.ironwill)) that.Mods.ironwill = 0;
-		if (isNaN(that.Mods.breastrows)) that.Mods.breastrows = 0;
-
-		that["changra"] = minValue(that["changra"], 0);
-		that["changra"] = Math.floor(maxValue(that["changra"], 120 + that.Mods.changra + (that.women.length / 2) - that.femininity()));
+		if (isNaN(that.physique.breastrows)) that.physique.breastrows = 0;
+		if (isNaN(that.physique.horns)) {
+			that.physique.horns = 0;
+			that.physique.hornstype = 0;
+		}
+		if (isNaN(that.Mods.resistsubmissiveness)) that.Mods.resistsubmissiveness = 0;
+		if (isNaN(that.Mods.resistdomesticity)) that.Mods.resistdomesticity = 0;
+		if (isNaN(that.Mods.resistmaternalism)) that.Mods.resistmaternalism = 0;
+		if (isNaN(that.Mods.resistallure)) that.Mods.resistallure = 0;
+		if (isNaN(that.Mods.resistorientation)) that.Mods.resistorientation = 0;
+		
 	}
 	
 	// Initialise

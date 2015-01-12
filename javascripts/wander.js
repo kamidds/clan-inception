@@ -27,17 +27,18 @@ function Wander()
 			else if (val > 5 && val < 11) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
 			else if (val > 10 && val < 16) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
 			else if (val > 15 && val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else WanderBattle();
+			else WanderBattle("snow forest");
 		}
 	);
 	$("#wander_button_hills").click(
 		function(){
-			var val = getRandomInt(1, 30);
+			var val = getRandomInt(1, 35);
 			if (val < 6) WanderNothing();
 			else if (val > 5 && val < 10) WanderFood("<h1>Found: Clean Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDomesticNutYou", "eatDomesticNutWoman");
 			else if (val > 9 && val < 16) WanderFood("<h1>Found: Long Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatOrientationNutYou", "eatOrientationNutWoman");
 			else if (val > 15 && val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else WanderBattle();
+			else if (val > 19 && val < 25) WanderFood("<h1>Found: White Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatMilkNutYou", "eatMilkNutWoman");
+			else WanderBattle("snow hills");
 		}
 	);
 	$("#wander_button_swamp").click(
@@ -47,7 +48,7 @@ function Wander()
 			else if (val > 5 && val < 15) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
 			else if (val > 14 && val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val > 19 && val < 25) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
-			else WanderBattle();
+			else WanderBattle("cold swamp");
 		}
 	);
 	$("#wander_button_beach").click(
@@ -57,7 +58,7 @@ function Wander()
 			else if (val > 5 && val < 10) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
 			else if (val > 9 && val < 15) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val > 14 && val < 20) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
-			else WanderBattle();
+			else WanderBattle("chilly beach");
 		}
 	);	
 }
@@ -65,7 +66,7 @@ function Wander()
 
 // Find a rival
 
-function WanderBattle()
+function WanderBattle(plc)
 {
 	advanceRound();
   if (player.women.length == 0){
@@ -74,7 +75,7 @@ function WanderBattle()
 	}
 	
   new Message("new Battle(getRandomInt(15, 35))", "<h1>Wandering</h1>\
-		<p>You wander through snow forest until spot lone man. He see you and grin. He think \
+		<p>You wander through " + plc + " until spot lone man. He see you and grin. He think \
 		you become womanfolk of his clan. He wrong.</p>");
 }
 
@@ -118,10 +119,10 @@ function WanderFood(desc, actionyou, actionwoman)
 
 function eatMelonYou()
 {
-	if (player.Mods.breasts < 100) {
+	if (player.Mods.breasts < 200) {
 		// Can benefit
 		player.Mods.breasts += 5;
-		if (player.Mods.breasts > 100) player.Mods.breasts = 100;
+		if (player.Mods.breasts > 200) player.Mods.breasts = 200;
 		new Message("Camp()", 
 			"<h1>Eat the Melon</h1>\
 			<p>You eat the melon and feel your ancestors spirit, teaching you how to make your women feed your children better.</p>");
@@ -142,7 +143,7 @@ function eatMelonWoman(index)
 		rival.Mods.breasts += 5;
 		if (rival.Mods.breasts > 200) rival.Mods.breasts = 200;
 		if (rival.physique.breasts > 30 && getRandomInt(1, 100) < 20) {
-			rival.Mods.breastrows += 1;
+			rival.physique.breastrows += 1;
 			new Message("", 
 				"<h1>" + rival.name + " Eats the Melon</h1>\
 				<p>" + rival.name + " eats the melon....</p>", true);
@@ -348,6 +349,77 @@ function eatOrientationNutWoman(index)
 	new Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
 		<p>" + rival.name + " eats the long nut and the power of the nut make her desire you.</p>");
+}
+
+
+// MilkNut
+
+function eatMilkNutYou()
+{
+	if (player.Mods.breasts < 200) {
+		// Can benefit
+		player.Mods.breasts += 5;
+		if (player.Mods.breasts > 200) player.Mods.breasts = 200;
+		if (player.physique.horns < 20) {
+			player.physique.horns += 1;
+			player.physique.hornstype = 1;
+		}			
+		if (player.physique.breasts > 25 && getRandomInt(1, 100) < 20) player.physique.breastrows += 1;
+
+		new Message("Camp()", 
+			"<h1>Eat the Melon</h1>\
+			<p>You eat the nut and feel your ancestors spirit, teaching you how to make your women feed your children better.</p>");
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>Eat the White Nut</h1>\
+			<p>You eat the nut and your belly full</p>");		
+	}
+	redraw();
+}
+
+function eatMilkNutWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	if (rival.Mods.breasts < 200) {
+		// Can benefit
+		rival.Mods.breasts += 2;
+		if (rival.Mods.breasts > 200) rival.Mods.breasts = 200;
+		if (rival.physique.horns < 20) {
+			rival.physique.horns += 1;
+			rival.physique.hornstype = 1;
+		}
+		if (rival.physique.breasts > 25 && getRandomInt(1, 100) < 20) {
+			rival.physique.breastrows += 1;
+			new Message("", 
+				"<h1>" + rival.name + " Eats the White Nut</h1>\
+				<p>" + rival.name + " eats the nut....</p>", true);
+			setTimeout(function() {
+				$("#message").append("and her breasts swell a little and grow a new set of breasts");
+				if (rival.physique.horns == 1) $("#message").append(" and grows a set of cow horns.");
+				$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+			}, 1000);
+		} else {
+			new Message("", 
+				"<h1>" + rival.name + " Eats the White Nut</h1>\
+				<p>" + rival.name + " eats the nut....</p>", true);
+			setTimeout(function() {
+				$("#message").append("and her breasts swell a little");
+				if (rival.physique.horns == 1) $("#message").append(" and grows a set of cow horns.");
+				$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+			}, 1000);
+		}
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>" + rival.name + " Eats the White Nut</h1>\
+			<p>" + rival.name + " eats the nut and her belly full</p>");		
+	}
 }
 
 // Find Thoth
