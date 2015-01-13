@@ -16,11 +16,9 @@ function Victory()
 
   $("#name_woman").click(function() {
     rival.name = $("#woman_name").val().length > 0 ? $("#woman_name").val() : getUnusedFemaleName();
-    rival.dysphoria = rival.dysphoria - rival.masculinity();
     player.women.push(rival);
     player.experience += minValue(Math.floor(rival.femininity() / 10), 5);
     rival.round = player.round;		// day captured
-    rival.setActivity();
     Camp();
   })
 }
@@ -348,9 +346,11 @@ function Battle(rivalFemininity) {
 	// special
   function processAction(avatar, trait, rate, special) {
     rate = Math.ceil(rate);
-		var resist = rate > 0 ? avatar.Mods["resist" + trait] : 0;
-		rate = rate - resist;
-		if (rate < 2) rate = 2;		// minimum change
+		if (rate > 0) {
+			var resist = rate > 0 ? avatar.Mods["resist" + trait] : 0;
+			rate = rate - resist;
+			if (rate < 2) rate = 2;		// minimum change
+		}
 		//alert(avatar.name + " " + trait + " changes " + rate);
     var projectedTotal = avatar[trait] + rate;
     if (special === true) {

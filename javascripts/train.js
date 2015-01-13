@@ -12,7 +12,7 @@ function Train()
 	
 	// Iron Will
 	if (player.Mods.ironwill < 4) {
-		$("#train_buttons").append("<button id='train_button_12' class='btn btn-woman push--right' title='You more unstoppable!'>Iron Will+</button>");
+		$("#train_buttons").append("<button id='train_button_12' class='btn btn-woman push--right' title='You more unstoppable!'>Iron Will+ (" + player.Mods.ironwill + ")</button>");
 		$("#train_button_12").click(
 			function(){
 				if (player.experience >= 5 && player.Mods.ironwill < 4) {
@@ -27,7 +27,7 @@ function Train()
 	}
 	
 	// Breast size increase
-	$("#train_buttons").append("<button id='train_button_1' class='btn btn-woman push--right' title='Increase way new women care for children'>Mother+</button>");
+	$("#train_buttons").append("<button id='train_button_1' class='btn btn-woman push--right' title='Increase way new women care for children'>Mother+ (" + (player.Mods.breasts / 10) + ")</button>");
 	$("#train_button_1").click(
 		function(){
 			if (player.experience >= 5) {
@@ -36,6 +36,7 @@ function Train()
 					player.Mods.breasts += 10;
 					$("#train_display").append("<p>Your new Women will feed their children more</p>");
 					drawStats();
+					$("#train_button_1").html("Mother+ (" + (player.Mods.breasts / 10) + ")");
 				} else $("#train_display").append("<p><b>No bigger possible.</b></p>");
 			}
 			IsDoneTraining();
@@ -43,7 +44,7 @@ function Train()
 	)
 	
 	// Perception increase
-	$("#train_buttons").append("<button id='train_button_2' class='btn btn-woman push--right' title='See though your enemies'>Perception+</button>");
+	$("#train_buttons").append("<button id='train_button_2' class='btn btn-woman push--right' title='See though your enemies'>Perception+ (" + (player.Mods.perception / 5) + ")</button>");
 	$("#train_button_2").click(
 		function(){
 			if (player.experience >= 5) {
@@ -51,13 +52,14 @@ function Train()
 				player.Mods.perception += 5;
 				$("#train_display").append("<p>You see more prey and enemies ways</p>");
 				drawStats();
+				$("#train_button_2").html("Perception+ (" + (player.Mods.perception / 5) + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	
 	// Changra increase
-	$("#train_buttons").append("<button id='train_button_3' class='btn btn-woman push--right' title='More Power!'>Changra+</button>");
+	$("#train_buttons").append("<button id='train_button_3' class='btn btn-woman push--right' title='More Power!'>Changra+ (" + (player.Mods.changra / 5) + ")</button>");
 	$("#train_button_3").click(
 		function(){
 			if (player.experience >= 5) {
@@ -66,13 +68,14 @@ function Train()
 				player.rest();
 				$("#train_display").append("<p>You have more Power to expand your clan</p>");
 				drawStats();
+				$("#train_button_3").html("Changra+ (" + (player.Mods.changra / 5) + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	
 	// Amazon
-	$("#train_buttons").append("<button id='train_button_4' class='btn btn-woman push--right' title='Strong women!'>Amazon+</button>");
+	$("#train_buttons").append("<button id='train_button_4' class='btn btn-woman push--right' title='Strong women!'>Amazon+ (" + (player.Mods.amazon / 2) + ")</button>");
 	$("#train_button_4").click(
 		function(){
 			if (player.experience >= 5) {
@@ -81,6 +84,7 @@ function Train()
 					player.Mods.amazon += 2;
 					$("#train_display").append("<p>Your new women will be stronger!</p>");
 					drawStats();
+					$("#train_button_4").html("Amazon+ (" + (player.Mods.amazon / 2) + ")");
 				} else $("#train_display").append("<p><b>No more possible.</b></p>");
 			}
 			IsDoneTraining();
@@ -88,7 +92,7 @@ function Train()
 	)
 	
 	// Cocks
-	$("#train_buttons").append("<button id='train_button_5' class='btn btn-woman push--right' title='Big Cock!'>Cock+</button>");
+	$("#train_buttons").append("<button id='train_button_5' class='btn btn-woman push--right' title='Big Cock!'>Cock+ (" + (player.Mods.cock / 2) + ")</button>");
 	$("#train_button_5").click(
 		function(){
 			if (player.experience >= 5) {
@@ -98,6 +102,7 @@ function Train()
 					if (player.Mods.cock > 20) player.Mods.cock = 20;
 					$("#train_display").append("<p>Your cock will grow!</p>");
 					redraw();
+					$("#train_button_5").html("Cock+ (" + (player.Mods.cock / 2) + ")");
 				} else $("#train_display").append("<p><b>No more possible.</b></p>");
 			}
 			IsDoneTraining();
@@ -105,7 +110,7 @@ function Train()
 	)
 
 	// Futa
-	$("#train_buttons").append("<button id='train_button_6' class='btn btn-woman push--right' title='Futa!'>Futa+</button>");
+	$("#train_buttons").append("<button id='train_button_6' class='btn btn-woman push--right' title='Futa!'>Futa+ (" + (player.Mods.futa / 2) + ")</button>");
 	$("#train_button_6").click(
 		function(){
 			if (player.experience >= 5) {
@@ -116,6 +121,7 @@ function Train()
 					if (player.Mods.futa > 2) $("#train_display").append("<p>Your women will have bigger cocks!</p>");
 					else $("#train_display").append("<p>Your women will also have cocks!</p>");
 					drawStats();
+					$("#train_button_6").html("Futa+ (" + (player.Mods.futa / 2) + ")");
 				} else $("#train_display").append("<p><b>No more possible.</b></p>");
 			}
 			IsDoneTraining();
@@ -125,7 +131,7 @@ function Train()
 	$("#train_buttons").append("<br>");
 	
 	// Push Dominance
-	$("#train_buttons").append("<button id='train_button_8' class='btn btn-woman push--right' title='Force Submissiveness more!'>Submissiveness+</button>");
+	$("#train_buttons").append("<button id='train_button_8' class='btn btn-woman push--right' title='Force Submissiveness more!'>Submissiveness+ (" + (player.Mods.pushsubmissiveness / 2) + ")</button>");
 	$("#train_button_8").click(
 		function(){
 			if (player.experience >= 5) {
@@ -133,12 +139,13 @@ function Train()
 				player.Mods.pushsubmissiveness += 2;
 				$("#train_display").append("<p>You make others more submissive!</p>");
 				drawStats();
+				$("#train_button_8").html("Submissiveness+ (" + (player.Mods.pushsubmissiveness / 2) + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	// Push Domesticity
-	$("#train_buttons").append("<button id='train_button_9' class='btn btn-woman push--right' title='Force Domesticity more!'>Domesticity+</button>");
+	$("#train_buttons").append("<button id='train_button_9' class='btn btn-woman push--right' title='Force Domesticity more!'>Domesticity+ (" + (player.Mods.pushdomesticity / 2) + ")</button>");
 	$("#train_button_9").click(
 		function(){
 			if (player.experience >= 5) {
@@ -146,12 +153,13 @@ function Train()
 				player.Mods.pushdomesticity += 2;
 				$("#train_display").append("<p>You make others more domestic!</p>");
 				drawStats();
+				$("#train_button_9").html("Domesticity+ (" + (player.Mods.pushdomesticity / 2) + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	// Push Maternalism
-	$("#train_buttons").append("<button id='train_button_7' class='btn btn-woman push--right' title='Force Maternalism more!'>Maternalism+</button>");
+	$("#train_buttons").append("<button id='train_button_7' class='btn btn-woman push--right' title='Force Maternalism more!'>Maternalism+ (" + (player.Mods.pushmaternalism / 2) + ")</button>");
 	$("#train_button_7").click(
 		function(){
 			if (player.experience >= 5) {
@@ -159,12 +167,13 @@ function Train()
 				player.Mods.pushmaternalism += 2;
 				$("#train_display").append("<p>You make others more of a mother!</p>");
 				drawStats();
+				$("#train_button_7").html("Maternalism+ (" + (player.Mods.pushmaternalism / 2) + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	// Push Allure
-	$("#train_buttons").append("<button id='train_button_10' class='btn btn-woman push--right' title='Force Alure more!'>Allure+</button>");
+	$("#train_buttons").append("<button id='train_button_10' class='btn btn-woman push--right' title='Force Alure more!'>Allure+ (" + (player.Mods.pushallure / 2) + ")</button>");
 	$("#train_button_10").click(
 		function(){
 			if (player.experience >= 5) {
@@ -172,12 +181,13 @@ function Train()
 				player.Mods.pushallure += 2;
 				$("#train_display").append("<p>You make others more pretty!</p>");
 				drawStats();
+				$("#train_button_10").html("Allure+ (" + (player.Mods.pushallure / 2) + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	// Push Orientation
-	$("#train_buttons").append("<button id='train_button_11' class='btn btn-woman push--right' title='Force Orientation more!'>Orientation+</button>");
+	$("#train_buttons").append("<button id='train_button_11' class='btn btn-woman push--right' title='Force Orientation more!'>Orientation+ (" + (player.Mods.pushorientation / 2) + ")</button>");
 	$("#train_button_11").click(
 		function(){
 			if (player.experience >= 5) {
@@ -185,6 +195,7 @@ function Train()
 				player.Mods.pushorientation += 2;
 				$("#train_display").append("<p>You make others desire you more</p>");
 				drawStats();
+				$("#train_button_11").html("Orientation+ (" + (player.Mods.pushorientation / 2) + ")");
 			}
 			IsDoneTraining();
 		}
@@ -193,7 +204,7 @@ function Train()
 	$("#train_buttons").append("<br>");
 	
 	// Resist Dominance
-	$("#train_buttons").append("<button id='train_button_13' class='btn btn-woman push--right' title='Resist Submissiveness!'>Resist Submissiveness</button>");
+	$("#train_buttons").append("<button id='train_button_13' class='btn btn-woman push--right' title='Resist Submissiveness!'>Resist Submissiveness (" + player.Mods.resistsubmissiveness + ")</button>");
 	$("#train_button_13").click(
 		function(){
 			if (player.experience >= 5) {
@@ -201,13 +212,14 @@ function Train()
 				player.Mods.resistsubmissiveness += 1;
 				$("#train_display").append("<p>You not beome a follower so easily!</p>");
 				drawStats();
+				$("#train_button_13").html("Resist Submissiveness (" + player.Mods.resistsubmissiveness + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	
 	// Resist Domesticity
-	$("#train_buttons").append("<button id='train_button_14' class='btn btn-woman push--right' title='Resist Domesticity!'>Resist Domesticity</button>");
+	$("#train_buttons").append("<button id='train_button_14' class='btn btn-woman push--right' title='Resist Domesticity!'>Resist Domesticity (" + player.Mods.resistdomesticity + ")</button>");
 	$("#train_button_14").click(
 		function(){
 			if (player.experience >= 5) {
@@ -215,12 +227,13 @@ function Train()
 				player.Mods.resistdomesticity += 1;
 				$("#train_display").append("<p>You not become one to look after camp so easily!</p>");
 				drawStats();
+				$("#train_button_14").html("Resist Domesticity (" + player.Mods.resistdomesticity + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	// Resist Maternalism
-	$("#train_buttons").append("<button id='train_button_15' class='btn btn-woman push--right' title='Resist Maternalism!'>Resist Maternalism</button>");
+	$("#train_buttons").append("<button id='train_button_15' class='btn btn-woman push--right' title='Resist Maternalism!'>Resist Maternalism (" + player.Mods.resistmaternalism + ")</button>");
 	$("#train_button_15").click(
 		function(){
 			if (player.experience >= 5) {
@@ -228,12 +241,13 @@ function Train()
 				player.Mods.resistmaternalism += 1;
 				$("#train_display").append("<p>You not become a mother so easily!</p>");
 				drawStats();
+				$("#train_button_15").html("Resist Maternalism (" + player.Mods.resistmaternalism + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	// Resist Allure
-	$("#train_buttons").append("<button id='train_button_16' class='btn btn-woman push--right' title='Resist Alure!'>Resist Allure</button>");
+	$("#train_buttons").append("<button id='train_button_16' class='btn btn-woman push--right' title='Resist Allure!'>Resist Allure (" + player.Mods.resistallure + ")</button>");
 	$("#train_button_16").click(
 		function(){
 			if (player.experience >= 5) {
@@ -241,12 +255,13 @@ function Train()
 				player.Mods.resistallure += 1;
 				$("#train_display").append("<p>You not become pretty so easily!</p>");
 				drawStats();
+				$("#train_button_16").html("Resist Allure (" + player.Mods.resistallure + ")");
 			}
 			IsDoneTraining();
 		}
 	)
 	// Resist Orientation
-	$("#train_buttons").append("<button id='train_button_17' class='btn btn-woman push--right' title='Resist Orientation!'>Resist Orientation</button>");
+	$("#train_buttons").append("<button id='train_button_17' class='btn btn-woman push--right' title='Resist Orientation!'>Resist Orientation (" + player.Mods.resistorientation + ")</button>");
 	$("#train_button_17").click(
 		function(){
 			if (player.experience >= 5) {
@@ -254,6 +269,7 @@ function Train()
 				player.Mods.resistorientation += 1;
 				$("#train_display").append("<p>You not gain desire as much</p>");
 				drawStats();
+				$("#train_button_17").html("Resist Orientation (" + player.Mods.resistorientation + ")");
 			}
 			IsDoneTraining();
 		}
