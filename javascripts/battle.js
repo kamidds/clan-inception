@@ -38,9 +38,9 @@ function Battle(rivalFemininity) {
   var pushCount = 0;
   var drainCount = 0;
   var reflectCount = 0;
+	var playerDefeated = false;
 
   var description = ""
-  var playerDefeated = false;
 
   var nextRivalAction = new RivalAction();
 
@@ -128,11 +128,6 @@ function Battle(rivalFemininity) {
 
   function standardChange() { return getRandomInt(7, 13); }
 
-  function checkForDefeat() {
-    if (player["physique"].testes > 11 && player.submissiveness >= rival.desires["submissiveness"] && player.domesticity >= rival.desires["domesticity"] && player.maternalism >= rival.desires["maternalism"] && player.allure >= rival.desires["allure"] && player.orientation >= rival.desires["orientation"]) playerDefeated = true;
-    else playerDefeated = false;
-  }
-
   function checkForVictoryButton() {
     if (rival["physique"].testes > 11) {
       $("#victory_button_container").html("<button id='victory_button' class='btn btn-victory'>Claim Her</button>");
@@ -174,12 +169,15 @@ function Battle(rivalFemininity) {
       this.trait = desiredTraits[0].trait;
     }
 
-    if (player["physique"].testes > 11 && player.submissiveness >= rival.desires["submissiveness"] && player.domesticity >= rival.desires["domesticity"] && player.maternalism >= rival.desires["maternalism"] && player.allure >= rival.desires["allure"] && player.orientation >= rival.desires["orientation"]) playerDefeated = true;
-    else playerDefeated = false;
+		// Does your rival hesitate?
     if (rival.submissiveness/4 >= getRandomInt(0, 100) && rival.Mods.ironwill < 4) {
 			if ((rival.Mods.ironwill * 25) < getRandomInt(1, 100)) return new Hesitate(rival);
 			else return new Rest(rival);
-    } else if (playerDefeated === true) {
+    }
+		
+		// Are you defeated
+		if (player["physique"].testes > 11 && player.submissiveness >= rival.desires["submissiveness"] && player.domesticity >= rival.desires["domesticity"] && player.maternalism >= rival.desires["maternalism"] && player.allure >= rival.desires["allure"] && player.orientation >= rival.desires["orientation"]) {
+			playerDefeated = true;
       var fates = [];
       if (player.submissiveness > 75) {
         fates.push("meekly obeying his wishes");
@@ -200,11 +198,44 @@ function Battle(rivalFemininity) {
       fate = "<p>With mighty howl, rival man stomp and point palm at you. His Changra surge into you, and your Changra evaporate like mist in sunlight. You collapse at rival man's feet, and he stare down as you pant and try collect your Changra. Finally he laugh and offer you hand.</p>\
       <p>'You have no Changra,' he say, pulling you up. 'You womanfolk. You mine now, and you be called "+randomFemaleName()+".'</p>\
       <p>You very confused, and you follow man back to clan. You struggle remember what was to be man, but those thoughts become strange to you, until finally all you know is to be woman.</p>\
-      <p>Rival man in your thoughts always now. Soon, you "+fate+".</p>"
-      new Message("location.reload();", fate)
-    } else if (rival.changra < getRandomInt(0, 70)) {
+      <p>Rival man in your thoughts always now. Soon, you "+fate+".</p>";
+			
+			if (fates.length === 0) {
+				// Escape, not feminine enough
+				new Message("Camp();", fate);
+				return new Rest(rival);
+			}
+			
+			// Captured
+			$(".stats").hide();
+			$("#output").html("<div id='message'>"+fate+"</div>\
+				<div id='end_buttons' class='push--top'></div>\
+				");
+	
+			// add choices
+			$("#end_buttons").append("<button id='end_button_submit' class='btn btn-woman push--right' title='Submit'>Submit</button>");
+			$("#end_button_submit").click(
+				function(){
+					new Message("location.reload();", "You give up and submit to your man");
+				}
+			);
+			if (player.Mods.ironwill > 0) {
+				$("#end_buttons").append("<button id='end_button_resist' class='btn btn-woman push--right' title='Resist'>Resist</button>");
+					$("#end_button_resist").click(
+					function() {
+						player.Mods.changra -= 5;
+						new Message("Camp();", "You resist you desire for the man and run away, you weaker for this");
+					}
+				)
+			} else $("#end_buttons").append("<p><b>You not strong in will enough to do anything else.</b></p>");
+			return new Rest(rival);
+    }
+		
+		// Do they Rest
+		if (rival.changra < getRandomInt(0, 70)) {
       return new Rest(rival)
     } else {
+			// They do another action
       var pushPropability = drainCount + rival.pushPreference + getRandomInt(0, rival.unpredictability);
       var drainProbability = reflectCount + rival.drainPreference + getRandomInt(0, rival.unpredictability);
       var reflectProbability = pushCount + rival.reflectPreference + getRandomInt(0, rival.unpredictability);
@@ -659,15 +690,17 @@ function Battle(rivalFemininity) {
 
     processRound(playerAction, nextRivalAction);
     processCounts(playerAction);
+		player.capTraits();
+    rival.capTraits();
+		
+		redraw();
 
     nextRivalAction = new RivalAction();
+		if (playerDefeated == true) return;
     var tell = rivalTell();
 
-    player.capTraits();
-    rival.capTraits();
     insertCombatControls();
     checkForVictoryButton();
     $("#last_action").html("<p class='battle-description'>"+description+"</p><p class='rival-tell'>"+tell+"</p>");
-    redraw();
   }
 }
