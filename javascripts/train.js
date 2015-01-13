@@ -20,6 +20,7 @@ function Train()
 					player.Mods.ironwill += 1;
 					$("#train_display").append("<p>You can resist others domination better</p>");
 					drawStats();
+					$("#train_button_12").html("Iron Will+ (" + player.Mods.ironwill + ")");
 				}
 				IsDoneTraining();
 			}
