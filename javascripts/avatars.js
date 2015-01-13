@@ -52,11 +52,13 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"amazon": 0,
 		"cock": 0,
 		"futa": 0,
+		// Bonuses to Push
 		"pushsubmissiveness": 0,
 		"pushdomesticity": 0,
 		"pushmaternalism": 0,
 		"pushallure": 0,
 		"pushorientation": 0,
+		// Resistances
 		"resistsubmissiveness": 0,
 		"resistdomesticity": 0,
 		"resistmaternalism": 0,
@@ -69,12 +71,19 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	
 	// Physique
 	this.physique = {
-		"irisc": getRandomInt(1, 20),
 		"hairc": getRandomInt(1, 20),
+		
+		// special numbers 100 = red, 101 = blue
+		"irisc": getRandomInt(1, 20),
 		"skin": getRandomInt(1, 20),
+		
+		// Body parts
 		"breastrows": 0,
 		"hornstype": 0,
-		"horns": 0
+		"horns": 0,
+		"tailtype": 0,
+		"tail": 0,
+		"wings": 0	
   }
 
 	// Methods
@@ -285,6 +294,11 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 			that.physique.horns = 0;
 			that.physique.hornstype = 0;
 		}
+		if (isNaN(that.physique.tail)) {
+			that.physique.tail = 0;
+			that.physique.tailtype = 0;
+		}
+		if (isNaN(that.physique.wings)) that.physique.wings = 0;
 		if (isNaN(that.Mods.resistsubmissiveness)) that.Mods.resistsubmissiveness = 0;
 		if (isNaN(that.Mods.resistdomesticity)) that.Mods.resistdomesticity = 0;
 		if (isNaN(that.Mods.resistmaternalism)) that.Mods.resistmaternalism = 0;

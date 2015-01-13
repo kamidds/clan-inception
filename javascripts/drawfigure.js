@@ -1361,11 +1361,11 @@
 						
 						if (irisc < 11) {
 							IRISCOLOR = "rgb("+Math.floor(92-(irisc*5.2))+","+Math.floor(64+(irisc*5.1))+","+Math.floor(51-(irisc*1.1))+")";
-						}
-						else {
+						}	else if (irisc < 100) {
 							var a = irisc-10; 
 							IRISCOLOR = "rgb("+Math.floor(40+(a*4.9))+","+Math.floor(115-(a*2.6))+","+Math.floor(40+(a*13.1))+")";
-						}
+						} else if (irisc == 100) IRISCOLOR = "rgb(255,0,0)";
+						else if (irisc == 101) IRISCOLOR = "rgb(0,0,255)";
 						
 						if (skin < 11) {
 							SKINC="rgb("+Math.floor(255-(skin*2.8))+","+Math.floor(214-(skin*5.3))+","+Math.floor(180-(skin*6.5))+")";
@@ -1373,31 +1373,39 @@
 							LIPCOLOR="rgb("+Math.floor(194-(skin*4.1))+","+Math.floor(123-(skin*4.1))+","+Math.floor(119-(skin*4.1))+")";
 							NIPPLESHADOW="rgb("+Math.floor(140-(skin*4.1))+","+Math.floor(89-(skin*4.1))+","+Math.floor(86-(skin*4.1))+")";
 							EYELINER="rgb("+Math.floor(128-(skin*2.6))+","+Math.floor(91-(skin*2.3))+","+Math.floor(65-(skin*1.8))+")";
-						}
-						else{
+						}	else if (skin < 100) {
 							var a = skin-11;
 							SKINC="rgb("+Math.floor(227-(a*9.6))+","+Math.floor(161-(a*9.1))+","+Math.floor(115-(a*6.3))+")";
 							SKINCB="rgb("+Math.floor(163-(a*12))+","+Math.floor(116-(a*10.8))+","+Math.floor(83-(a*7.3))+")";
 							LIPCOLOR="rgb("+Math.floor(153-(a*8.9))+","+Math.floor(82-(a*6.2))+","+Math.floor(78-(a*6.4))+")";
 							NIPPLESHADOW="rgb("+Math.floor(99-(a*9.9))+","+Math.floor(48-(a*7.2))+","+Math.floor(45-(a*7.4))+")";
 							EYELINER="rgb("+Math.floor(102-(a*8.9))+","+Math.floor(68-(a*6.6))+","+Math.floor(47-(a*4.4))+")";
+						} else if (skin == 100) {
+							SKINC="rgb(231,100,106)";
+							SKINCB="rgb(194,55,55)";
+							LIPCOLOR=SKINCB;
+							NIPPLESHADOW=SKINCB;
+							EYELINER=SKINCB;
+						} else if (skin == 101) {
+							SKINC="rgb(174,187,254)";
+							SKINCB="rgb(32,40,64)";
+							LIPCOLOR=SKINCB;
+							NIPPLESHADOW=SKINCB;
+							EYELINER=SKINCB;
 						}
 						
 						if (hairc < 6) {
 							HAIRCOLOR="rgb("+Math.floor(36+(hairc*17.2))+","+Math.floor(7+(hairc*10.6))+","+Math.floor(11+(hairc*8.8))+")";
 							HAIRCOLORB="rgb("+Math.floor(0+(hairc*11.8))+","+Math.floor(0+(hairc*5.8))+","+Math.floor(0+(hairc*5.2))+")";
-						}
-						else if (hairc < 11) {
+						}	else if (hairc < 11) {
 							var a = hairc-6;
 							HAIRCOLOR="rgb("+Math.floor(122+(a*8.2))+","+Math.floor(60-(a*12))+","+Math.floor(55-(a*10.8))+")";
 							HAIRCOLORB="rgb("+Math.floor(59+(a*8.6))+","+Math.floor(29-(a*5.8))+","+Math.floor(26-(a*5))+")";
-						}
-						else if (hairc < 16) {
+						}	else if (hairc < 16) {
 							var a = hairc-11;
 							HAIRCOLOR="rgb("+Math.floor(163+(a*11.8))+","+Math.floor(0+(a*37.6))+","+Math.floor(1+(a*30.4))+")";
 							HAIRCOLORB="rgb("+Math.floor(102+(a*11.2))+","+Math.floor(0+(a*26.8))+","+Math.floor(1+(a*21.6))+")";
-						}
-						else {
+						}	else {
 							var a = hairc-16;
 							HAIRCOLOR="rgb("+Math.floor(222+(a*5.8))+","+Math.floor(188+(a*12.6))+","+Math.floor(153+(a*6.2))+")";
 							HAIRCOLORB="rgb("+Math.floor(158+(a*6.2))+","+Math.floor(134+(a*5.8))+","+Math.floor(109+(a*.4))+")";

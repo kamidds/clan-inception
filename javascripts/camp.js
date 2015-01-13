@@ -260,5 +260,9 @@ function editWoman()
 	$("#slider_horns").slider({value:rival.physique.horns,min:0,max:10,slide:function(event, ui) {
 		rival.physique.horns = ui.value; 
 		redraw();
-	}});	
+	}});
+	$("#slider_tail").slider({value:rival.physique.tail,min:0,max:10,slide:function(event, ui) {
+		rival.physique.tail = ui.value; 
+		redraw();
+	}});		
 }
