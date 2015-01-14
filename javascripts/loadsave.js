@@ -2,7 +2,14 @@
 // General container for all variables for a game in progress
 function ASavedGame()
 {
+	// The player
 	this.player = "";
+	
+	// some details on each visitable place
+	this.places = "";
+	
+	// Demon
+	this.demon = "";
 }
 	
 // Load Games
@@ -41,6 +48,7 @@ function loadGameId(id)
 		alert("Save not found.");
 		return;
 	}
+	createDemon();
 	createRival(0);
 	var sg = JSON.parse(str);
 	var temp = JSON.parse(sg.player);
@@ -53,7 +61,26 @@ function loadGameId(id)
 		jQuery.extend(player.women[i], temp.women[i]);
 		if (player.women[i].activity == "") player.women[i].setActivity();
 		if (player.women[i].name == "") player.women[i].name = getUnusedFemaleName();
+		if (isNaN(player.women[i].pregnancy)) {
+			player.women[i].pregnancy = 0;
+			player.women[i].children = 0;
+		}
 	}
+	places = { };
+	if (sg.places != undefined) {
+		var tempplaces = JSON.parse(sg.places);
+		$.each(tempplaces, function(index, place) {
+			places[index] = tempplaces[index];
+			if (isNaN(places[index])) places[index] = 0;
+		});
+	}
+	
+	if (sg.demon != undefined) {
+		var tempdemon = JSON.parse(sg.demon);
+		jQuery.extend(demon, tempdemon);
+	}
+
+	
 	alert("Loaded Game " + id + ", week " + player.round);
 	resetRival();
 	rival.name = "";
@@ -78,6 +105,8 @@ function saveGameId(id)
 {
 	var sg = new ASavedGame();
 	sg.player = JSON.stringify(JSON.decycle(player));
+	sg.demon = JSON.stringify(JSON.decycle(demon));
+	sg.places = JSON.stringify(JSON.decycle(places));
 	var str = JSON.stringify(JSON.decycle(sg));
 	localStorage.setItem('clani' + id, str);
 	alert("Saved.");

@@ -102,6 +102,7 @@ function insertCharacterCreationIO(){
 	
 	drawfigure('player_avatar', player);
 	createRival(0);
+	createDemon();
 }
 
 $(document).ready(function() {

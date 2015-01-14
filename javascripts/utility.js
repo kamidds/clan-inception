@@ -11,3 +11,21 @@ function toCommaSeperatedList(array){
   else if (array.length === 2) return array[0] + " and " + array[1];
   else return array[0]
 }
+
+//accepts any value like '#ffffff', 'rgba(255,255,255,1)', 'hsl(0,100%,100%)', or 'white'
+function toRGBA(c) {
+    var can = document.createElement('canvasdummy'),
+        ctx = can.getContext('2d');
+    can.width = can.height = 1;
+    ctx.fillStyle = c;
+    ctx.fillRect(0, 0, 1, 1); //paint the canvas
+    var img = ctx.getImageData(0, 0, 1, 1),
+        data = img.data,
+        rgba = {
+            r: data[0], //0-255 red
+            g: data[1], //0-255 green
+            b: data[2], //0-255 blue
+            a: data[3]  //0-255 opacity (0 being transparent, 255 being opaque)
+        };
+    return rgba;
+}

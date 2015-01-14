@@ -1260,6 +1260,86 @@
 				ctx.fill();
 			}
 			
+			function drawTail(ctx)
+			{
+				var a = avatar.physique.tail;
+				if (a == 0) return;
+				ctx.lineWidth = 1.5;
+
+				ctx.strokeStyle=SKINCB;
+				ctx.fillStyle=SKINC;
+
+				ctx.beginPath();
+				
+				var b = a * 2;
+				var c = avatar.physique.tailtype;
+				ctx.moveTo(75, 190);
+				
+				// 'Body' of tail
+				if (c == 1) {
+					// Cow
+					ctx.quadraticCurveTo(20 - b, 280 + a, 20 - b, 240);
+					ctx.lineTo(20 - b - 2, 245);
+					ctx.quadraticCurveTo(20 - b, 285 + a, 75, 195);
+					ctx.lineTo(75, 190);
+				} else {
+					// Demon
+					ctx.quadraticCurveTo(20 - b, 280 + a, 20 - b, 240);
+					ctx.lineTo(20 - b - 2, 245);
+					ctx.quadraticCurveTo(20 - b, 285 + a, 75, 195);
+					ctx.lineTo(75, 190);				
+				}
+				ctx.stroke();
+				ctx.fill();
+				
+				// 'End' of tail
+				if (c == 1) {
+					// Cow
+					ctx.moveTo(20 - b, 242);
+					ctx.lineTo(15 - b, 236);
+					ctx.moveTo(20 - b, 242);
+					ctx.lineTo(13 - b, 234);
+					ctx.moveTo(20 - b, 242);
+					ctx.lineTo(17 - b, 230);
+					ctx.moveTo(20 - b, 242);
+					ctx.lineTo(11 - b, 241);
+					ctx.stroke();
+				} else {
+					// Demon
+					ctx.moveTo(22 - b, 243);
+					ctx.lineTo(12 - b, 248);
+					ctx.lineTo(12 - b, 235);
+					ctx.lineTo(24 - b, 238);
+					ctx.lineTo(22 - b, 243);
+					ctx.stroke();
+					ctx.fill();
+				}
+			}
+			
+			function drawWings(ctx)
+			{
+				var a = avatar.physique.wings;
+				if (a == 0) return;
+				ctx.lineWidth = 1.5;
+
+				ctx.strokeStyle="black";
+				ctx.fillStyle=SKINCB;
+
+				ctx.beginPath();
+				
+				ctx.moveTo(73, 75);
+				ctx.lineTo(3, 20);
+				ctx.lineTo(22, 290);
+				ctx.lineTo(60, 150);
+				ctx.lineTo(63, 95);
+				ctx.stroke();
+				ctx.fill();
+				
+				ctx.stroke();
+				ctx.fill();				
+			}
+			
+			
 			function drawHalfFigure1(ctx)
 			{
 				ctx.fillStyle=SKINC;
@@ -1359,15 +1439,22 @@
 						var EYELINER = "black";
 						var NIPPLESHADOW = "black";
 						
-						if (irisc < 11) {
+						if (isNaN(irisc)) {
+							IRISCOLOR = irisc;
+						} else if (irisc < 11) {
 							IRISCOLOR = "rgb("+Math.floor(92-(irisc*5.2))+","+Math.floor(64+(irisc*5.1))+","+Math.floor(51-(irisc*1.1))+")";
 						}	else if (irisc < 100) {
 							var a = irisc-10; 
 							IRISCOLOR = "rgb("+Math.floor(40+(a*4.9))+","+Math.floor(115-(a*2.6))+","+Math.floor(40+(a*13.1))+")";
-						} else if (irisc == 100) IRISCOLOR = "rgb(255,0,0)";
-						else if (irisc == 101) IRISCOLOR = "rgb(0,0,255)";
+						}
 						
-						if (skin < 11) {
+						if (isNaN(skin)) {
+							SKINC=skin;
+							SKINCB=skin;
+							LIPCOLOR=skin;
+							NIPPLESHADOW=skin;
+							EYELINER=SKINCB;
+						} else if (skin < 11) {
 							SKINC="rgb("+Math.floor(255-(skin*2.8))+","+Math.floor(214-(skin*5.3))+","+Math.floor(180-(skin*6.5))+")";
 							SKINCB="rgb("+Math.floor(214-(skin*5.1))+","+Math.floor(156-(skin*4))+","+Math.floor(147-(skin*6.4))+")";
 							LIPCOLOR="rgb("+Math.floor(194-(skin*4.1))+","+Math.floor(123-(skin*4.1))+","+Math.floor(119-(skin*4.1))+")";
@@ -1381,8 +1468,8 @@
 							NIPPLESHADOW="rgb("+Math.floor(99-(a*9.9))+","+Math.floor(48-(a*7.2))+","+Math.floor(45-(a*7.4))+")";
 							EYELINER="rgb("+Math.floor(102-(a*8.9))+","+Math.floor(68-(a*6.6))+","+Math.floor(47-(a*4.4))+")";
 						} else if (skin == 100) {
-							SKINC="rgb(231,100,106)";
-							SKINCB="rgb(194,55,55)";
+							SKINC="rgb(211,90,96)";
+							SKINCB="rgb(184,45,45)";
 							LIPCOLOR=SKINCB;
 							NIPPLESHADOW=SKINCB;
 							EYELINER=SKINCB;
@@ -1394,7 +1481,10 @@
 							EYELINER=SKINCB;
 						}
 						
-						if (hairc < 6) {
+						if (isNaN(hairc)) {
+							HAIRCOLOR=hairc;
+							HAIRCOLORB=hairc;
+						} else if (hairc < 6) {
 							HAIRCOLOR="rgb("+Math.floor(36+(hairc*17.2))+","+Math.floor(7+(hairc*10.6))+","+Math.floor(11+(hairc*8.8))+")";
 							HAIRCOLORB="rgb("+Math.floor(0+(hairc*11.8))+","+Math.floor(0+(hairc*5.8))+","+Math.floor(0+(hairc*5.2))+")";
 						}	else if (hairc < 11) {
@@ -1445,12 +1535,19 @@
 						ctx.translate(heightoffset, 400-(heightheight*400));
 						ctx.scale(heightscale,heightheight);
 						
+						// Draw Wings
+						drawWings(ctx);
+						ctx.translate(78.6, 200);
+						ctx.scale(-1, 1);
+						ctx.translate(-78.6,-200);
+						drawWings(ctx);
+						ctx.translate(0,0);
+						
+						// Draw Tail
+						drawTail(ctx);
+						
 						// Draw hair
-						ctx.fillStyle=HAIRCOLOR;
-						ctx.strokeStyle=HAIRCOLORB;
 						drawHairBack(ctx)
-						ctx.fill();
-						ctx.stroke();
 						
 						// Draw left side, part 1
 						drawHalfFigure1(ctx);

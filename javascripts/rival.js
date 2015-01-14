@@ -1,5 +1,6 @@
 //
-// rival object, generally your oponent in combat, but can also be used as in intermediate object when reviewing your clan
+// rival object, generally your oponent in combat, but can also be used as in intermediate object when
+// reviewing your clan or meeting other people
 var rival;
 
 // Functions
