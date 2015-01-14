@@ -99,7 +99,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 
   this.masculinity = function() { return 100 - this.femininity(); }
 
-  this.cunning = function() { return (this.femininity() + this.allure)/2; }
+  this.cunning = function() { return this.Mods.perception + ((this.femininity() + this.allure) / 2); }
 
 	this.perception = function() { return this.Mods.perception + Math.ceil((this.femininity() + 100 - this.domesticity)/2); }
 
