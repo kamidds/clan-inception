@@ -1,4 +1,6 @@
 // Game general variables and functions
+// place information
+var places = { };
 
 // Names
 function randomMaleName()
