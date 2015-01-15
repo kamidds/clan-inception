@@ -30,7 +30,7 @@ function Wander()
 		"<h2>Where do you hunt?</h2>\
 		<div id='wander_buttons' class='push--top'></div>\
 		<div id='wander_display'></div>");
-	$.each(places, function(index, place) { $("#wander_display").append(index + ": " + place + ", ");	});
+	//$.each(places, function(index, place) { $("#wander_display").append(index + ": " + place + ", ");	});
 	
 	// add places
 	$("#wander_buttons").append("\
@@ -107,12 +107,15 @@ function Wander()
 function WanderBattle(plc)
 {
 	advanceRound();
-  if (player.women.length == 0){
+  if (player.women.length == 0) {
 		MeetThoth();
 		return;
 	}
 	
-  new Message("new Battle(getRandomInt(15, 35))", "<h1>Wandering</h1>\
+	var ranks = Math.floor(player.getTrainingRanks() * (getRandomInt(40, 120) / 100));
+	createRival(ranks);
+	
+  new Message("new Battle(rival)", "<h1>Wandering</h1>\
 		<p>You wander through " + plc + " until spot lone man. He see you and grin. He think \
 		you become womanfolk of his clan. He wrong.</p>");
 }
