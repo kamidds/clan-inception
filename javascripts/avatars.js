@@ -65,20 +65,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"resistallure": 0,
 		"resistorientation": 0		
 	}
-	this.getTrainingRanks = function(nc)
-	{
-		this.capTraits();	// ensure they are all initialised
-		var val = this.Mods.ironwill + (this.Mods.perception / 5) + (this.Mods.changra / 5);
-		if (nc == true) {
-			// rank that do not affect combat
-			val += (this.Mods.breasts / 10) + (this.Mods.amazon / 2) + (this.Mods.cock / 2) + (this.Mods.futa / 2);
-			val += this.physique.breastrows + this.physique.horns + this.physique.tail + this.physique.wings;
-		}
-		val += (this.Mods.pushsubmissiveness / 2) + (this.Mods.pushdomesticity / 2) + (this.Mods.pushmaternalism / 2) + (this.Mods.pushallure / 2) + (this.Mods.pushorientation / 2);
-		val += this.Mods.resistsubmissiveness + this.Mods.resistdomesticity + this.Mods.resistmaternalism + this.Mods.resistallure + this.Mods.resistorientation;
-		return Math.ceil(val);
-	}
-	
+
 	// Your women
   this.women = [];
 	
@@ -287,7 +274,37 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		});
 		
 		that["changra"] = minValue(that["changra"], 0);
-		that["changra"] = Math.floor(maxValue(that["changra"], 120 + that.Mods.changra + (that.women.length / 2) - that.femininity()));		
+		that["changra"] = Math.floor(maxValue(that["changra"], 120 + that.Mods.changra + (that.women.length / 2) - that.femininity()));
+		
+			// Following needed to upgrade save games
+		if (isNaN(that.Mods.changra)) that.Mods.changra = 0;
+		if (isNaN(that.Mods.breasts)) that.Mods.breasts = 0;
+		if (isNaN(that.Mods.perception)) that.Mods.perception = 0;
+		if (isNaN(that.Mods.amazon)) that.Mods.amazon = 0;
+		if (isNaN(that.Mods.cock)) that.Mods.cock = 0;
+		if (isNaN(that.Mods.futa)) that.Mods.futa = 0;
+		if (isNaN(that.Mods.pushsubmissiveness)) that.Mods.pushsubmissiveness = 0;
+		if (isNaN(that.Mods.pushdomesticity)) that.Mods.pushdomesticity = 0;
+		if (isNaN(that.Mods.pushmaternalism)) that.Mods.pushmaternalism = 0;
+		if (isNaN(that.Mods.pushallure)) that.Mods.pushallure = 0;
+		if (isNaN(that.Mods.pushorientation)) that.Mods.pushorientation = 0;
+		if (isNaN(that.Mods.ironwill)) that.Mods.ironwill = 0;
+		if (isNaN(that.physique.breastrows)) that.physique.breastrows = 0;
+		if (isNaN(that.physique.horns)) {
+			that.physique.horns = 0;
+			that.physique.hornstype = 0;
+		}
+		if (isNaN(that.physique.tail)) {
+			that.physique.tail = 0;
+			that.physique.tailtype = 0;
+		}
+		if (isNaN(that.physique.wings)) that.physique.wings = 0;
+		if (isNaN(that.Mods.resistsubmissiveness)) that.Mods.resistsubmissiveness = 0;
+		if (isNaN(that.Mods.resistdomesticity)) that.Mods.resistdomesticity = 0;
+		if (isNaN(that.Mods.resistmaternalism)) that.Mods.resistmaternalism = 0;
+		if (isNaN(that.Mods.resistallure)) that.Mods.resistallure = 0;
+		if (isNaN(that.Mods.resistorientation)) that.Mods.resistorientation = 0;
+		
 	}
 	
 	// Initialise
@@ -322,55 +339,4 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
   this.defensiveness = getRandomInt(0, 10);
 
   this.currentAction = "";
-	
-	// Combat functions
-	this.Victory = function() { }
-	this.Defeat = function() { }
-	this.getTell = function(action) { }
-	
-	// Save/Load
-	this.upgradeSave = function(rnd)
-	{
-		// Following needed to upgrade save games
-		if (isNaN(that.Mods.changra)) that.Mods.changra = 0;
-		if (isNaN(that.Mods.breasts)) that.Mods.breasts = 0;
-		if (isNaN(that.Mods.perception)) that.Mods.perception = 0;
-		if (isNaN(that.Mods.amazon)) that.Mods.amazon = 0;
-		if (isNaN(that.Mods.cock)) that.Mods.cock = 0;
-		if (isNaN(that.Mods.futa)) that.Mods.futa = 0;
-		if (isNaN(that.Mods.pushsubmissiveness)) that.Mods.pushsubmissiveness = 0;
-		if (isNaN(that.Mods.pushdomesticity)) that.Mods.pushdomesticity = 0;
-		if (isNaN(that.Mods.pushmaternalism)) that.Mods.pushmaternalism = 0;
-		if (isNaN(that.Mods.pushallure)) that.Mods.pushallure = 0;
-		if (isNaN(that.Mods.pushorientation)) that.Mods.pushorientation = 0;
-		if (isNaN(that.Mods.ironwill)) that.Mods.ironwill = 0;
-		if (isNaN(that.physique.breastrows)) that.physique.breastrows = 0;
-		if (isNaN(that.physique.horns)) {
-			that.physique.horns = 0;
-			that.physique.hornstype = 0;
-		}
-		if (isNaN(that.physique.tail)) {
-			that.physique.tail = 0;
-			that.physique.tailtype = 0;
-		}
-		if (isNaN(that.physique.wings)) that.physique.wings = 0;
-		if (isNaN(that.Mods.resistsubmissiveness)) that.Mods.resistsubmissiveness = 0;
-		if (isNaN(that.Mods.resistdomesticity)) that.Mods.resistdomesticity = 0;
-		if (isNaN(that.Mods.resistmaternalism)) that.Mods.resistmaternalism = 0;
-		if (isNaN(that.Mods.resistallure)) that.Mods.resistallure = 0;
-		if (isNaN(that.Mods.resistorientation)) that.Mods.resistorientation = 0;
-		
-		if (that.activity == "") that.setActivity();
-		if (that.name == "") that.name = getUnusedFemaleName();
-		if (isNaN(that.pregnancy)) {
-			that.pregnancy = 0;
-			that.children = 0;
-		}
-		
-		if (that.round == undefined || that.round == 0) {
-			if (rnd != undefined) that.round = rnd;
-			else that.round = 0;
-		}
-	}
-	
 }
