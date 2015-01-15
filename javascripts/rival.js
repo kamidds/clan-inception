@@ -20,27 +20,25 @@ function createRival(ranks)
 	rival.getTell = getRivalTell;
 	
 	updateRival();
-	
 	rankUpRival(ranks);
 }
 
 function rankUpRival(ranks)
 {
 	// Ranks
-	if (ranks == 0) return;
+	if (ranks == 0 || ranks == undefined) return;
 	
 	// divide ranks up
-	
 	// Perception 20%
 	var used = 0;
-	var val = int(ranks / 5);
+	var val = Math.floor(ranks / 5);
 	if (val > ((player.Mods.perception / 5) - 1)) val = (player.Mods.perception / 5) - 1;
 	if (val > 0) {
 		rival.Mods.perception += val * 5;
 		used += val;
 	}
 	// Changra 20%
-	val = int(ranks / 5);
+	val = Math.floor(ranks / 5);
 	if (val > 0) {
 		rival.Mods.changra += val * 5;
 		used += val;
