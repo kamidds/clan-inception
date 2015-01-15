@@ -48,23 +48,18 @@ function loadGameId(id)
 		alert("Save not found.");
 		return;
 	}
-	createDemon();
 	createRival(0);
 	var sg = JSON.parse(str);
 	var temp = JSON.parse(sg.player);
 
 	jQuery.extend(player, temp);
-	if (player.round == undefined || player.round == 0) player.round = sg.round;
+	player.upgradeSave(sg.round);
+
 	player.women = [];
 	for (var i = 0; i < temp.women.length; i += 1 ) {
 		player.women[i] = new Avatar(50, 95, 90, 75, 80);
 		jQuery.extend(player.women[i], temp.women[i]);
-		if (player.women[i].activity == "") player.women[i].setActivity();
-		if (player.women[i].name == "") player.women[i].name = getUnusedFemaleName();
-		if (isNaN(player.women[i].pregnancy)) {
-			player.women[i].pregnancy = 0;
-			player.women[i].children = 0;
-		}
+		player.women[i].upgradeSave();
 	}
 	places = { };
 	if (sg.places != undefined) {
@@ -75,11 +70,12 @@ function loadGameId(id)
 		});
 	}
 	
+	createDemon();
 	if (sg.demon != undefined) {
 		var tempdemon = JSON.parse(sg.demon);
 		jQuery.extend(demon, tempdemon);
+		demon.upgradeSave();
 	}
-
 	
 	alert("Loaded Game " + id + ", week " + player.round);
 	resetRival();
