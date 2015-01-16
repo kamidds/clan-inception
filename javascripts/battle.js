@@ -509,7 +509,7 @@ function Battle(currrival) {
     this.avatar.currentAction = this
 
     this.standard = function() {
-			var val = rival.name = "Rival man" ? this.opponent.allure : 25;
+			var val = rival.name == "Rival man" ? this.opponent.allure : 25;
       if (getRandomInt(0, 100) < val) {
         alert("You run like she-deer!");
         this.avatar.changra -= 15;
