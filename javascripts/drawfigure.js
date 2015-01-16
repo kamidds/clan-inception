@@ -1387,7 +1387,7 @@
 				for (var i = avatar.physique.breastrows; i > 0; i--) {
 					var sz = breasts * (1.0 - (i * 0.1));
 					if (sz < (breasts / 2)) sz = breasts / 2;
-					var pos = (16 - i) * i;
+					var pos = (18 - i) * i;
 					if (pos < 4) pos = 4;
 					drawBoobs(ctx, sz, pos);
 				}
