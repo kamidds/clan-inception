@@ -95,7 +95,7 @@ function Wander()
 			if (val < 6) WanderNothing();
 			else if (val < 10) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
 			else if (val < 15) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else if (val > 14 && val < 20) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
+			else if (val < 20) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
 			else WanderBattle("chilly beach");
 		}
 	);	
@@ -112,8 +112,9 @@ function WanderBattle(plc)
 		return;
 	}
 	
-	var ranks = Math.floor(player.getTrainingRanks() * (getRandomInt(40, 120) / 100));
-	createRival(ranks);
+	// Generic Rival
+	var exp = Math.floor(player.getTrainingRanks() * (getRandomInt(40, 120) / 100)) * 5;
+	createRival(exp);
 	
   new Message("new Battle(rival)", "<h1>Wandering</h1>\
 		<p>You wander through " + plc + " until spot lone man. He see you and grin. He think \

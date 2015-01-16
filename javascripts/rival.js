@@ -4,29 +4,51 @@
 var rival;
 
 // Functions
-function createRival(ranks)
+function createRival(exp)
 {
 	// Stats
-	var femininity = getRandomInt(15, 35) - ranks;		// 15-35 median for stats
+	var femininity = getRandomInt(15, 35) - (exp / 5);		// 15-35 median for stats
 	if (femininity < 6) femininity = 6;
 	var minTrait = femininity - 10;
 	var maxTrait = femininity + 10;
 	rival = new Avatar(getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait));
-	rival.name = "rival";		// Generic man
+	rival.name = "Rival man";		// Generic man
 	
 	// Standard Victory/Defeat/Tells for Generic man
 	rival.Victory = RivalVictory;
 	rival.Defeat = RivalDefeat;
-	rival.getTell = getRivalTell;
+	rival.getTell = RivalGetTell;
+	rival.spendExperience = RivalSpendExperience;
+	rival.experience = exp;
 	
 	updateRival();
-	rankUpRival(ranks);
+	
+	rival.spendExperience();
 }
 
-function rankUpRival(ranks)
+function updateRival()
 {
+	rival.Mods.breasts = player.Mods.breasts;
+	rival.Mods.amazon = player.Mods.amazon;
+	rival.Mods.futa = player.Mods.futa;
+}
+
+// Reset to a average person, with stats all in the center, no bars shown
+function resetRival()
+{
+	rival = new Avatar(50, 50, 50, 50, 50);
+	redraw();
+}
+
+
+// Generic Man
+
+function RivalSpendExperience()
+{
+	if (rival.experience == 0) return;
+	
 	// Ranks
-	if (ranks == 0 || ranks == undefined) return;
+	var ranks = rival.experience / 5;
 	
 	// divide ranks up
 	// Perception 20%
@@ -55,22 +77,11 @@ function rankUpRival(ranks)
 		// TODO respect desires
 		var trait = AVATAR_TRAITS[getRandomInt(1, 5)];
 		if (getRandomInt(1, 100) < 50) rival.Mods["push" + trait] += 2;
-		else rival.Mods["resist" + trait]++;
+		else rival.Mods["resist" + trait] += 1;
+		used++;
 	}
-}
-
-function updateRival()
-{
-	rival.Mods.breasts = player.Mods.breasts;
-	rival.Mods.amazon = player.Mods.amazon;
-	rival.Mods.futa = player.Mods.futa;
-}
-
-// Reset to a average person, with stats all in the center, no bars shown
-function resetRival()
-{
-	rival = new Avatar(50, 50, 50, 50, 50);
-	redraw();
+	
+	rival.experience -= used * 5;
 }
 
 function RivalVictory()
@@ -151,7 +162,7 @@ function RivalDefeat()
 	return true;
 }
 
-function getRivalTell(action) {
+function RivalGetTell(action) {
 
 	var pushDescription = getRandomElem([
 		"pound chest.",
@@ -193,13 +204,12 @@ function getRivalTell(action) {
 		"chew lip."
 	])
 
-	var rivalman = rival.name == "rival" ? "Rival man" : rival.name;
 	switch(action) {
-		case "push": return rivalman + " " + pushDescription;
-		case "drain": return rivalman + " " + drainDescription;
-		case "reflect": return rivalman + " " + reflectDescription;
-		case "rest": return rivalman + " " + restDescription;
-		case "hesitate": return rivalman + " " + hesitateDescription;
+		case "push": return rival.name + " " + pushDescription;
+		case "drain": return rival.name + " " + drainDescription;
+		case "reflect": return rival.name + " " + reflectDescription;
+		case "rest": return rival.name + " " + restDescription;
+		case "hesitate": return rival.name + " " + hesitateDescription;
 	}
 	return "";
 }

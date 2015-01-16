@@ -16,7 +16,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 
 	// Identity
   var that = this;
-  this.name = "";			// special case for "rival" in battle and drawfigure.js
+  this.name = "";			// special case for "Rival man" in battle and drawfigure.js
 	this.round = 0;			// day of game for player, day of capture for a woman
 
 	// Power
@@ -326,6 +326,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Combat functions
 	this.Victory = function() { }
 	this.Defeat = function() { }
+	this.spendExperience = function() { }
 	this.getTell = function(action) { }
 	
 	// Save/Load

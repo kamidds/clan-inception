@@ -17,15 +17,21 @@ function Battle(currrival) {
 	var playerDefeated = false;
 
   var description = "";
-	var rivalman = rival.name == "rival" ? "Rival man" : rival.name;
-	var rivalmanlwr = rival.name == "rival" ? "rival man" : rival.name;
+	
+	var rivalmanlwr = rival.name == "Rival man" ? "rival man" : rival.name;
 	var rivalhe = rival.femininity() > 49 ? "she" : "he";
 	var rivalhim = rival.femininity() > 49 ? "her" : "him";
-
-  var nextRivalAction = new RivalAction();
-
-  $("#rcwomen").show();
+	if (rival.name == "Rival man") {
+		$("#rcwomen").html("Rival's Women: <span id='rival_women'>");
+		$("#rcchangra").html("Rival's Changra: <span id='rival_changra'>");
+	} else {
+		$("#rcwomen").html(rival.name + "'s Women: <span id='rival_women'>");
+		$("#rcchangra").html(rival.name + "'s Changra: <span id='rival_changra'>");
+	}
+	$("#rcwomen").show();
   $("#rcchangra").show();
+	
+  var nextRivalAction = new RivalAction();
 
   $("#output").html(
     "<div class='combat-controls'>\
@@ -102,7 +108,7 @@ function Battle(currrival) {
     redraw();
   }
 
-  insertCombatControls()
+  insertCombatControls();
   var tell = rivalTell();
   $("#last_action").html("<p class='rival-tell'>"+tell+"</p>");
 
@@ -202,15 +208,15 @@ function Battle(currrival) {
       switch (player.description[trait]) {
         case 10: return "Your eyes wet with tears. You stupid, scared. You only make mistake. You want dada. You want someone protect you."
         case 9: return "You feel small, like child boy. But when you real child, father protect you. Nobody protect you now."
-        case 8: return rivalman + " stare at you, and " + rivalhe + " know. " + capitalize(rivalhe) + " know you stupid. You make mistake."
+        case 8: return rival.name + " stare at you, and " + rivalhe + " know. " + capitalize(rivalhe) + " know you stupid. You make mistake."
         case 7: return "You pause, doubting last action. Did you make mistake? Are you stupid?"
         case 6: return "You hesitate, unsure what to do next."
         
         case 5: return "You plant feet firm in ground. Shaken but ready."
         case 4: return "You stand straight, roll shoulders, stare " + rivalmanlwr + " hard in eye."
-        case 3: return "You smile cocky at " + rivalman + ". " + capitalize(rivalhe) + " weak. You strong. You make him your woman."
-        case 2: return "You laugh at " + rivalman + ". " + capitalize(rivalhe) + " become like dog to you. All manfolk become like dog to you."
-        case 1: return "You roar at " + rivalman + ", beat your chest. He cower before you like dog man!"
+        case 3: return "You smile cocky at " + rival.name + ". " + capitalize(rivalhe) + " weak. You strong. You make him your woman."
+        case 2: return "You laugh at " + rival.name + ". " + capitalize(rivalhe) + " become like dog to you. All manfolk become like dog to you."
+        case 1: return "You roar at " + rival.name + ", beat your chest. He cower before you like dog man!"
       }
     }
 
@@ -249,7 +255,7 @@ function Battle(currrival) {
     function describeAllure() {
       switch (player.description[trait]) {
         case 10: return "You moving like she-cat in heat. Gestures slow, sensual, beckoning. You try stop, but within moments you doing it again."
-        case 9: return "You give " + rivalmanlwr + " flirt-like smile. Change posture so he get better look at chest. When you realize what you doing, you jerk straight up. " + rivalman + " give you bemused smile."
+        case 9: return "You give " + rivalmanlwr + " flirt-like smile. Change posture so he get better look at chest. When you realize what you doing, you jerk straight up. " + rival.name + " give you bemused smile."
         case 8: return "Without thinking you bat eyelashes at " + rivalmanlwr + "."
         case 7: return "You think of womanfolk dress. How pretty and delicate and flowing. Blushing, you imagine self wearing their clothes."
         case 6: return "You notice chipped fingernails, dirt underneath. You notice mud on hairy arms. Clothes stained."
@@ -378,12 +384,12 @@ function Battle(currrival) {
         processAction(this.opponent, this.trait, rate, true);
         processAction(this.avatar, this.trait, rate * -1, true);
         this.avatar[this.trait] = minValue(this.avatar[this.trait], 50);
-        description += this.avatar === player ? rivalman + " attempt "+opponentActivity+", but instead " + rivalhe + " vulnerable as you push " + rivalhim + " full of "+this.trait+". " : "You attempt "+opponentActivity+", but instead you vulnerable as " + rivalhe + " push you full of " + this.trait + ". ";
+        description += this.avatar === player ? rival.name + " attempt "+opponentActivity+", but instead " + rivalhe + " vulnerable as you push " + rivalhim + " full of "+this.trait+". " : "You attempt "+opponentActivity+", but instead you vulnerable as " + rivalhe + " push you full of " + this.trait + ". ";
       } else {
         var rate = standardChange() * 2;
         if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);
         processAction(this.opponent, this.trait, rate, true);
-        description += this.avatar === player ? rivalman + " attempt " + opponentActivity + ", but instead " + rivalhe + " soak in your mother ancestor's "+this.trait+" very fast. " : "You attempt "+opponentActivity+", but instead you soak in " + this.trait + " from " + rivalmanlwr + "'s mother ancestors. ";
+        description += this.avatar === player ? rival.name + " attempt " + opponentActivity + ", but instead " + rivalhe + " soak in your mother ancestor's "+this.trait+" very fast. " : "You attempt "+opponentActivity+", but instead you soak in " + this.trait + " from " + rivalmanlwr + "'s mother ancestors. ";
       }
     }
 
@@ -394,13 +400,13 @@ function Battle(currrival) {
         processAction(this.opponent, this.trait, rate)
         processAction(this.avatar, this.trait, rate * -1)
         this.avatar[this.trait] = minValue(this.avatar[this.trait], 50);
-        description += this.avatar === player ? "You push " + this.trait + " into " + rivalmanlwr + ". " : rivalman + " push " + this.trait + " into you. ";
+        description += this.avatar === player ? "You push " + this.trait + " into " + rivalmanlwr + ". " : rival.name + " push " + this.trait + " into you. ";
       }
       else {
 				var rate = standardChange();
         if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);				
         processAction(this.opponent, this.trait, rate)
-        description += this.avatar === player ? "You summon mother ancestors, which fill " + rivalmanlwr + " with "+this.trait+". " : rivalman + " summon mother ancestors, which whisper to you secrets of "+this.trait+". ";
+        description += this.avatar === player ? "You summon mother ancestors, which fill " + rivalmanlwr + " with " + this.trait + ". " : rival.name + " summon mother ancestors, which whisper to you secrets of "+this.trait+". ";
       }
     }
   }
@@ -422,27 +428,27 @@ function Battle(currrival) {
     this.special = function() {
       if (this.opponent[this.trait] > 50) {
         processAction(this.avatar, this.trait, standardChange() * -1, true)
-        description += this.avatar === player ? rivalman + " attempt reflect, leaving you free to talk to father ancestors about "+switchFemForMascTrait(this.trait)+". " : "You attempt reflect " + rivalman + "'s attack, leaving " + rivalhim + " free to talk with father ancestors about "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? rival.name + " attempt reflect, leaving you free to talk to father ancestors about "+switchFemForMascTrait(this.trait)+". " : "You attempt reflect " + rival.name + "'s attack, leaving " + rivalhim + " free to talk with father ancestors about "+switchFemForMascTrait(this.trait)+". ";
       } else {
         var rate = standardChange() * 2;
         processAction(this.opponent, this.trait, rate, true)
         processAction(this.avatar, this.trait, rate * -1, true)
         this.opponent[this.trait] = maxValue(this.opponent[this.trait], 51);
-        description += this.avatar === player ? rivalman + " attempt reflect, make " + rivalhim + " easy prey as you drain " + rivalhim + " of "+switchFemForMascTrait(this.trait)+". " : "You attempt reflect, making you easy prey as " + rivalmanlwr + " drain you of "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? rival.name + " attempt reflect, make " + rivalhim + " easy prey as you drain " + rivalhim + " of "+switchFemForMascTrait(this.trait)+". " : "You attempt reflect, making you easy prey as " + rivalmanlwr + " drain you of "+switchFemForMascTrait(this.trait)+". ";
       }
     }
 
     this.standard = function() {
       if (this.opponent[this.trait] > 50) {
         processAction(this.avatar, this.trait, standardChange() * -1)
-        description += this.avatar === player ? "You summon father ancestors and learn of "+switchFemForMascTrait(this.trait)+". " : rivalman + " summon father ancestors and learn of "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? "You summon father ancestors and learn of "+switchFemForMascTrait(this.trait)+". " : rival.name + " summon father ancestors and learn of "+switchFemForMascTrait(this.trait)+". ";
       }
       else{
         var rate = standardChange() * 2;
         processAction(this.opponent, this.trait, rate)
         processAction(this.avatar, this.trait, rate * -1)
         this.opponent[this.trait] = maxValue(this.opponent[this.trait], 51);
-        description += this.avatar === player ? "You drain " + rivalmanlwr + " of "+switchFemForMascTrait(this.trait)+". " : rivalman + " drain you of "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? "You drain " + rivalmanlwr + " of "+switchFemForMascTrait(this.trait)+". " : rival.name + " drain you of "+switchFemForMascTrait(this.trait)+". ";
       }
     }
   }
@@ -459,12 +465,12 @@ function Battle(currrival) {
     this.special = function() {
       this.trait = this.opponent.currentAction.trait
       processAction(this.opponent, this.trait, standardChange() * 2, true)
-      description += this.avatar === player ? rivalman + " attempt give you "+this.trait+", but you reflect it back at " + rivalhim + ". " : "You attempt give " + rivalmanlwr + " "+this.trait+", but " + rivalhe + " reflects it back at you. " ;
+      description += this.avatar === player ? rival.name + " attempt give you "+this.trait+", but you reflect it back at " + rivalhim + ". " : "You attempt give " + rivalmanlwr + " "+this.trait+", but " + rivalhe + " reflects it back at you. " ;
     }
 
     this.standard = function() {
       this.avatar.changra += getRandomInt(0, 5);
-      description += this.avatar === player ? "You attempt reflect " + rivalmanlwr + "'s attack, but " + rivalhe + " no attack. " : rivalman + " attempt reflect your attack, but you no attack. ";
+      description += this.avatar === player ? "You attempt reflect " + rivalmanlwr + "'s attack, but " + rivalhe + " no attack. " : rival.name + " attempt reflect your attack, but you no attack. ";
     }
   }
 
@@ -489,7 +495,7 @@ function Battle(currrival) {
           avatar[trait] = minValue(avatar[trait], avatar.natural[trait])
         }
       })
-      description += this.avatar === player ? "You rest. " : rivalman + " rest. ";
+      description += this.avatar === player ? "You rest. " : rival.name + " rest. ";
     }
   }
 
@@ -503,7 +509,7 @@ function Battle(currrival) {
     this.avatar.currentAction = this
 
     this.standard = function() {
-			var val = rival.name = "rival" ? this.opponent.allure : 25;
+			var val = rival.name = "Rival man" ? this.opponent.allure : 25;
       if (getRandomInt(0, 100) < val) {
         alert("You run like she-deer!");
         this.avatar.changra -= 15;
@@ -526,7 +532,7 @@ function Battle(currrival) {
 
     this.standard = function() {
       this.avatar.changra += getRandomInt(15, 20);
-      description += this.avatar === player ? "You hesitate. " : rivalman + " hesitate. ";
+      description += this.avatar === player ? "You hesitate. " : rival.name + " hesitate. ";
     }
   }
 

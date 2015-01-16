@@ -1508,7 +1508,7 @@
 						heightread= heightft + heightin;
 						ctx.font = "bold 400 12px/2 Unknown Font, serif";
 						ctx.fillText(heightread, 136, 19);
-						if (avatar.name != "rival") {
+						if (avatar.name != "Rival man") {
 							ctx.font = "bold 18px Unknown Font, serif";
 							ctx.fillText(avatar.name, 6, 24);
 						}
