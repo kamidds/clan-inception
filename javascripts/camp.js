@@ -42,7 +42,7 @@ function displayWomen(){
 		rival = player.women[index];
 		$("#woman_display").html("<h2>"+rival.name+"</h2>");
 
-		editWoman();
+		//editWoman();
 		
 		// Description
 		var fate = "";
