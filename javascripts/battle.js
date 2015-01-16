@@ -52,18 +52,18 @@ function Battle(currrival) {
       $.each(AVATAR_TRAITS, function( index, trait ) {
         traitName = trait === "orientation" ? "Attraction to &#9794;" : capitalize(trait)
         if (player[trait] > 50) {
-          $("#push_controls").append("<button id='push_"+trait+"' class='btn btn-combat btn-push'>&#955; "+traitName+"</button>");
+          $("#push_controls").append("<button id='push_" + trait + "' class='btn btn-combat btn-push'>&#955; " + traitName + "</button>");
           if (player.changra < 13) {
-            $("#push_"+trait).attr("disabled","disabled");
+            $("#push_" + trait).attr("disabled","disabled");
           } else {
-            $("#push_"+trait).click(function() { new Round(new Push(trait, player)); });
+            $("#push_" + trait).click(function() { new Round(new Push(trait, player)); });
           }
         } else {
-          $("#push_controls").append("<button id='push_"+trait+"' class='btn btn-combat btn-summon-maternal'>&#8756; "+traitName+"</button>");
+          $("#push_controls").append("<button id='push_" + trait + "' class='btn btn-combat btn-summon-maternal'>&#8756; " + traitName + "</button>");
           if (player.changra < 7) {
-            $("#push_"+trait).attr("disabled","disabled");
+            $("#push_" + trait).attr("disabled","disabled");
           } else {
-            $("#push_"+trait).click(function() { new Round(new Push(trait, player)); });
+            $("#push_" + trait).click(function() { new Round(new Push(trait, player)); });
           }
         }
       });
@@ -75,19 +75,19 @@ function Battle(currrival) {
       $.each(AVATAR_TRAITS, function(index, trait) {
         traitName = switchFemForMascTrait(trait);
         if (rival[trait] > 50) {
-          $("#drain_controls").append("<button id='drain_"+trait+"' class='btn btn-combat btn-summon-paternal'>&#8756; "+traitName+"</button>");
+          $("#drain_controls").append("<button id='drain_" + trait + "' class='btn btn-combat btn-summon-paternal'>&#8756; " + traitName + "</button>");
           if (player.changra < 6) {
-            $("#drain_"+trait).attr("disabled","disabled");
+            $("#drain_" + trait).attr("disabled","disabled");
           } else {
-            $("#drain_"+trait).click(function() { new Round(new Drain(trait, player)); });
+            $("#drain_" + trait).click(function() { new Round(new Drain(trait, player)); });
           }
         }
         else{
-          $("#drain_controls").append("<button id='drain_"+trait+"' class='btn btn-combat btn-drain'>&#978; "+traitName+"</button>");
+          $("#drain_controls").append("<button id='drain_" + trait + "' class='btn btn-combat btn-drain'>&#978; " + traitName + "</button>");
           if (player.changra < 4) {
-            $("#drain_"+trait).attr("disabled","disabled");
+            $("#drain_" + trait).attr("disabled","disabled");
           } else {
-            $("#drain_"+trait).click(function() { new Round(new Drain(trait, player)); });
+            $("#drain_" + trait).click(function() { new Round(new Drain(trait, player)); });
           }
         }
       });
@@ -96,8 +96,8 @@ function Battle(currrival) {
     function fillSupportColumn() {
       $("#support_controls").html("<h2>Other</h2>");
       $.each(["reflect", "rest", "flee"], function( index, action ) {
-        $("#support_controls").append("<button id='"+action+"' class='btn btn-combat btn-support'>"+capitalize(action)+"</button>");
-        $("#"+action).click(function() { eval("new Round(new "+capitalize(action)+"(player));") });
+        $("#support_controls").append("<button id='" + action + "' class='btn btn-combat btn-support'>" + capitalize(action) + "</button>");
+        $("#" + action).click(function() { eval("new Round(new " + capitalize(action) + "(player));") });
       });
       $("#reflect").addClass("btn-reflect");
     }
@@ -110,7 +110,7 @@ function Battle(currrival) {
 
   insertCombatControls();
   var tell = rivalTell();
-  $("#last_action").html("<p class='rival-tell'>"+tell+"</p>");
+  $("#last_action").html("<p class='rival-tell'>" + tell + "</p>");
 
   function standardChange() { return getRandomInt(7, 13); }
 
@@ -187,7 +187,7 @@ function Battle(currrival) {
       });
       this.action = predictions[0].action;
       this.determineRivalTrait();
-      return eval("new "+capitalize(this.action)+"('"+this.trait+"', rival);" )
+      return eval("new " + capitalize(this.action) + "('" + this.trait + "', rival);" )
     }
   }
 
@@ -301,7 +301,7 @@ function Battle(currrival) {
   function describeChange(avatar, trait) {
     if (avatar === player) {
       var description = ""
-      var traitFraction = Math.floor(avatar[trait]/10);
+      var traitFraction = Math.floor(avatar[trait] / 10);
       if (traitFraction != avatar.description[trait]) {
         avatar.description[trait] = traitFraction;
         description = describeTrait(trait);
@@ -379,23 +379,23 @@ function Battle(currrival) {
     this.special = function() {
       var opponentActivity = this.avatar[this.trait] > 50 ? "listen to father ancestors" : "siphon masculinity"
       if (this.avatar[this.trait] > 50) {
-        var rate = standardChange() * (this.avatar[this.trait]/25);
+        var rate = standardChange() * (this.avatar[this.trait] / 25);
         if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);
         processAction(this.opponent, this.trait, rate, true);
         processAction(this.avatar, this.trait, rate * -1, true);
         this.avatar[this.trait] = minValue(this.avatar[this.trait], 50);
-        description += this.avatar === player ? rival.name + " attempt "+opponentActivity+", but instead " + rivalhe + " vulnerable as you push " + rivalhim + " full of "+this.trait+". " : "You attempt "+opponentActivity+", but instead you vulnerable as " + rivalhe + " push you full of " + this.trait + ". ";
+        description += this.avatar === player ? rival.name + " attempt " + opponentActivity + ", but instead " + rivalhe + " vulnerable as you push " + rivalhim + " full of " + this.trait + ". " : "You attempt " + opponentActivity + ", but instead you vulnerable as " + rivalhe + " push you full of " + this.trait + ". ";
       } else {
         var rate = standardChange() * 2;
         if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);
         processAction(this.opponent, this.trait, rate, true);
-        description += this.avatar === player ? rival.name + " attempt " + opponentActivity + ", but instead " + rivalhe + " soak in your mother ancestor's "+this.trait+" very fast. " : "You attempt "+opponentActivity+", but instead you soak in " + this.trait + " from " + rivalmanlwr + "'s mother ancestors. ";
+        description += this.avatar === player ? rival.name + " attempt " + opponentActivity + ", but instead " + rivalhe + " soak in your mother ancestor's " + this.trait + " very fast. " : "You attempt " + opponentActivity + ", but instead you soak in " + this.trait + " from " + rivalmanlwr + "'s mother ancestors. ";
       }
     }
 
     this.standard = function() {
       if (this.avatar[this.trait] > 50) {
-        var rate = standardChange() * (this.avatar[this.trait]/50);
+        var rate = standardChange() * (this.avatar[this.trait] / 50);
         if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);
         processAction(this.opponent, this.trait, rate)
         processAction(this.avatar, this.trait, rate * -1)
@@ -406,7 +406,7 @@ function Battle(currrival) {
 				var rate = standardChange();
         if (this.avatar.Mods["push" + this.trait] != 0) rate *= 1 + (0.2 * this.avatar.Mods["push" + this.trait]);				
         processAction(this.opponent, this.trait, rate)
-        description += this.avatar === player ? "You summon mother ancestors, which fill " + rivalmanlwr + " with " + this.trait + ". " : rival.name + " summon mother ancestors, which whisper to you secrets of "+this.trait+". ";
+        description += this.avatar === player ? "You summon mother ancestors, which fill " + rivalmanlwr + " with " + this.trait + ". " : rival.name + " summon mother ancestors, which whisper to you secrets of " + this.trait + ". ";
       }
     }
   }
@@ -428,27 +428,27 @@ function Battle(currrival) {
     this.special = function() {
       if (this.opponent[this.trait] > 50) {
         processAction(this.avatar, this.trait, standardChange() * -1, true)
-        description += this.avatar === player ? rival.name + " attempt reflect, leaving you free to talk to father ancestors about "+switchFemForMascTrait(this.trait)+". " : "You attempt reflect " + rival.name + "'s attack, leaving " + rivalhim + " free to talk with father ancestors about "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? rival.name + " attempt reflect, leaving you free to talk to father ancestors about " + switchFemForMascTrait(this.trait) + ". " : "You attempt reflect " + rival.name + "'s attack, leaving " + rivalhim + " free to talk with father ancestors about " + switchFemForMascTrait(this.trait) + ". ";
       } else {
         var rate = standardChange() * 2;
         processAction(this.opponent, this.trait, rate, true)
         processAction(this.avatar, this.trait, rate * -1, true)
         this.opponent[this.trait] = maxValue(this.opponent[this.trait], 51);
-        description += this.avatar === player ? rival.name + " attempt reflect, make " + rivalhim + " easy prey as you drain " + rivalhim + " of "+switchFemForMascTrait(this.trait)+". " : "You attempt reflect, making you easy prey as " + rivalmanlwr + " drain you of "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? rival.name + " attempt reflect, make " + rivalhim + " easy prey as you drain " + rivalhim + " of " + switchFemForMascTrait(this.trait) + ". " : "You attempt reflect, making you easy prey as " + rivalmanlwr + " drain you of " + switchFemForMascTrait(this.trait) + ". ";
       }
     }
 
     this.standard = function() {
       if (this.opponent[this.trait] > 50) {
         processAction(this.avatar, this.trait, standardChange() * -1)
-        description += this.avatar === player ? "You summon father ancestors and learn of "+switchFemForMascTrait(this.trait)+". " : rival.name + " summon father ancestors and learn of "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? "You summon father ancestors and learn of " + switchFemForMascTrait(this.trait) + ". " : rival.name + " summon father ancestors and learn of " + switchFemForMascTrait(this.trait) + ". ";
       }
       else{
         var rate = standardChange() * 2;
         processAction(this.opponent, this.trait, rate)
         processAction(this.avatar, this.trait, rate * -1)
         this.opponent[this.trait] = maxValue(this.opponent[this.trait], 51);
-        description += this.avatar === player ? "You drain " + rivalmanlwr + " of "+switchFemForMascTrait(this.trait)+". " : rival.name + " drain you of "+switchFemForMascTrait(this.trait)+". ";
+        description += this.avatar === player ? "You drain " + rivalmanlwr + " of " + switchFemForMascTrait(this.trait) + ". " : rival.name + " drain you of " + switchFemForMascTrait(this.trait) + ". ";
       }
     }
   }
@@ -465,7 +465,7 @@ function Battle(currrival) {
     this.special = function() {
       this.trait = this.opponent.currentAction.trait
       processAction(this.opponent, this.trait, standardChange() * 2, true)
-      description += this.avatar === player ? rival.name + " attempt give you "+this.trait+", but you reflect it back at " + rivalhim + ". " : "You attempt give " + rivalmanlwr + " "+this.trait+", but " + rivalhe + " reflects it back at you. " ;
+      description += this.avatar === player ? rival.name + " attempt give you " + this.trait + ", but you reflect it back at " + rivalhim + ". " : "You attempt give " + rivalmanlwr + " " + this.trait + ", but " + rivalhe + " reflects it back at you. " ;
     }
 
     this.standard = function() {
@@ -574,7 +574,7 @@ function Battle(currrival) {
     //alert("Round " + player.submissiveness);
     description = ""
 
-    if (player.submissiveness/4 > getRandomInt(1, 100) && player.Mods.ironwill < 4) {
+    if ((player.submissiveness / 4) > getRandomInt(1, 100) && player.Mods.ironwill < 4) {
       //alert("hes");
 			if ((player.Mods.ironwill * 25) < getRandomInt(1, 100)) playerAction = new Hesitate(player);
     }
@@ -592,6 +592,6 @@ function Battle(currrival) {
 
     insertCombatControls();
     checkForVictoryButton();
-    $("#last_action").html("<p class='battle-description'>"+description+"</p><p class='rival-tell'>"+tell+"</p>");
+    $("#last_action").html("<p class='battle-description'>" + description + "</p><p class='rival-tell'>" + tell + "</p>");
   }
 }
