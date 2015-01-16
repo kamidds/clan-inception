@@ -88,6 +88,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Physique
 	this.physique = {
 		"hairc": getRandomInt(1, 20),
+		"hairstyle": getRandomInt(0, 9),
 		
 		// special numbers 100 = red, 101 = blue
 		"irisc": getRandomInt(1, 20),
@@ -99,7 +100,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"horns": 0,
 		"tailtype": 0,
 		"tail": 0,
-		"wings": 0	
+		"wings": 0
   }
 
 	// Methods
@@ -289,8 +290,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     this["physique"].face = this.calcFace();
     this["physique"].eyes = this.calcEyes();
     this["physique"].lips = this.calcLips();
-    this["physique"].hairback = this.calcHairLength();
-    this["physique"].hairfront = this.calcHairLength();
+    this["physique"].hairlength = this.calcHairLength();
     this["physique"].shoulders = this.calcShoulders();
     this["physique"].breasts = this.calcBreasts();
     this["physique"].nipples = this.calcNipples();
@@ -398,6 +398,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		}
 		
 		if (isNaN(that.futa)) that.futa = 0;
+		if (isNaN(that.physique.hairstyle)) that.physique.hairstyle = 1;
 	}
 	
 }

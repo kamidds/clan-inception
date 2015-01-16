@@ -812,43 +812,47 @@
 			
 			function drawHairBack(ctx)
 			{
+				if (avatar.physique.hairstyle == 0) return;	// Bald
+				
 				ctx.fillStyle=HAIRCOLOR;
 				ctx.strokeStyle=HAIRCOLORB;
 				ctx.beginPath();
 				
 				/*Hairback*/
-				var a = hairback;
+				var a = hairlength;
+				if (a < 1) a = 1;
 				var b = a/2;
 				var c = a/3;
 				var d = a/5;
 				var e = a/10;
 				
-				if (a > 1) {
-					ctx.moveTo(61,26);
-					ctx.quadraticCurveTo(60-(c+e),26+(a+b),60-(d+e),26+(a*3));
-					ctx.quadraticCurveTo(79,26+(a*4),97+d+e,26+(a*3));
-					ctx.quadraticCurveTo(97+c+e,26+(a+b),96,26);
-					ctx.lineTo(61,26);
-				}
+				ctx.moveTo(61,26);
+				ctx.quadraticCurveTo(60-(c+e),26+(a+b),60-(d+e),26+(a*3));
+				ctx.quadraticCurveTo(79,26+(a*4),97+d+e,26+(a*3));
+				ctx.quadraticCurveTo(97+c+e,26+(a+b),96,26);
+				ctx.lineTo(61,26);
+
 				ctx.fill();
 				ctx.stroke();
 			}
 			
 			function drawHairFront(ctx)
 			{
+				if (avatar.physique.hairstyle == 0) return;	// Bald
+				
 				ctx.beginPath();
 				
 				/*Hairfront*/
-				var a = hairfront;
+				var a = hairlength;
 				var b = a/2;
 				var c = a/3;
 				var d = a/5;
 				var e = a/10;
 				var x = face/7;
 				
-				if (hairfront<2) {
-					var z = (hairfront-1)*2;
-					if (z > 1) z=1;
+				if (hairlength < 2) {
+					var z = (hairlength - 1) * 2;
+					if (z > 1) z = 1;
 					if (hairc < 6) {
 						HAIRCOLOR="rgba("+Math.floor(36+(hairc*17.2))+","+Math.floor(7+(hairc*10.6))+","+Math.floor(11+(hairc*8.8))+","+z+")";
 						HAIRCOLORB="rgba("+Math.floor(0+(hairc*11.8))+","+Math.floor(0+(hairc*5.8))+","+Math.floor(0+(hairc*5.2))+","+z+")";
@@ -858,17 +862,17 @@
 						HAIRCOLOR="rgba("+Math.floor(163+(y*11.8))+","+Math.floor(0+(y*37.6))+","+Math.floor(1+(y*30.4))+","+z+")";
 						HAIRCOLORB="rgba("+Math.floor(102+(y*11.2))+","+Math.floor(0+(y*26.8))+","+Math.floor(1+(y*21.6))+","+z+")";
 					} else {
-						var y = hairc-16;
+						var y = hairc - 16;
 						HAIRCOLOR="rgba("+Math.floor(222+(y*5.8))+","+Math.floor(188+(y*12.6))+","+Math.floor(153+(y*6.2))+","+z+")";
 						HAIRCOLORB="rgba("+Math.floor(158+(y*6.2))+","+Math.floor(134+(y*5.8))+","+Math.floor(109+(y*.4))+","+z+")";
 					}
 					
-					var facea = face-11;
-					if (face < 11) facea=face;
-					var faceb = facea/2;
-					var facec = facea/3;
-					var faced = facea/5;
-					var facee = facea/10;
+					var facea = face - 11;
+					if (face < 11) facea = face;
+					var faceb = facea / 2;
+					var facec = facea / 3;
+					var faced = facea / 5;
+					var facee = facea / 10;
 					
 					ctx.fillStyle=HAIRCOLOR;
 					ctx.strokeStyle=HAIRCOLORB;
@@ -1416,8 +1420,7 @@
 				var irisc = typeof stats["irisc"] !== 'undefined' ? stats["irisc"] : missingData = true;
 				var lips = typeof stats["lips"] !== 'undefined' ? stats["lips"] : missingData = true;
 				var skin = typeof stats["skin"] !== 'undefined' ? stats["skin"] : missingData = true;
-				var hairback = typeof stats["hairback"] !== 'undefined' ? stats["hairback"] : missingData = true;
-				var hairfront = typeof stats["hairfront"] !== 'undefined' ? stats["hairfront"] : missingData = true;
+				var hairlength = typeof stats["hairlength"] !== 'undefined' ? stats["hairlength"] : missingData = true;
 				var hairc = typeof stats["hairc"] !== 'undefined' ? stats["hairc"] : missingData = true;
 				var shoulders = typeof stats["shoulders"] !== 'undefined' ? stats["shoulders"] : missingData = true;
 				var breasts = typeof stats["breasts"] !== 'undefined' ? stats["breasts"] : missingData = true;
