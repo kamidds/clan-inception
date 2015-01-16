@@ -458,10 +458,10 @@
 					ctx.moveTo(51.075+(x/10), 104.5-(x/3) + ypos);
 					ctx.bezierCurveTo(45.575-a+(x/10), 113.45+a-(x/3) + ypos,
 														35.5-a+(x/10), 131.9+a-(x/3) + f + ypos,
-														54-a+(x/10), 143.25+a-(x/3) + f + ypos
+														54-a+(x/10) + d, 143.25+a+e-(x/3) + f + ypos + d
 														);
-					ctx.bezierCurveTo(66.9-a, 147.15 + a - (x / 3) + f + ypos,
-														72.4-a + f, 144.125 + a - (x / 3) + (f * 1.5) + ypos,
+					ctx.bezierCurveTo(66.9-a/2, 147.15 + a + a/2 - (x / 3) + f + ypos,
+														72.4-a/2 + f, 144.125 + a + a/2 - (x / 3) + (f * 1.5) + ypos,
 														79.5, 140.075 + a - (x / 3) + ypos - g
 														);
 				}
