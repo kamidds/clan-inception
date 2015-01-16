@@ -116,9 +116,31 @@ function WanderBattle(plc)
 	var exp = Math.floor(player.getTrainingRanks() * (getRandomInt(40, 120) / 100)) * 5;
 	createRival(exp);
 	
-  new Message("new Battle(rival)", "<h1>Wandering</h1>\
-		<p>You wander through " + plc + " until spot lone man. He see you and grin. He think \
-		you become womanfolk of his clan. He wrong.</p>");
+	if (player.Mods.perception > 0 && (player.Mods.perception * 5) >= getRandomInt(0, 100)) {
+		// can avoid
+		$("#output").html("<h1>Wandering</h1>\
+			<p>You wander through " + plc + " until spot lone man. He no see you yet.\
+			<div id='fight_buttons' class='push--top'></div>\
+			<button id='fight_button_fight' class='btn btn-woman push--right' title='Take him!'>Fight</button>\
+			<button id='fight_button_leave' class='btn btn-woman push--right' title='Leave'>Leave</button>\
+			");
+		$("#fight_button_fight").click(
+			function(){
+				Battle(rival);
+			}
+		);
+		$("#fight_button_leave").click(
+			function() {
+				new Message("Camp();", "You no want this weakling and leave him.");
+			}
+		);
+		
+	} else {
+		// Cannot avoid
+		new Message("new Battle(rival)", "<h1>Wandering</h1>\
+			<p>You wander through " + plc + " until spot lone man. He see you and grin. He think \
+			you become womanfolk of his clan. He wrong.</p>");
+	}
 }
 
 
