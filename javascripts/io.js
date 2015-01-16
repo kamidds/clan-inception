@@ -6,7 +6,7 @@ function redraw()
 		var canvas = document.getElementById("rival_avatar");
 		var ctx = canvas.getContext("2d");
 		ctx.beginPath();
-		ctx.clearRect (0, 0, canvas.width, canvas.height);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
 		var w = canvas.width;
 		canvas.width = 1;

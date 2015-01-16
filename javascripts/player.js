@@ -9,7 +9,7 @@ var player = new Avatar(getRandomInt(23, 28),
 // Initialise player specific variables
 player.experience = 5;
 
-// Get an unused name for a nbew woman, to limit cases of the same name being randomly chosen
+// Get an unused name for a new woman, to limit cases of the same name being randomly chosen
 function getUnusedFemaleName() {
   var ntry = 0;
   var str = "";
