@@ -17,7 +17,7 @@ function ASavedGame()
 function loadGame(cancel) 
 {
 	var cnt = 0;
-	for (var id = 1; id < 4; id++) {
+	for (var id = 1; id < 5; id++) {
 		var str = localStorage.getItem('clani' + id);
 		var sg = JSON.parse(str);
 		if (sg != undefined) cnt++;
@@ -25,7 +25,7 @@ function loadGame(cancel)
 	if (cnt == 0) return 0;
 
 	$("#output").html("<h1>Loading a game</h1><div id='loading'></div>");
-	for (var id = 1; id < 4; id++) {
+	for (var id = 1; id < 5; id++) {
 		var str = localStorage.getItem('clani' + id);
 		var sg = JSON.parse(str);
 		if (sg != undefined) {
@@ -95,7 +95,7 @@ function loadGameId(id)
 function saveGame(cancel) 
 {
 	$("#output").html("<h1>Saving a game</h1><div id='saving'></div>");
-	for (var id = 1; id < 4; id++) {
+	for (var id = 1; id < 5; id++) {
 		$("#saving").append("<button myid='" + id + "' id='save_button_"+id+"' class='btn btn-woman push--right'>Save Game "+id+"</button>");
 		
 		$("#save_button_"+id).click(
