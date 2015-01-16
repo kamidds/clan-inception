@@ -33,7 +33,9 @@ function Camp(){
   $("#load_button").click(function(){
 		if (loadGame("Camp()") == 0) alert("No saved games");
 	});
-  $("#save_button").click(saveGame);
+  $("#save_button").click(function() {
+		saveGame("Camp()");
+	});
 	$("#exp_button").click(Train);
 }
 

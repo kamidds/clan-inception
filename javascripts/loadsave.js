@@ -92,7 +92,7 @@ function loadGameId(id)
 
 // Save Games
 
-function saveGame() 
+function saveGame(cancel) 
 {
 	$("#output").html("<h1>Saving a game</h1><div id='saving'></div>");
 	for (var id = 1; id < 4; id++) {
@@ -102,6 +102,12 @@ function saveGame()
 			function() { saveGameId($(this).attr("myid")); }
 		);
 	}
+	$("#saving").append("<button id='save_button_cancel' class='btn btn-woman push--right' title='Cancel'>Cancel</button>");
+	$("#save_button_cancel").click(
+		function() { 
+			eval(cancel);
+		}
+	);
 }
 
 function saveGameId(id) 
