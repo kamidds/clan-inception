@@ -71,9 +71,9 @@
 			{
 				ctx.beginPath();
 				
-				var hasc = penis < 11 || (avatar.Mods.futa > 0 && penis > 10);
+				var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10);
 				var ap = penis;
-				if (avatar.Mods.futa > 0 && penis > 10) ap = 11 - avatar.Mods.futa;
+				if ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10) ap = 11 - (avatar.Mods.futa + avatar.futa);
 				else ap = ap - avatar.Mods.cock;
 				var a = (21-ap)/13;
 				if (a<1) a=1;
@@ -708,6 +708,7 @@
 			function drawEyes(ctx)
 			{
 				ctx.beginPath();
+				ctx.lineWidth=1;
 				
 				/*Eyes*/
 				var a = eyes/6;
@@ -1570,7 +1571,7 @@
 						drawBelly(ctx);
 						ctx.stroke();		
 						
-						var hasc = penis < 11 || (avatar.Mods.futa > 0 && penis > 13);
+						var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 13);
 						if (hasc == true) drawGenitals(ctx);
 						
 						// Draw left side, part 2

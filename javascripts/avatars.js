@@ -13,21 +13,17 @@ function switchFemForMascTrait(trait) {
 function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 
 	// Variables
-
-	// Identity
   var that = this;
+	
+	// Identity
   this.name = "";			// special case for "Rival man" in battle and drawfigure.js
 	this.round = 0;			// day of game for player, day of capture for a woman
+	
+	// Futanari
+	this.futa = 0;			// > 0 if a futa
 
 	// Power
   this.changra = getRandomInt(75, 100);
-
-  // Motherhood
-  this.pregnancy = 0;
-  this.children = 0;
-
-  // Desire
-  this.desire = 0;
 
 	// Traits
   this.submissiveness = submissiveness;
@@ -35,6 +31,13 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
   this.maternalism = maternalism;
   this.allure = allure;
   this.orientation = orientation;
+	
+	// Motherhood
+  this.pregnancy = 0;
+  this.children = 0;
+
+  // Desire
+  this.desire = 0;
 	
 	this.description = { }
   this.activity = "";
@@ -195,69 +198,90 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Physique
 
   this.calcPhysique = function() {
+		
+		this.getSubmissiveness = function() {
+			if (this.futa > 0 && this.submissiveness < 49) return this.submissiveness + 50;
+			return this.submissiveness;
+		}
+		this.getAllure = function() {
+			if (this.futa > 0 && this.allure < 49) return this.allure + 50;
+			return this.allure;
+		}
+		this.getDomesticity = function() {
+			if (this.futa > 0 && this.domesticity < 49) return this.domesticity + 50;
+			return this.domesticity;
+		}	
+		this.getMaternalism = function() {
+			if (this.futa > 0 && this.maternalism < 49) return this.maternalism + 50;
+			return this.maternalism;
+		}
+		this.getOrientation = function() {
+			if (this.futa > 0 && this.orientation < 49) return this.orientation + 50;
+			return this.orientation;
+		}		
 
     this.calcHeight = function() {
-			if (this.femininity() > 49) return maxValue(20 - (this.submissiveness/5) + this.Mods.amazon, 20);
-      return maxValue(20 - (this.submissiveness/5), 20);
+			if (this.futa > 0 || this.femininity() > 49) return maxValue(20 - (this.submissiveness/5) + this.Mods.amazon, 20);
+      return maxValue(20 - (this.getSubmissiveness()/5), 20);
     }
 
     this.calcFace = function() {
-      return ((this.allure * 2) + this.submissiveness)/10;
+      return ((this.getAllure() * 2) + this.getSubmissiveness())/10;
     }
 
     this.calcEyes = function() {
-      return ((this.submissiveness * 2) + this.allure)/10;
+      return ((this.getSubmissiveness() * 2) + this.getAllure())/10;
     }
 
     this.calcLips = function() {
-      return (this.allure * 3)/10;
+      return (this.getAllure() * 3)/10;
     }
 
     this.calcHairLength = function() {
-      return ((this.allure * 2) + this.domesticity)/10;
+      return ((this.getAllure() * 2) + this.getDomesticity())/10;
     }
 
     this.calcShoulders = function() {
-      var val = ((this.submissiveness * 1.5) + (this.domesticity * 1.5) )/10;
-			if (this.femininity() > 49) val = val - (this.Mods.amazon * 4);
+      var val = ((this.getSubmissiveness() * 1.5) + (this.getDomesticity() * 1.5) )/10;
+			if (this.femininity() > 49 || this.futa > 0) val = val - (this.Mods.amazon * 4);
 			if (val < 0) val = 0;
 			return val;
     }
 
     this.calcBreasts = function() {
       var val;
-			if (this.femininity() > 49) val = ((((this.allure + this.Mods.breasts) - 50) * 4) + (((this.maternalism + this.Mods.breasts) - 50) * 2 ))/10;
-			else val = (((this.allure - 50) * 4) + ((this.maternalism - 50) *2))/10;
+			if (this.futa > 0 || this.femininity() > 49) val = ((((this.getAllure() + this.Mods.breasts) - 50) * 4) + (((this.getMaternalism() + this.Mods.breasts) - 50) * 2 ))/10;
+			else val = (((this.getAllure() - 50) * 4) + ((this.getMaternalism() - 50) *2))/10;
       return minValue(val, 0);
     }
 
     this.calcNipples = function() {
-      var val = (((this.maternalism - 50) * 4) + ((this.allure - 50) *2 ))/10;
+      var val = (((this.getMaternalism() - 50) * 4) + ((this.getAllure() - 50) *2 ))/10;
       return minValue(val, 0);
     }
 
     this.calcTestes = function() {
-      return ((this.orientation * 4) + this.submissiveness + this.domesticity + this.maternalism + this.allure)/40;
+      return ((this.getOrientation() * 4) + this.getSubmissiveness() + this.getDomesticity() + this.getMaternalism() + this.getAllure())/40;
     }
 
     this.calcPenis = function() {
-      return (this.orientation + this.allure + this.submissiveness)/10;
+      return (this.getOrientation() + this.getAllure() + this.getSubmissiveness())/10;
     }
 
     this.calcWaist = function() {
-      return ((this.allure * 3) - this.pregnancy * 5)/10;
+      return ((this.getAllure() * 3) - this.pregnancy * 5)/10;
     }
 
     this.calcHips = function() {
-      return (this.maternalism * 3)/10;
+      return (this.getMaternalism() * 3)/10;
     }
 
     this.calcAss = function() {
-      return ((this.maternalism * 2) + this.allure)/10;
+      return ((this.getMaternalism() * 2) + this.getAllure())/10;
     }
 
     this.calcLegs = function() {
-      return ((this.domesticity * 2) + this.allure)/10;
+      return ((this.getDomesticity() * 2) + this.getAllure())/10;
     }
 
 		this.capTraits();
@@ -372,6 +396,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 			if (rnd != undefined) that.round = rnd;
 			else that.round = 0;
 		}
+		
+		if (isNaN(that.futa)) that.futa = 0;
 	}
 	
 }

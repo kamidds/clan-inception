@@ -4,6 +4,7 @@ function insertCharacterCreationIO(){
     "<h1>Design Your Avatar</h1>\
     <h2>Name</h2>\
     <input id='player_name_input' value='"+randomMaleName()+"' placeholder='Name'/>\
+		<input type='checkbox' id='chkFuta'>Futanari</input>\
     <h2>Coloration</h2>\
     <table class='slidertable'>\
       <tr><td>Complexion: </td><td><div id='slider_skin'></div></td></tr>\
@@ -80,7 +81,15 @@ function insertCharacterCreationIO(){
 
 	  player.orientation=51-ui.value; 
 	  drawfigure('player_avatar', player)}}
-  ); 
+  );
+	$('#chkFuta').change(function() {
+		if($(this).is(":checked")) {
+			player.futa = 1;
+		} else {
+			player.futa = 0;
+		}
+		drawfigure('player_avatar', player);
+  });
 
   $("#player_name_input").click(function(){
     $("#player_name_input").focus();
