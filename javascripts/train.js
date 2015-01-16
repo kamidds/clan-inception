@@ -18,7 +18,7 @@ function Train()
 				if (player.experience >= 5 && player.Mods.ironwill < 4) {
 					player.experience -= 5;
 					player.Mods.ironwill += 1;
-					$("#train_display").append("<p>You can resist others domination better</p>");
+					$("#train_display").append("<p>You resist others domination better</p>");
 					drawStats();
 					$("#train_button_12").html("Iron Will+ (" + player.Mods.ironwill + ")");
 				}
@@ -67,7 +67,7 @@ function Train()
 				player.experience -= 5;
 				player.Mods.changra += 5;
 				player.rest();
-				$("#train_display").append("<p>You have more Power to expand your clan</p>");
+				$("#train_display").append("<p>You have more Power to expand clan</p>");
 				drawStats();
 				$("#train_button_3").html("Changra+ (" + (player.Mods.changra / 5) + ")");
 			}
@@ -83,7 +83,7 @@ function Train()
 					if (player.Mods.amazon < 20) {
 					player.experience -= 5;
 					player.Mods.amazon += 2;
-					$("#train_display").append("<p>Your new women will be stronger!</p>");
+					$("#train_display").append("<p>Your new women be stronger!</p>");
 					drawStats();
 					$("#train_button_4").html("Amazon+ (" + (player.Mods.amazon / 2) + ")");
 				} else $("#train_display").append("<p><b>No more possible.</b></p>");
@@ -101,7 +101,7 @@ function Train()
 					player.experience -= 5;
 					player.Mods.cock += 2;
 					if (player.Mods.cock > 20) player.Mods.cock = 20;
-					$("#train_display").append("<p>Your cock will grow!</p>");
+					$("#train_display").append("<p>Your cock grow!</p>");
 					redraw();
 					$("#train_button_5").html("Cock+ (" + (player.Mods.cock / 2) + ")");
 				} else $("#train_display").append("<p><b>No more possible.</b></p>");
@@ -120,7 +120,7 @@ function Train()
 					player.Mods.futa += 2;
 					if (player.Mods.futa > 20) player.Mods.futa = 20;
 					if (player.Mods.futa > 2) $("#train_display").append("<p>Your women will have bigger cocks!</p>");
-					else $("#train_display").append("<p>Your women will also have cocks!</p>");
+					else $("#train_display").append("<p>Your women also have cocks!</p>");
 					drawStats();
 					$("#train_button_6").html("Futa+ (" + (player.Mods.futa / 2) + ")");
 				} else $("#train_display").append("<p><b>No more possible.</b></p>");
@@ -138,7 +138,7 @@ function Train()
 			if (player.experience >= 5) {
 				player.experience -= 5;
 				player.Mods.pushsubmissiveness += 2;
-				$("#train_display").append("<p>You make others more submissive!</p>");
+				$("#train_display").append("<p>You make others submissive!</p>");
 				drawStats();
 				$("#train_button_8").html("Submissiveness+ (" + (player.Mods.pushsubmissiveness / 2) + ")");
 			}
@@ -152,7 +152,7 @@ function Train()
 			if (player.experience >= 5) {
 				player.experience -= 5;
 				player.Mods.pushdomesticity += 2;
-				$("#train_display").append("<p>You make others more domestic!</p>");
+				$("#train_display").append("<p>You make others domestic!</p>");
 				drawStats();
 				$("#train_button_9").html("Domesticity+ (" + (player.Mods.pushdomesticity / 2) + ")");
 			}
@@ -166,7 +166,7 @@ function Train()
 			if (player.experience >= 5) {
 				player.experience -= 5;
 				player.Mods.pushmaternalism += 2;
-				$("#train_display").append("<p>You make others more of a mother!</p>");
+				$("#train_display").append("<p>You make others more mother!</p>");
 				drawStats();
 				$("#train_button_7").html("Maternalism+ (" + (player.Mods.pushmaternalism / 2) + ")");
 			}
@@ -180,7 +180,7 @@ function Train()
 			if (player.experience >= 5) {
 				player.experience -= 5;
 				player.Mods.pushallure += 2;
-				$("#train_display").append("<p>You make others more pretty!</p>");
+				$("#train_display").append("<p>You make others pretty!</p>");
 				drawStats();
 				$("#train_button_10").html("Allure+ (" + (player.Mods.pushallure / 2) + ")");
 			}
@@ -194,7 +194,7 @@ function Train()
 			if (player.experience >= 5) {
 				player.experience -= 5;
 				player.Mods.pushorientation += 2;
-				$("#train_display").append("<p>You make others desire you more</p>");
+				$("#train_display").append("<p>You make others desire you!</p>");
 				drawStats();
 				$("#train_button_11").html("Orientation+ (" + (player.Mods.pushorientation / 2) + ")");
 			}
@@ -282,6 +282,6 @@ function IsDoneTraining()
 	if (player.experience <= 0) {
 		$("#exp_button").hide();
 		$("#train_buttons").hide();
-		$("#train_display").append("<p><b>You no know how to train more.</b></p>");
+		$("#train_display").append("<p><b>You no can train more.</b></p>");
 	}
 }
