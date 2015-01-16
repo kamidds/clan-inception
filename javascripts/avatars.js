@@ -261,11 +261,11 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     }
 
     this.calcTestes = function() {
-      return ((this.getOrientation() * 4) + this.getSubmissiveness() + this.getDomesticity() + this.getMaternalism() + this.getAllure())/40;
+      return ((this.orientation * 4) + this.submissiveness + this.domesticity + this.maternalism + this.allure)/40;
     }
 
     this.calcPenis = function() {
-      return (this.getOrientation() + this.getAllure() + this.getSubmissiveness())/10;
+      return (this.orientation + this.allure + this.submissiveness)/10;
     }
 
     this.calcWaist = function() {

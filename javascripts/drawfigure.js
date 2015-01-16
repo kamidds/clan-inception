@@ -74,7 +74,7 @@
 				var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10);
 				var ap = penis;
 				if ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10) ap = 11 - (avatar.Mods.futa + avatar.futa);
-				else ap = ap - avatar.Mods.cock;
+				ap -= avatar.Mods.cock;
 				var a = (21-ap)/13;
 				if (a<1) a=1;
 				else if (a > 2) a = 2;
