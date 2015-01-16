@@ -774,6 +774,8 @@
 			{
 				ctx.beginPath();
 				
+				ctx.strokeStyle=SKINCB;
+				ctx.fillStyle=SKINC;
 				ctx.lineWidth = (21-face)/15;
 				if (ctx.lineWidth<1) ctx.lineWidth=1;
 				
@@ -1560,7 +1562,14 @@
 						
 						ctx.translate(0,0);
 						
-						// Draw central/common parts of the body, part 1
+						// Draw central/common parts of the body, part 1						
+						ctx.strokeStyle=SKINCB;
+						ctx.fillStyle=SKINC;
+						drawBelly(ctx);
+						ctx.fill();
+						drawBelly(ctx);
+						ctx.stroke();		
+						
 						var hasc = penis < 11 || (avatar.Mods.futa > 0 && penis > 13);
 						if (hasc == true) drawGenitals(ctx);
 						
@@ -1575,18 +1584,12 @@
 						
 						ctx.translate(0,0);
 						
-						// Draw central/common parts of the body, part 2
-						ctx.strokeStyle=SKINCB;
-						ctx.fillStyle=SKINC;
-						drawBelly(ctx);
-						ctx.fill();
-						drawBelly(ctx);
-						ctx.stroke();		
+						// Draw central/common parts of the body, part 2		
 						drawNose(ctx);
 						ctx.stroke();
 						drawCleavage(ctx);
 						ctx.stroke();
-						if (avatar.physique.breasts < 78) {
+						if (avatar.physique.breasts < 80) {
 							drawBellyButton(ctx);
 							ctx.stroke();
 						}

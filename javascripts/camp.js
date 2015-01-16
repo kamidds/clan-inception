@@ -217,6 +217,8 @@ function editWoman()
 			<tr><td>Futa+</td><td><div id='slider_futa'></div></td></tr>\
 			<tr><td>Amazon+</td><td><div id='slider_amazon'></div></td></tr>\
 			<tr><td>Horns</td><td><div id='slider_horns'></div></td></tr>\
+			<tr><td>Tail</td><td><div id='slider_tail'></div></td></tr>\
+			<tr><td>Pregnancy</td><td><div id='slider_pregnancy'></div></td></tr>\
 		</table></font>\
 		");
 	$('#expandwoman').click(function(){
@@ -245,7 +247,6 @@ function editWoman()
 	$("#slider_boobs").slider({value:rival.Mods.breasts,min:0,max:200,slide:function(event, ui) {
 		rival.Mods.breasts = ui.value; 
 		redraw();
-		$("#woman_display").append("<p>"+rival.physique["breasts"]+ " " + rival.Mods.breasts + "</p>");
 	}}); 
 	$("#slider_amazon").slider({value:rival.Mods.amazon,min:0,max:20,slide:function(event, ui) {
 		rival.Mods.amazon = ui.value; 
@@ -266,5 +267,9 @@ function editWoman()
 	$("#slider_tail").slider({value:rival.physique.tail,min:0,max:10,slide:function(event, ui) {
 		rival.physique.tail = ui.value; 
 		redraw();
-	}});		
+	}});
+	$("#slider_pregnancy").slider({value:rival.pregnancy,min:0,max:100,slide:function(event, ui) {
+		rival.pregnancy = ui.value; 
+		redraw();
+	}});	
 }
