@@ -86,7 +86,7 @@ function insertCharacterCreationIO(){
     $("#player_name_input").focus();
   })
   $("#load_button").click(function(){
-    new loadGame();
+    new loadGame("location.reload();");
   })
   $("#accept").click(function(){
     player.name = $("#player_name_input").val();
@@ -96,6 +96,7 @@ function insertCharacterCreationIO(){
       player.maximums[trait] = player[trait] + 35;
       player.description[trait] = Math.floor(player[trait]/10);
     })
+		if (pts > 10) player.experience += Math.floor(pts / 10) * 5;
 		player.round = 1;
     new Camp();    
   });
@@ -127,7 +128,7 @@ $(document).ready(function() {
       lone man and ambush. You make man your woman. You start new clan . . . or you \
       become part of other clan in process. Either way, you warmer.</p>");
 	$("#load_button").click(function(){
-		if (loadGame() == 0) {
+		if (loadGame("location.reload();") == 0) {
 			alert("No saved games, starting a new game");
 		}
 	});

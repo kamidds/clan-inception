@@ -14,7 +14,7 @@ function ASavedGame()
 	
 // Load Games
 
-function loadGame() 
+function loadGame(cancel) 
 {
 	var cnt = 0;
 	for (var id = 1; id < 4; id++) {
@@ -38,6 +38,13 @@ function loadGame()
 			);
 		}
 	}
+	$("#loading").append("<button id='load_button_cancel' class='btn btn-woman push--right' title='Cancel'>Cancel</button>");
+	$("#load_button_cancel").click(
+		function() { 
+			eval(cancel);
+		}
+	);	
+
 	return cnt;
 }
 

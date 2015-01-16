@@ -31,7 +31,7 @@ function Camp(){
   $("#women_button").click(displayWomen);
   $("#wander_button").click(Wander);
   $("#load_button").click(function(){
-		if (loadGame() == 0) alert("No saved games");
+		if (loadGame("Camp()") == 0) alert("No saved games");
 	});
   $("#save_button").click(saveGame);
 	$("#exp_button").click(Train);
@@ -42,7 +42,7 @@ function displayWomen(){
 		rival = player.women[index];
 		$("#woman_display").html("<h2>"+rival.name+"</h2>");
 
-		//editWoman();
+		editWoman();
 		
 		// Description
 		var fate = "";
