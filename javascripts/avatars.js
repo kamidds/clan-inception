@@ -391,6 +391,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 			that.pregnancy = 0;
 			that.children = 0;
 		}
+		if (isNaN(that.dysphoria)) that.dysphoria = that.masculinity();
 		
 		if (that.round == undefined || that.round == 0) {
 			if (rnd != undefined) that.round = rnd;
