@@ -150,7 +150,7 @@ function Battle(currrival) {
         if (that.action === "drain" && player[trait] > 50) {
           var offensiveIncentive = 0;
         } else {
-          var offensiveIncentive = ((rival.desires[trait] - player[trait])/50) * rival.offensiveness;
+          var offensiveIncentive = ((rival.desires[trait] - player[trait]) / 50) * rival.offensiveness;
         }
         desiredTraits.push({"trait": trait, "desire": offensiveIncentive + defensiveIncentive + getRandomInt(0, rival.unpredictability * 2)})
       })
@@ -161,7 +161,7 @@ function Battle(currrival) {
     }
 
 		// Does your rival hesitate?
-    if (rival.submissiveness/4 >= getRandomInt(0, 100) && rival.Mods.ironwill < 4) {
+    if (rival.submissiveness / 4 >= getRandomInt(0, 100) && rival.Mods.ironwill < 4) {
 			if ((rival.Mods.ironwill * 25) < getRandomInt(1, 100)) return new Hesitate(rival);
 			else return new Rest(rival);
     }

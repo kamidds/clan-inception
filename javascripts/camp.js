@@ -47,21 +47,7 @@ function displayWomen(){
 		//editWoman();
 		
 		// Description
-		var fate = "";
-		if (rival.submissiveness > 75) {
-			fate += rival.name + " obedient. ";
-		}
-		if (rival.domesticity > 75) {
-			fate += "She tend dutifully to camp. ";
-		}
-		if (rival.allure > 75) {
-			fate += "She spread legs for you every night. ";
-		}
-		if (rival.maternalism > 75) {
-			fate += "She already swelling with your child.";
-		};
-		if (fate.length === 0) fate = "She useless and willful.";
-		
+		var fate = rival.activity;		
 		if (rival.round > 0) fate += "<br>Brought to clan on week " + rival.round;
 
 		$("#woman_display").append("<p>"+fate+"</p>");
@@ -120,23 +106,23 @@ function editPlayer()
 	});
 		
 	$("#slider_maternalism_p").slider({value:100-player.maternalism,min:0,max:100,slide:function(event, ui) {
-		player.maternalism=100-ui.value; 
+		player.maternalism = 100 - ui.value; 
 		redraw();
 	}});
 	$("#slider_submissiveness_p").slider({value:100-player.submissiveness,min:0,max:100,slide:function(event, ui) {
-		player.submissiveness=100-ui.value; 
+		player.submissiveness = 100 - ui.value; 
 		redraw();
 	}});
 	$("#slider_domesticity_p").slider({value:100-player.domesticity,min:0,max:100,slide:function(event, ui) {
-		player.domesticity=100-ui.value; 
+		player.domesticity = 100 - ui.value; 
 		redraw();
 	}});
 	$("#slider_allure_p").slider({value:100-player.allure,min:0,max:100,slide:function(event, ui) {
-		player.allure=100-ui.value; 
+		player.allure = 100 - ui.value; 
 		redraw();
 	}});
 	$("#slider_orientation_p").slider({value:100-player.orientation,min:0,max:100,slide:function(event, ui) {
-		player.orientation=100-ui.value; 
+		player.orientation = 100 - ui.value; 
 		redraw();
 	}}); 
 	$("#slider_boobs_p").slider({value:player.Mods.breasts,min:0,max:200,slide:function(event, ui) {
