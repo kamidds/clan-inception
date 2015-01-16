@@ -43,6 +43,7 @@ function resetRival()
 
 // Generic Man
 
+// allocate experience
 function RivalSpendExperience()
 {
 	if (rival.experience == 0) return;
@@ -84,6 +85,7 @@ function RivalSpendExperience()
 	rival.experience -= used * 5;
 }
 
+// You beat them
 function RivalVictory()
 {
   $("#output").html(
@@ -92,6 +94,7 @@ function RivalVictory()
     <p>As she quiver and snivel, you must decide on name for her.</p>\
     <input id='woman_name' value='" + getUnusedFemaleName() + "'>\
     <button id='name_woman' class='btn'>Give Name</button>\
+		<button id='reject_woman' class='btn'>Reject Woman</button>\
   ");
 
   $('#woman_name').click(function() {
@@ -105,8 +108,13 @@ function RivalVictory()
     rival.round = player.round;		// day captured
     Camp();
   })
+  $("#reject_woman").click(function() {
+    player.experience += 5;
+    new Message("Camp();", "You no want this weakling and leave her to be claimed by another.");
+  })	
 }
 
+// You lost
 function RivalDefeat()
 {
 	var fates = [];
@@ -129,7 +137,7 @@ function RivalDefeat()
 	fate = "<p>With mighty howl, rival man stomp and point palm at you. His Changra surge into you, and your Changra evaporate like mist in sunlight. You collapse at rival man's feet, and he stare down as you pant and try collect your Changra. Finally he laugh and offer you hand.</p>\
 	<p>'You have no Changra,' he say, pulling you up. 'You womanfolk. You mine now, and you be called "+randomFemaleName()+".'</p>\
 	<p>You very confused, and you follow man back to clan. You struggle remember what was to be man, but those thoughts become strange to you, until finally all you know is to be woman.</p>\
-	<p>Rival man in your thoughts always now. Soon, you "+fate+".</p>";
+	<p>Rival man in your thoughts always now. Soon, you " + fate + ".</p>";
 	
 	if (fates.length === 0) {
 		// Escape, not feminine enough
@@ -139,7 +147,7 @@ function RivalDefeat()
 	
 	// Captured
 	$(".stats").hide();
-	$("#output").html("<div id='message'>"+fate+"</div>\
+	$("#output").html("<div id='message'>" + fate + "</div>\
 		<div id='end_buttons' class='push--top'></div>\
 		");
 
@@ -162,6 +170,7 @@ function RivalDefeat()
 	return true;
 }
 
+// The tells they give off
 function RivalGetTell(action) {
 
 	var pushDescription = getRandomElem([
