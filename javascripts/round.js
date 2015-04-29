@@ -1,3 +1,5 @@
+// New round/game week
+
 function advanceRound() {
   player.round += 1;
   player.women.forEach(function(woman){

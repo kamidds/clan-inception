@@ -85,6 +85,7 @@ function editPlayer()
 				<tr><td>Homosexual</td><td><div id='slider_orientation_p'></div></td><td>Heterosexual</td></tr>\
 				<tr><td>Boobs+</td><td><div id='slider_boobs_p'></div></td></tr>\
 				<tr><td>Cock+</td><td><div id='slider_cock_p'></div></td></tr>\
+				<tr><td>Balls+</td><td><div id='slider_balls_p'></div></td></tr>\
 				<tr><td>Futa+</td><td><div id='slider_futa_p'></div></td></tr>\
 				<tr><td>Amazon+</td><td><div id='slider_amazon_p'></div></td></tr>\
 				<tr><td>Push Submissiveness</td><td><div id='slider_psubmissiveness_p'></div></td></tr>\
@@ -137,6 +138,10 @@ function editPlayer()
 		player.Mods.cock = ui.value; 
 		redraw();
 	}});	
+	$("#slider_balls_p").slider({value:player.Mods.balls,min:0,max:20,slide:function(event, ui) {
+		player.Mods.balls = ui.value;
+		redraw();
+	}});		
 	$("#slider_futa_p").slider({value:player.Mods.futa,min:0,max:20,slide:function(event, ui) {
 		player.Mods.futa = ui.value; 
 		redraw();
@@ -201,6 +206,7 @@ function editWoman()
 			<tr><td>Boobs+</td><td><div id='slider_boobs'></div></td></tr>\
 			<tr><td>Breast Rows</td><td><div id='slider_rows'></div></td></tr>\
 			<tr><td>Futa+</td><td><div id='slider_futa'></div></td></tr>\
+			<tr><td>Balls</td><td><div id='slider_balls'></div></td></tr>\
 			<tr><td>Amazon+</td><td><div id='slider_amazon'></div></td></tr>\
 			<tr><td>Horns</td><td><div id='slider_horns'></div></td></tr>\
 			<tr><td>Tail</td><td><div id='slider_tail'></div></td></tr>\
@@ -242,6 +248,10 @@ function editWoman()
 		rival.Mods.futa = ui.value; 
 		redraw();
 	}});
+	$("#slider_balls").slider({value:rival.Mods.balls,min:0,max:20,slide:function(event, ui) {
+		rival.Mods.balls = ui.value; 
+		redraw();
+	}});	
 	$("#slider_rows").slider({value:rival.physique.breastrows,min:0,max:6,slide:function(event, ui) {
 		rival.physique.breastrows = ui.value; 
 		redraw();

@@ -55,6 +55,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"amazon": 0,
 		"cock": 0,
 		"futa": 0,
+		"balls": 0,
 		// Bonuses to Push
 		"pushsubmissiveness": 0,
 		"pushdomesticity": 0,
@@ -262,7 +263,9 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     }
 
     this.calcTestes = function() {
-      return ((this.orientation * 4) + this.submissiveness + this.domesticity + this.maternalism + this.allure)/40;
+			var val	= ((this.orientation * 4) + this.submissiveness + this.domesticity + this.maternalism + this.allure)/40;
+			if (this.Mods.balls > 0) val = val > 0 ? this.Mods.balls * -2 : (val + this.Mods.balls * -2);
+			return val;
     }
 
     this.calcPenis = function() {
@@ -363,6 +366,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.amazon)) that.Mods.amazon = 0;
 		if (isNaN(that.Mods.cock)) that.Mods.cock = 0;
 		if (isNaN(that.Mods.futa)) that.Mods.futa = 0;
+		if (isNaN(that.Mods.balls)) that.Mods.balls = 0;
 		if (isNaN(that.Mods.pushsubmissiveness)) that.Mods.pushsubmissiveness = 0;
 		if (isNaN(that.Mods.pushdomesticity)) that.Mods.pushdomesticity = 0;
 		if (isNaN(that.Mods.pushmaternalism)) that.Mods.pushmaternalism = 0;

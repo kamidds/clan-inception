@@ -109,6 +109,23 @@ function Train()
 			IsDoneTraining();
 		}
 	)
+	// Balls
+	$("#train_buttons").append("<button id='train_button_18' class='btn btn-woman push--right' title='Big Balls!'>Balls+ (" + (player.Mods.balls / 2) + ")</button>");
+	$("#train_button_18").click(
+		function(){
+			if (player.experience >= 5) {
+				if (player.Mods.balls < 20) {
+					player.experience -= 5;
+					player.Mods.balls += 2;
+					if (player.Mods.balls > 20) player.Mods.balls = 20;
+					$("#train_display").append("<p>Your balls grow!</p>");
+					redraw();
+					$("#train_button_18").html("Cock+ (" + (player.Mods.balls / 2) + ")");
+				} else $("#train_display").append("<p><b>No more possible.</b></p>");
+			}
+			IsDoneTraining();
+		}
+	)	
 
 	// Futa
 	$("#train_buttons").append("<button id='train_button_6' class='btn btn-woman push--right' title='Futa!'>Futa+ (" + (player.Mods.futa / 2) + ")</button>");
