@@ -42,7 +42,7 @@ function Camp(){
 function displayWomen(){
 	function displayWoman(index){
 		rival = player.women[index];
-		$("#woman_display").html("<h2>"+rival.name+"</h2>");
+		$("#woman_display").html("<h2>"+rival.name+"</h2><font size='-4'>Children: " + rival.children + "</font>");
 
 		//editWoman();
 		

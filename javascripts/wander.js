@@ -58,20 +58,22 @@ function Wander()
 	$("#wander_button_forest").click(
 		function(){
 			setPlaceVisited("Forest");
-			var val = getRandomInt(1, 29);
+			var val = getRandomInt(1, 34);
 			if (val < 3) WanderNothing();
 			else if (val < 11) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
 			else if (val < 16) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 25) WanderFood("<h1>Found: Grapes</h1><p>You find some odd grapes, with double berries, it may feed your clan</p>", "eatGrapesYou", "eatGrapesWoman");
+			else if (val < 30) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
+
 			else WanderBattle("snow forest");
 		}
 	);
 	$("#wander_button_hills").click(
 		function(){
 			setPlaceVisited("Hills");
-			var val = getRandomInt(1, 38);
-			if (val < 5) WanderNothing();
+			var val = getRandomInt(1, 32);
+			if (val < 3) WanderNothing();
 			else if (val < 10) WanderFood("<h1>Found: Clean Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDomesticNutYou", "eatDomesticNutWoman");
 			else if (val < 16) WanderFood("<h1>Found: Long Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatOrientationNutYou", "eatOrientationNutWoman");
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
@@ -82,12 +84,14 @@ function Wander()
 	$("#wander_button_swamp").click(
 		function(){
 			setPlaceVisited("Swamp");
-			var val = getRandomInt(1, 34);
-			if (val < 4) WanderNothing();
+			var val = getRandomInt(1, 44);
+			if (val < 3) WanderNothing();
 			else if (val < 15) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 25) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
 			else if (val < 30) WanderFood("<h1>Found: Green Berry</h1><p>You find small green berry that smells strange, it may feed your clan</p>", "eatGreenBerryYou", "eatGreenBerryWoman");
+			else if (val < 35) WanderFood("<h1>Found: Pale Berry</h1><p>You find small pale berry that smells strange, it may feed your clan</p>", "eatPaleBerryYou", "eatPaleBerryWoman");
+			else if (val < 40) WanderFood("<h1>Found: Dark Berry</h1><p>You find small dark coloured berry that smells strange, it may feed your clan</p>", "eatDarkBerryYou", "eatDarkBerryWoman");
 			else WanderBattle("cold swamp");
 		}
 	);
@@ -95,7 +99,7 @@ function Wander()
 		function(){
 			setPlaceVisited("Beach");
 			var val = getRandomInt(1, 30);
-			if (val < 4) WanderNothing();
+			if (val < 3) WanderNothing();
 			else if (val < 15) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 25) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
@@ -178,7 +182,7 @@ function WanderFood(desc, actionyou, actionwoman)
 	});
 	$("#eat_buttons").append("<button id='eat_button_throw' class='btn btn-woman push--right'>Throw Away</button>");
 	$("#eat_button_throw").click(function(){
-		new Message("Camp()", "<h1>Throw Away</h1><p>You thow the thing away.</p>");
+		new Message("Camp()", "<h1>Throw Away</h1><p>You throw the thing away.</p>");
 	});		
 }
 
@@ -559,7 +563,7 @@ function eatDemonNutYou()
 		}			
 
 		new Message("Camp()", 
-			"<h1>Eat the Melon</h1>\
+			"<h1>Eat the Red Nut</h1>\
 			<p>You eat the nut and feel a surge of heat from the fires of the mountain.</p>");
 	} else {
 		// No effect
@@ -648,6 +652,59 @@ function eatGreenBerryWoman(index)
 	}
 }
 
+// Pale Berry
+
+function eatPaleBerryYou()
+{
+	player.physique.skin = getRandomInt(1, 10);		
+
+	new Message("Camp()", 
+		"<h1>Eat the Pale Berry</h1>\
+		<p>You eat the berry and feel a flush of warmth.</p>");
+	redraw();
+}
+
+function eatPaleBerryWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	rival.physique.skin = getRandomInt(1, 10);	
+	new Message("", 
+		"<h1>" + rival.name + " Eats the Pale Berry</h1>\
+		<p>" + rival.name + " eats the berry....</p>", true);
+	setTimeout(function() {
+		$("#message").append("and a wave of colour spreads over her skin.");
+		$("#message").click(function() { $(".stats").show(); Camp(); });
+		redraw();
+	}, 1000);
+}
+
+// Pale Berry
+
+function eatDarkBerryYou()
+{
+	player.physique.skin = getRandomInt(10, 20);		
+
+	new Message("Camp()", 
+		"<h1>Eat the Dark Berry</h1>\
+		<p>You eat the berry and feel a flush of warmth.</p>");
+	redraw();
+}
+
+function eatDarkBerryWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	rival.physique.skin = getRandomInt(10, 20);	
+	new Message("", 
+		"<h1>" + rival.name + " Eats the Dark Berry</h1>\
+		<p>" + rival.name + " eats the berry....</p>", true);
+	setTimeout(function() {
+		$("#message").append("and a wave of colour spreads over her skin.");
+		$("#message").click(function() { $(".stats").show(); Camp(); });
+		redraw();
+	}, 1000);
+}
 
 // Find Thoth
 
