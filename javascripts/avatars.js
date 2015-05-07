@@ -137,6 +137,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     if (this.isPregnant()) {
       this.pregnancy += 2.5;
       if (this.pregnancy >= getRandomInt(90, 105)) {
+				this.activity = "She give birth to fine " + (Math.random() < 0.5 ? "son" : "daughter") + " last night. Your clan grow.";
         this.pregnancy = 0;
         this.children += 1;
       }
@@ -171,16 +172,16 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
   }
 
   this.confused = function(avatar) {
-    avatar.activity = "She spend week wandering camp, muttering to self about how she man. Strong man. But she walk more and more like woman. She cry easier and easier like woman. Soon she forget how be man and only be woman for you."
+    avatar.activity = "She spend week wandering camp, muttering to self about how she man. Strong man. But she walk more and more like woman. She cry easier and easier like woman. Soon she forget how be man and only be woman for you.";
     avatar.dysphoria -= getRandomInt(1, 10);
   }
 
   this.tend = function(avatar) {
-    avatar.activity = "She dutifully tend camp for you."
+    avatar.activity = "She dutifully tend camp for you.";
   }
 
   this.fuck = function(avatar) {
-    avatar.activity = "She come to you every night and spread legs. You fuck like animal."
+    avatar.activity = "She come to you every night and spread legs. You fuck like animal.";
     avatar.fornicate();
   }
 

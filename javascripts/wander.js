@@ -72,37 +72,40 @@ function Wander()
 	$("#wander_button_hills").click(
 		function(){
 			setPlaceVisited("Hills");
-			var val = getRandomInt(1, 32);
+			var val = getRandomInt(1, 37);
 			if (val < 3) WanderNothing();
 			else if (val < 10) WanderFood("<h1>Found: Clean Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDomesticNutYou", "eatDomesticNutWoman");
 			else if (val < 16) WanderFood("<h1>Found: Long Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatOrientationNutYou", "eatOrientationNutWoman");
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 28) WanderFood("<h1>Found: White Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatMilkNutYou", "eatMilkNutWoman");
+			else if (val < 33) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
 			else WanderBattle("snow hills");
 		}
 	);
 	$("#wander_button_swamp").click(
 		function(){
 			setPlaceVisited("Swamp");
-			var val = getRandomInt(1, 44);
+			var val = getRandomInt(1, 38);
 			if (val < 3) WanderNothing();
-			else if (val < 15) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
-			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else if (val < 25) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
-			else if (val < 30) WanderFood("<h1>Found: Green Berry</h1><p>You find small green berry that smells strange, it may feed your clan</p>", "eatGreenBerryYou", "eatGreenBerryWoman");
-			else if (val < 35) WanderFood("<h1>Found: Pale Berry</h1><p>You find small pale berry that smells strange, it may feed your clan</p>", "eatPaleBerryYou", "eatPaleBerryWoman");
-			else if (val < 40) WanderFood("<h1>Found: Dark Berry</h1><p>You find small dark coloured berry that smells strange, it may feed your clan</p>", "eatDarkBerryYou", "eatDarkBerryWoman");
+			else if (val < 7) WanderFood("<h1>Found: Small Melon</h1><p>You find small strange melon, it may feed your clan</p>", "eatSmallMelonYou", "eatSmallMelonWoman");
+			else if (val < 15) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
+			else if (val < 20) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
+			else if (val < 25) WanderFood("<h1>Found: Green Berry</h1><p>You find small green berry that smells strange, it may feed your clan</p>", "eatGreenBerryYou", "eatGreenBerryWoman");
+			else if (val < 30) WanderFood("<h1>Found: Pale Berry</h1><p>You find small pale berry that smells strange, it may feed your clan</p>", "eatPaleBerryYou", "eatPaleBerryWoman");
+			else if (val < 35) WanderFood("<h1>Found: Dark Berry</h1><p>You find small dark coloured berry that smells strange, it may feed your clan</p>", "eatDarkBerryYou", "eatDarkBerryWoman");
 			else WanderBattle("cold swamp");
 		}
 	);
 	$("#wander_button_beach").click(
 		function(){
 			setPlaceVisited("Beach");
-			var val = getRandomInt(1, 30);
+			var val = getRandomInt(1, 34);
 			if (val < 3) WanderNothing();
 			else if (val < 15) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 25) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
+			else if (val < 30) WanderFood("<h1>Found: Paw Fruit</h1><p>You find small fruit look like paw, you feel the force of your ancestors in it</p>", "eatPawFruitYou", "eatPawFruitWoman");			
+
 			else WanderBattle("chilly beach");
 		}
 	);	
@@ -243,6 +246,85 @@ function eatMelonWoman(index)
 	}
 }
 
+// Small Breast Melon
+
+function eatSmallMelonYou()
+{
+	if (player.Mods.breasts > -20) {
+		// Can benefit
+		player.Mods.breasts -= 5;
+		if (player.Mods.breasts < -20) player.Mods.breasts = -20;
+		new Message("Camp()", 
+			"<h1>Eat the Small Melon</h1>\
+			<p>You eat the melon and feel your bad ancestors spirit, you forget how to make your women feed your children.</p>");
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>Eat the Small Melon</h1>\
+			<p>You eat the small melon and your belly full</p>");		
+	}			
+}
+
+function eatSmallMelonWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	if (rival.Mods.breasts > -20) {
+		// Can benefit
+		rival.Mods.breasts -= 5;
+		if (rival.Mods.breasts < -20) rival.Mods.breasts = -20;
+		new Message("", 
+			"<h1>" + rival.name + " Eats the Small Melon</h1>\
+			<p>" + rival.name + " eats the small melon....</p>", true);
+		setTimeout(function() {
+			$("#message").append("and her breasts shrink a little.</p>\
+			<p align='center'><font size='-4'>click to continue</font></p>");
+			$("#message").click(function() { $(".stats").show(); Camp(); });
+			redraw();
+		}, 1000);
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>" + rival.name + " Eats the Small Melon</h1>\
+			<p>" + rival.name + " eats the melon and her belly full</p>");		
+	}
+}
+
+// Paw Fruit
+
+function eatPawFruitYou()
+{
+	player.physique.breastrows += 1;
+	if (player.physique.tail < 20) {
+		player.physique.tail += 1;
+		player.physique.tailtype = 3;
+	}	
+	redraw();
+	new Message("Camp()", 
+			"<h1>Eat the Fruit</h1>\
+			<p>You eat the melon and feel your ancestors spirit, your chest and rear feel strange.</p>");
+}
+
+function eatPawFruitWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	rival.physique.breastrows += 1;
+	if (rival.physique.tail < 20) {
+		rival.physique.tail += 1;
+		rival.physique.tailtype = 3;
+	}
+	new Message("", 
+		"<h1>" + rival.name + " Eats the Fruit</h1>\
+		<p>" + rival.name + " eats the fruit....</p>", true);
+	setTimeout(function() {
+		$("#message").append("and row a new set of breasts");
+		if (rival.physique.tail == 1) $("#message").append(" and grows a furry tail");
+		$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");
+		$("#message").click(function() { $(".stats").show(); Camp(); });
+		redraw();
+	}, 1000);
+}
 
 // Cock Mushroom
 

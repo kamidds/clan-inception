@@ -126,7 +126,7 @@ function editPlayer()
 		player.orientation = 100 - ui.value; 
 		redraw();
 	}}); 
-	$("#slider_boobs_p").slider({value:player.Mods.breasts,min:0,max:200,slide:function(event, ui) {
+	$("#slider_boobs_p").slider({value:player.Mods.breasts,min:-20,max:200,slide:function(event, ui) {
 		player.Mods.breasts = ui.value; 
 		redraw();
 	}}); 
@@ -236,7 +236,7 @@ function editWoman()
 		rival.orientation=100-ui.value; 
 		redraw();
 	}}); 
-	$("#slider_boobs").slider({value:rival.Mods.breasts,min:0,max:200,slide:function(event, ui) {
+	$("#slider_boobs").slider({value:rival.Mods.breasts,min:-20,max:200,slide:function(event, ui) {
 		rival.Mods.breasts = ui.value; 
 		redraw();
 	}}); 

@@ -1295,7 +1295,7 @@
 					ctx.moveTo(62, 8 - b);
 					ctx.quadraticCurveTo(65, 15, 71, 15);
 					ctx.lineTo(65, 20);
-				} else {
+				} else if (c == 2) {
 					// Demon
 					ctx.moveTo(62, 1 - b);
 					ctx.lineTo(65, 20);
@@ -1323,7 +1323,7 @@
 				ctx.moveTo(75, 190);
 				
 				// 'Body' of tail
-				if (c == 1) {
+				if (c == 1 || c == 3) {
 					// Cow
 					ctx.quadraticCurveTo(20 - b, 280 + a, 20 - b, 240);
 					ctx.lineTo(20 - b - 2, 245);
@@ -1351,7 +1351,7 @@
 					ctx.moveTo(20 - b, 242);
 					ctx.lineTo(11 - b, 241);
 					ctx.stroke();
-				} else {
+				} else if (c == 2) {
 					// Demon
 					ctx.moveTo(22 - b, 243);
 					ctx.lineTo(12 - b, 248);
