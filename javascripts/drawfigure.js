@@ -243,6 +243,8 @@
 				
 				if (waist<0){/*Upper Waist*/
 					ctx.lineWidth = (waist * -1) / 10;
+					if (ctx.lineWidth < 1) ctx.lineWidth = 1; 
+					else if (ctx.lineWidth > 1.8) ctx.lineWidth = 1.8;
 					
 					var a = shoulders;
 					var b = a / 2;
