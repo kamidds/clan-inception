@@ -1523,7 +1523,7 @@
 							EYELINER = SKINCB;
 						} else if (skin == 102) {
 							SKINC = "rgb(114,224,114)";
-							SKINCB = "rgb(32,65,34)";
+							SKINCB = "rgb(82,115,84)";
 							LIPCOLOR = SKINCB;
 							NIPPLESHADOW = SKINCB;
 							EYELINER = SKINCB;
