@@ -17,13 +17,13 @@ function randomMaleName()
 
 function randomFemaleName()
 {
-  names = ["Akila", "Amunet", "Ankhetitat", "Astarte", "Aziza", "Bahiti", "Bastet", "Beketaten", "Chione", "Dendera",
+  names = ["Akila", "Amunet", "Ankhetitat", "Ast", "Astarte", "Atet", "Aziza", "Bahiti", "Bakt", "Bastet", "Beketaten", "Betresh", "Chione", "Dendera",
     "Dalila", "Echidna", "Eshe", "Eopei", "Enskerk", 
-		"Hafsha", "Hatshepsut", "Heqet", "Herneith", "Hesi", "Hasra", "Hunra", "Iseret", 
-		"Kakra", "Kanika", "Kasmut", "Kesi", "Kephira", "Kemat", "Khonsu", "Kema", 
+		"Hafsha", "Hatshepsut", "Heqet", "Herneith", "Hesi", "Hasra", "Henite", "Herit", "Hunra", "Iseret", 
+		"Kakra", "Kanika", "Kasmut", "Kawit", "Kesi", "Kephira", "Kemat", "Khonsu", "Kema", 
 		"Mafuane", "Mandisa", "Meht-Urt", "Merei", "Menhit", "Meshkenet", "Monifa", "Muminah",
     "Merneith", "Merti", "Merysankh", "Mutemwiya", "Mutnofret", "Muyet", "Mesta", 
-		"Nefertari", "Nabirye", "Naheemah", "Nailah", "Neith", "Neithotep", "Nekhbet", "Nefret", "Nuru", "Nushim", 
+		"Nefertari", "Nabirye", "Naheemah", "Nailah", "Neith", "Neithotep", "Nekhbet", "Nefret", "Nofret", "Nuru", "Nushim", 
 		"Olufemi", "Omorose", "Ouei", "Oohhotep", "Pasht", "Pelkha", "Phut", "Pipui", "Pthah-se", 
     "Rabiah", "Raia", "Rashida", "Rehema", "Sabah", "Sagira", "Sakhmet", "Sanura", "Shani",
     "Sharifa", "Subira", "Tahirah", "Tauret", "Thema", "Thermuthis", "Tuyu", "Uatit", "Zahra", "Zalika"];
