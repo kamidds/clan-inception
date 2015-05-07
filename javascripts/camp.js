@@ -9,6 +9,8 @@ function Camp(){
 	
 	$("#output").html("<h1>Camp - Week " + player.round + "</h1>");
 	
+	if (player.activity != "") $("#output").append("<p align='left'>" + player.activity + "</p>");
+	
 	//editPlayer();
 
 	if (player.experience > 0) {

@@ -38,7 +38,7 @@ function drawStats()
 	if (getPerceptionRate() >= getRandomInt(0, 100)) $("#rival_changra").html(rival.changra);
 	else $("#rival_changra").html("?");
 
-	var ch = 0;
+	var ch = player.children;
 	$.each(player.women, function( index, value ) {
 		ch += player.women[index].children;
 	});

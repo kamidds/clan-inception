@@ -83,9 +83,6 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		return Math.ceil(val);
 	}
 	
-	// Your women
-  this.women = [];
-	
 	// Physique
 	this.physique = {
 		"hairc": getRandomInt(1, 20),
@@ -104,6 +101,14 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"wings": 0
   }
 
+	// Possessions
+	
+	// Your women
+  this.women = [];
+	
+	// Goods
+	this.goods = 0;
+	
 	// Methods
 	
   this.femininity = function() {
@@ -137,7 +142,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     if (this.isPregnant()) {
       this.pregnancy += 2.5;
       if (this.pregnancy >= getRandomInt(90, 105)) {
-				this.activity = "She give birth to fine " + (Math.random() < 0.5 ? "son" : "daughter") + " last night. Your clan grow.";
+				this.activity = this == player ? "You" : "She";
+				this.activity  += " give birth to fine " + (Math.random() < 0.5 ? "son" : "daughter") + " last night. Your clan grow.";
         this.pregnancy = 0;
         this.children += 1;
       }
@@ -169,6 +175,10 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
       if (prob > 0) { this.pregnancy = 2.5; }
     }
     this.desire = 0;
+		if (!player.isPregnant() && this.Mods.futa > 0) {
+			var prob = (player.maternalism + 50) - getRandomInt(50, 100);
+      if (prob > 0) { player.pregnancy = 2.5; }
+		}
   }
 
   this.confused = function(avatar) {
@@ -405,6 +415,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		
 		if (isNaN(that.futa)) that.futa = 0;
 		if (isNaN(that.physique.hairstyle)) that.physique.hairstyle = 1;
+		if (isNaN(that.goods)) that.goods = 0;
 	}
 	
 }
