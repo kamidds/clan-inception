@@ -6,13 +6,36 @@
 /* modifications, but they make no claims and do not require attributions.   */
 /*                                                                           */
 		function drawfigure(canvasname, avatar) {
+
+
+			function shadeCylinder(context, x, y, wid, hei, clr) {
+				
+				var gradient = context.createLinearGradient(x, y, x + wid, y);
+				gradient.addColorStop(0, clr);
+				gradient.addColorStop(0.25, $.xcolor.lighten(clr, 0.75));
+				gradient.addColorStop(0.5, clr);
+				gradient.addColorStop(0.75, $.xcolor.darken(clr, 0.33));
+				gradient.addColorStop(1, clr);
+
+				context.fillStyle = gradient;
+				context.fill();
+			}
 	
 			function drawGenitals(ctx)
 			{
 				ctx.strokeStyle = SKINCB;
 				ctx.fillStyle = SKINC;
 				drawTestes(ctx);
-				drawPenis(ctx);
+				var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10);
+				//if (avatar.futa > 0) drawPenis(ctx, 0, 20, false);
+				
+				var ev = avatar.physique.gentialscnt - (Math.floor(avatar.physique.gentialscnt / 2) * 2);
+				for (var i = avatar.physique.gentialscnt; i > 0; i--) {
+					var evi = i - (Math.floor(i / 2) * 2);
+					var ab = (evi == 1) ? 15 : -15;
+					var ang = ev == 1 ? ab * Math.floor(i / 2) : ab * Math.floor((i + 1) / 2);	
+					drawPenis(ctx, ang, penis, hasc);
+				}
 			}
 			
 			function drawTestes(ctx)
@@ -95,14 +118,23 @@
 				ctx.stroke();
 			}
 			
-			function drawPenis(ctx)
+			function drawPenis(ctx, rot, size, cock)
 			{
+				ctx.save();
+				var erect = avatar.desire > 50 && cock == true;
+				var xoff = 80;
+				var yoff = 215;
+				if (erect) yoff = yoff - 13;
+				ctx.translate(xoff - (rot / 3), yoff);
+				if (erect) ctx.scale(1, -1);
+				ctx.rotate(rot*Math.PI/180);
 				ctx.beginPath();
 				
-				var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10);
-				var ap = penis;
-				if ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10) ap = 11 - (avatar.Mods.futa + avatar.futa);
-				ap -= avatar.Mods.cock;
+				var ap = size;
+				if (cock) {
+					if ((avatar.Mods.futa + avatar.futa) > 0 && size > 10) ap = 11 - (avatar.Mods.futa + avatar.futa);
+					ap -= avatar.Mods.cock;
+				}
 				var a = (21 - ap) / 13;
 				if (a < 1) a = 1;
 				else if (a > 2) a = 2;
@@ -114,28 +146,31 @@
 				var b = a / 2;
 				var c = a / 7;
 				var d = a / 5;
-				var e = a / (5 + (avatar.Mods.cock / 2)); // width
+				var e;
+				if (cock) e = a / (5 + (avatar.Mods.cock / 2)); // width
+				else e = a / 10;
 				var f = 1;
 				var y = 0;
 				var g = 0;
 				var l = avatar.Mods.cock;
 				
 				/*Penis*/
-				if (hasc == true) {
-					ctx.moveTo(75 + e, 200 + f);
-					ctx.quadraticCurveTo(72 + e, 202 + f + l/* - e*/,
-															 73 + d + e, 230 + f - (a + b) + l);
-					ctx.lineTo(84 - (d + e), 230 + f - (a + b) + l);
-					ctx.quadraticCurveTo(83 - d, 202 + f/* - e*/ + l,
-															 83 - d, 200 + f);
-				} else {
+				if (cock == true) {
+					ctx.moveTo(75 + e - xoff, 200 + f - yoff);
+					ctx.quadraticCurveTo(72 + e - xoff, 202 + f + l - yoff,
+															 73 + d + e - xoff, 230 + f - (a + b) + l - yoff);
+					ctx.lineTo(84 - (d + e) - xoff, 230 + f - (a + b) + l - yoff);
+					ctx.quadraticCurveTo(83 - d - xoff, 202 + f + l - yoff,
+															 83 - d - xoff, 200 + f - yoff);
+					shadeCylinder(ctx, 75+e - xoff, 200+f - yoff, 84 - (d + e) - (75+e), 230 + f - (a + b) + l - (200+f), SKINC);
+				} else {			
 					x = 0;
-					ctx.moveTo(75 + e,200 + f);
-					ctx.quadraticCurveTo(76 + d, 202 + f - (d + d), 73 + d + e, 234 + f - (a + a + d));
-					ctx.lineTo(84 - (d + e), 234 + f - (a + a + d));
-					ctx.quadraticCurveTo(83 - d, 202 + f - (d + d), 83 - d, 200 + f);
+					ctx.moveTo(75 + e - xoff, 200 + f - yoff);
+					ctx.quadraticCurveTo(76 + d - xoff, 202 + f - (d + d) - yoff, 73 + d + e - xoff, 234 + f - (a + a + d) - yoff);
+					ctx.lineTo(84 - (d + e) - xoff, 234 + f - (a + a + d) - yoff);
+					ctx.quadraticCurveTo(83 - d - xoff, 202 + f - (d + d) - yoff, 84 - d - xoff, 200 + f - yoff);
+					ctx.fill();
 				}
-				ctx.fill();
 				ctx.stroke();
 				
 				/*Penis Head*/
@@ -143,17 +178,20 @@
 				ctx.strokeStyle = LIPCOLOR;
 				ctx.beginPath();
 				
-				if (ap<11) {
-					ctx.moveTo(75 + d, 230 + f - (a + b) + l);
-					ctx.lineTo(84 - (d + e), 230 - (a + b) + l);
-					ctx.quadraticCurveTo(78 + d, 240 + f - (a + b + b) + l, 73 + d, 230 + f - (a + b) + l);
+				if (ap < 11) {
+					ctx.moveTo(75 + d - xoff, 230 + f - (a + b) + l - yoff);
+					ctx.lineTo(84 - (d + e) - xoff, 230 - (a + b) + l - yoff);
+					ctx.quadraticCurveTo(78 + d - xoff, 240 + f - (a + b + b) + l - yoff, 73 + d - xoff, 230 + f - (a + b) + l - yoff);
+					shadeCylinder(ctx, 75 + d - xoff, 230 + f - (a + b) + 1 - yoff, 84 - (d + e) - (75+d), 240 + f - (a + b + b) + l - (230+f - (a + b) + 1), LIPCOLOR);
+
 				} else if (ap<20) {
-					ctx.moveTo(76.7 + d, 234 + f - (a + a + d));
-					ctx.lineTo(84 - (d + e), 234 - (a + a + d));
-					ctx.quadraticCurveTo(79, 241 + f - (a + b + b + d + d), 72 + d + e, 234 + f - (a + a + d));
+					ctx.moveTo(76.7 + d - xoff, 234 + f - (a + a + d) - yoff);
+					ctx.lineTo(84 - (d + e) - xoff, 234 - (a + a + d) - yoff);
+					ctx.quadraticCurveTo(79 - xoff, 241 + f - (a + b + b + d + d) - yoff, 72 + d + e - xoff, 234 + f - (a + a + d) - yoff);
+					ctx.fill();
 				}
-				ctx.fill();
 				ctx.stroke();
+				ctx.restore();
 			}
 			
 			function drawPecs(ctx)
@@ -1616,7 +1654,10 @@
 						ctx.stroke();		
 						
 						var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 13);
-						if (hasc == true) drawGenitals(ctx);
+						if (hasc == true) {
+							if (avatar.physique.breasts < 80) drawBellyButton(ctx);
+							drawGenitals(ctx);
+						}
 						
 						// Draw left side, part 2
 						drawHalfFigure2(ctx);
@@ -1632,9 +1673,11 @@
 						// Draw central/common parts of the body, part 2		
 						drawNose(ctx);
 						drawCleavage(ctx)
-						if (avatar.physique.breasts < 80) drawBellyButton(ctx);
 						drawLips(ctx);
-						if (hasc == false) drawGenitals(ctx);
+						if (hasc == false) {
+							drawGenitals(ctx);
+							if (avatar.physique.breasts < 80) drawBellyButton(ctx);
+						}
 					}
 				}
 			}

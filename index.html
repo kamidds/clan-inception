@@ -3,9 +3,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Clan: Inception 2.0.2</title>
+    <title>Clan: Inception 2.0.3</title>
     <script type="text/javascript" src="javascripts/jquery-min.js"></script>
     <script type="text/javascript" src="javascripts/jquery-ui-min.js"></script>
+		<script type="text/javascript" src="javascripts/jquery.xcolor.min.js"></script>
     <script type="text/javascript" src="javascripts/utility.js"></script>
     <script type="text/javascript" src="javascripts/avatars.js"></script>
 		<script type="text/javascript" src="javascripts/player.js"></script>
@@ -67,12 +68,16 @@
             <span class="stat-text">Your Women: <span id="player_women"></span></span>
             <span id="rcwomen" class="stat-text stat-text--right">Rival's Women: <span id="rival_women"></span></span>
           </div>
-					<font size="-1"><b>Other Stats</b></font>
-          <div class="stat-container">
+          <div class="stat-container" id="otherstats">
             <div id="awareness" class="changra-container"></div>
             <span class="stat-text">Your Perception: <span id="player_perception"></span></span>
-						<span id="rcexperience" class="stat-text stat-text--right">Your Experience: <span id="player_experience"></span></span>
+						<span id="rcexperience" class="stat-text stat-text--right">Your Experience: <span id="player_experience"></span></span>				
           </div>
+          <div class="stat-container" id="goods">
+						<font size="-1"><b>Camp Details</b></font>
+            <div id="goods" class="changra-container"></div>
+            <span class="stat-text">Goods: <span id="player_goods"></span></span>
+          </div>					
         </div>
 
     		<div id="output"></div>

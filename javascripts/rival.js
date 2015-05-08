@@ -20,6 +20,7 @@ function createRival(exp)
 	rival.getTell = RivalGetTell;
 	rival.spendExperience = RivalSpendExperience;
 	rival.experience = exp;
+	rival.goods = getRandomInt(3, 10);
 	
 	updateRival();
 	
@@ -82,7 +83,7 @@ function RivalSpendExperience()
 		used++;
 	}
 	
-	rival.experience -= used * 5;
+	//rival.experience -= used * 5;
 }
 
 // You beat them
@@ -90,7 +91,7 @@ function RivalVictory()
 {
   $("#output").html(
     "<h1>You Howl!</h1>\
-    <p>And unleash your spirit Changra. The air smell of burning and lightning, and then your rival crumble, weeping like woman. Her Changra burned away. She yours, and soon she forget how to be man.</p>\
+    <p>And unleash your spirit Changra. The air smell of burning and lightning, and then your rival crumble, weeping like woman. Her Changra burned away. She yours, and soon she forget how to be man. You take what <i>she</i> was carrying from their hunt.</p>\
     <p>As she quiver and snivel, you must decide on name for her.</p>\
     <input id='woman_name' value='" + getUnusedFemaleName() + "'>\
     <button id='name_woman' class='btn'>Give Name</button>\
@@ -105,11 +106,14 @@ function RivalVictory()
     rival.name = $("#woman_name").val().length > 0 ? $("#woman_name").val() : getUnusedFemaleName();
     player.women.push(rival);
     player.experience += minValue(Math.floor(rival.femininity() / 10), 5);
+		player.goods += rival.goods;
+		rival.goods = 0;
     rival.round = player.round;		// day captured
     Camp();
   })
   $("#reject_woman").click(function() {
     player.experience += 5;
+		player.goods += rival.goods;	
     new Message("Camp();", "You no want this weakling and leave her to be claimed by another.");
   })	
 }

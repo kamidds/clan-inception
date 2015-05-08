@@ -16,7 +16,7 @@ function createDemon()
 	demon.physique.hairc = "black";
 	demon.physique.irisc = "red";
 	demon.Mods.ironwill = 4;
-	demon.Mods.breasts = 15;
+	demon.Mods.breasts = 12;
 	demon.Mods.changra = 50;
 	demon.Mods.perception = 4;
 	demon.Mods.amazon = 1;

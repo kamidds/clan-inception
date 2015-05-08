@@ -3,6 +3,8 @@ function Camp(){
 	$("#rcwomen").hide();
   $("#rcchangra").hide();
 	$(".stats").show();
+	$("#otherstats").show();
+	$("#goods").show();
 
   player.rest();
 	resetRival();
@@ -44,14 +46,13 @@ function Camp(){
 function displayWomen(){
 	function displayWoman(index){
 		rival = player.women[index];
-		$("#woman_display").html("<h2>"+rival.name+"</h2><font size='-4'>Children: " + rival.children + "</font>");
+		$("#woman_display").html("<h2 style='margin-bottom:2px;'>"+rival.name+"</h2><font size='-1'>Children: " + rival.children + "</font>");
+		if (rival.round > 0) $("#woman_display").append("<font size='-1'>, Brought to clan on week " + rival.round + "</font>");
 
 		//editWoman();
 		
 		// Description
 		var fate = rival.activity;		
-		if (rival.round > 0) fate += "<br>Brought to clan on week " + rival.round;
-
 		$("#woman_display").append("<p>"+fate+"</p>");
 		redraw();
 	}
@@ -86,7 +87,9 @@ function editPlayer()
 				<tr><td>Allure</td><td><div id='slider_allure_p'></div></td><td>Lustfulness</td></tr>\
 				<tr><td>Homosexual</td><td><div id='slider_orientation_p'></div></td><td>Heterosexual</td></tr>\
 				<tr><td>Boobs+</td><td><div id='slider_boobs_p'></div></td></tr>\
+				<tr><td>Breast Rows</td><td><div id='slider_rows_p'></div></td></tr>\
 				<tr><td>Cock+</td><td><div id='slider_cock_p'></div></td></tr>\
+				<tr><td>Genitals</td><td><div id='slider_cocks_p'></div></td></tr>\
 				<tr><td>Balls+</td><td><div id='slider_balls_p'></div></td></tr>\
 				<tr><td>Futa+</td><td><div id='slider_futa_p'></div></td></tr>\
 				<tr><td>Amazon+</td><td><div id='slider_amazon_p'></div></td></tr>\
@@ -143,7 +146,7 @@ function editPlayer()
 	$("#slider_balls_p").slider({value:player.Mods.balls,min:0,max:20,slide:function(event, ui) {
 		player.Mods.balls = ui.value;
 		redraw();
-	}});		
+	}});
 	$("#slider_futa_p").slider({value:player.Mods.futa,min:0,max:20,slide:function(event, ui) {
 		player.Mods.futa = ui.value; 
 		redraw();
@@ -192,12 +195,20 @@ function editPlayer()
 		player.Mods.resistorientation = ui.value; 
 		redraw();
 	}});	
+	$("#slider_rows_p").slider({value:player.physique.breastrows,min:0,max:6,slide:function(event, ui) {
+		player.physique.breastrows = ui.value; 
+		redraw();
+	}});
+	$("#slider_cocks_p").slider({value:player.physique.gentialscnt,min:0,max:6,slide:function(event, ui) {
+		player.physique.gentialscnt = ui.value; 
+		redraw();
+	}});	
 }
 
 function editWoman()
 {
 		$("#woman_display").append(
-		"<font size='-2'>\
+		"<font size='-1'>\
 		<a id='expandwoman' href='#'>Click Here To Edit " + rival.name + "</a>\
 		<table class='slidertable3' id='womantable'>\
 			<tr><td>Submissiveness</td><td><div id='slider_submissiveness'></div></td><td>Dominance</td></tr>\
@@ -207,6 +218,7 @@ function editWoman()
 			<tr><td>Homosexual</td><td><div id='slider_orientation'></div></td><td>Heterosexual</td></tr>\
 			<tr><td>Boobs+</td><td><div id='slider_boobs'></div></td></tr>\
 			<tr><td>Breast Rows</td><td><div id='slider_rows'></div></td></tr>\
+			<tr><td>Genitals</td><td><div id='slider_cocks'></div></td></tr>\
 			<tr><td>Futa+</td><td><div id='slider_futa'></div></td></tr>\
 			<tr><td>Balls</td><td><div id='slider_balls'></div></td></tr>\
 			<tr><td>Amazon+</td><td><div id='slider_amazon'></div></td></tr>\
@@ -258,6 +270,10 @@ function editWoman()
 		rival.physique.breastrows = ui.value; 
 		redraw();
 	}});
+	$("#slider_cocks").slider({value:rival.physique.gentialscnt,min:0,max:6,slide:function(event, ui) {
+		rival.physique.gentialscnt = ui.value; 
+		redraw();
+	}});	
 	$("#slider_horns").slider({value:rival.physique.horns,min:0,max:10,slide:function(event, ui) {
 		rival.physique.horns = ui.value; 
 		redraw();

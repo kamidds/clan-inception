@@ -98,7 +98,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"horns": 0,
 		"tailtype": 0,
 		"tail": 0,
-		"wings": 0
+		"wings": 0,
+		"gentialscnt": 1
   }
 
 	// Possessions
@@ -385,6 +386,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.pushorientation)) that.Mods.pushorientation = 0;
 		if (isNaN(that.Mods.ironwill)) that.Mods.ironwill = 0;
 		if (isNaN(that.physique.breastrows)) that.physique.breastrows = 0;
+		if (isNaN(that.physique.gentialscnt)) that.physique.gentialscnt = 1;
 		if (isNaN(that.physique.horns)) {
 			that.physique.horns = 0;
 			that.physique.hornstype = 0;
@@ -400,7 +402,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.resistallure)) that.Mods.resistallure = 0;
 		if (isNaN(that.Mods.resistorientation)) that.Mods.resistorientation = 0;
 		
-		if (that.activity == "") that.setActivity();
+		if (that.activity == "" && that != player) that.setActivity();
+		else if (that == player && that.activity.indexOf("birth") == -1) that.activity = "";
 		if (that.name == "") that.name = getUnusedFemaleName();
 		if (isNaN(that.pregnancy)) {
 			that.pregnancy = 0;

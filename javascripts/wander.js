@@ -44,13 +44,14 @@ function Wander()
 		$("#wander_button_volcano").click(
 			function(){
 				setPlaceVisited("Volcano");
-				var val = getRandomInt(1, 35);
+				var val = getRandomInt(1, 37);
 				if (getPlaceCnt("Volcano") == 2) val = 0;
-				if (val < 5) MeetDemon();
+				if (val < 4) MeetDemon();
 				else if (val < 11) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
 				else if (val < 16) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
 				else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 				else if (val < 28) WanderFood("<h1>Found: Red Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatDemonNutYou", "eatDemonNutWoman");
+				else if (val < 33) WanderFood("<h1>Found: Split Mushroom</h1><p>You find strange mushroom, with long and stiff shape and two stalks, it may feed your clan</p>", "eatTwinMushroomYou", "eatTwinMushroomWoman");
 				else WanderBattle("hot volcano");
 			}
 		)
@@ -99,13 +100,13 @@ function Wander()
 	$("#wander_button_beach").click(
 		function(){
 			setPlaceVisited("Beach");
-			var val = getRandomInt(1, 34);
+			var val = getRandomInt(1, 39);
 			if (val < 3) WanderNothing();
 			else if (val < 15) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 25) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
-			else if (val < 30) WanderFood("<h1>Found: Paw Fruit</h1><p>You find small fruit look like paw, you feel the force of your ancestors in it</p>", "eatPawFruitYou", "eatPawFruitWoman");			
-
+			else if (val < 30) WanderFood("<h1>Found: Paw Fruit</h1><p>You find small fruit look like paw, you feel the force of your ancestors in it</p>", "eatPawFruitYou", "eatPawFruitWoman");
+			else if (val < 35) WanderFood("<h1>Found: Tri-Sea-thing</h1><p>You find strange sea creature, long and slimy with three bodies, it may feed your clan</p>", "eatTriCreatureYou", "eatTriCreatureWoman");
 			else WanderBattle("chilly beach");
 		}
 	);	
@@ -183,9 +184,10 @@ function WanderFood(desc, actionyou, actionwoman)
 			eval(actionwoman + "(" + index + ")");
 		});
 	});
-	$("#eat_buttons").append("<button id='eat_button_throw' class='btn btn-woman push--right'>Throw Away</button>");
+	$("#eat_buttons").append("<button id='eat_button_throw' class='btn btn-woman push--right'>Other Use</button>");
 	$("#eat_button_throw").click(function(){
-		new Message("Camp()", "<h1>Throw Away</h1><p>You throw the thing away.</p>");
+		player.goods += 2;
+		new Message("Camp()", "<h1>Other Use</h1><p>You store it away to be used as needed for crafting.</p>");
 	});		
 }
 
@@ -336,7 +338,7 @@ function eatMushroomYou()
 		redraw();
 		new Message("Camp()", 
 			"<h1>Eat the Mushroom</h1>\
-			<p>You eat the mushroom and you feel your cock stiffens and swells with the power of your ancestors!</p>");
+			<p>You eat the mushroom and you feel your cock stiffen and swells with the power of your ancestors!</p>");
 	} else {
 		// No effect
 		new Message("Camp()", 
@@ -369,6 +371,107 @@ function eatMushroomWoman(index)
 			<p>" + rival.name + " eats the mushroom and her belly full</p>");		
 	}
 }
+
+// Twin Cock Mushroom
+
+function eatTwinMushroomYou()
+{
+	if (player.physique.gentialscnt != 2) {
+		// Can benefit
+		if (player.Mods.cock < 20) player.Mods.cock += 1;
+		player.physique.gentialscnt = 2;
+		redraw();
+		new Message("Camp()", 
+			"<h1>Eat the Split Mushroom</h1>\
+			<p>You eat the mushroom and you feel your cock stiffen and swells with the power of your ancestors, but then it splits in two!</p>");
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>Eat the Mushroom</h1>\
+			<p>You eat the mushroom and your belly full</p>");		
+	}			
+}
+
+function eatTwinMushroomWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	if (rival.physique.gentialscnt != 2) {
+		// Can benefit
+		if (rival.Mods.futa < 20) rival.Mods.futa += 1;
+		new Message("", 
+			"<h1>" + rival.name + " Eats the Twin Mushroom</h1>\
+			<p>" + rival.name + " eats the twin mushroom....</p>", true);
+		setTimeout(function() {
+			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill her and she grows a pair of cocks.</p>");
+			else {
+				if (rival.physique.gentialscnt == 1) $("#message").append("and her cock swells and splits in two!</p>");
+				else if (rival.physique.gentialscnt == 3) $("#message").append("and her cocks swells and join until there are only two!</p>");
+				else $("#message").append("and her cock swells.</p>");
+			}
+			rival.physique.gentialscnt = 2;
+			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+			$("#message").click(function() { $(".stats").show(); Camp(); });
+			redraw();
+		}, 1000);
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>" + rival.name + " Eats the Mushroom</h1>\
+			<p>" + rival.name + " eats the mushroom and her belly full</p>");		
+	}
+}
+
+// Tri Creature
+
+function eatTriCreatureYou()
+{
+	if (player.physique.gentialscnt != 3) {
+		// Can benefit
+		player.Mods.cock += 1;
+		player.physique.gentialscnt = 3;
+		redraw();
+		new Message("Camp()", 
+			"<h1>Eat the Tri-Seathing</h1>\
+			<p>You eat the sea creature and you feel your cock stiffen and swells with the power of your ancestors, but then it splits into three cocks!</p>");
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>Eat the Thing</h1>\
+			<p>You eat the thing and your belly full</p>");		
+	}			
+}
+
+function eatTriCreatureWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	if (rival.physique.gentialscnt != 3) {
+		// Can benefit
+		if (rival.Mods.futa < 20) rival.Mods.futa += 1;
+		new Message("", 
+			"<h1>" + rival.name + " Eats the Tri-Seacreature</h1>\
+			<p>" + rival.name + " eats the seathing....</p>", true);
+		setTimeout(function() {
+			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill her and she grows three cocks.</p>");
+			else {
+				if (rival.physique.gentialscnt == 1) $("#message").append("and her cock swells and splits into three!</p>");
+				else if (rival.physique.gentialscnt == 2) $("#message").append("and her cocks swells and split into three!</p>");
+				else $("#message").append("and her cock swells.</p>");
+			}
+			rival.physique.gentialscnt = 3;
+			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+			$("#message").click(function() { $(".stats").show(); Camp(); });
+			redraw();
+		}, 1000);
+	} else {
+		// No effect
+		new Message("Camp()", 
+			"<h1>" + rival.name + " Eats the Thing</h1>\
+			<p>" + rival.name + " eats the sae creature and her belly full</p>");		
+	}
+}
+
 
 // Balls Grapes
 
@@ -631,18 +734,14 @@ function eatMilkNutWoman(index)
 
 function eatDemonNutYou()
 {
-	if (player.physique.skin < 100 || player.physique.wings < 20 || player.physique.hornstype == 0 || player.physique.tailtype == 0) {
+	if (player.physique.skin < 100 || player.physique.wings < 20 || player.physique.hornstype != 2 || player.physique.tailtype != 2) {
 		// Can benefit
 		if (player.physique.skin < 100) player.physique.skin = Math.floor(Math.random() * 2) + 100;
 		if (player.physique.wings < 10) player.physique.wings++;
-		if (player.physique.hornstype == 0) {
-			player.physique.hornstype = 2;
-			player.physique.horns = 2;
-		}
-		if (player.physique.tailtype == 0) {
-			player.physique.tail = 2;
-			player.physique.tailtype = 2;
-		}			
+		if (player.physique.hornstype != 2) player.physique.hornstype = 2;
+		player.physique.horns += 2;
+		if (player.physique.tailtype != 2) player.physique.tailtype = 2;
+		player.physique.tail += 2;
 
 		new Message("Camp()", 
 			"<h1>Eat the Red Nut</h1>\
@@ -660,21 +759,17 @@ function eatDemonNutWoman(index)
 {
 	rival = player.women[index];
 	redraw();
-	if (rival.physique.skin < 100 || rival.physique.wings < 20 || rival.physique.hornstype == 0 || rival.physique.tailtype == 0) {
+	if (rival.physique.skin < 100 || rival.physique.wings < 20 || rival.physique.hornstype != 2 || rival.physique.tailtype != 2) {
 		// Can benefit
 		if (rival.physique.skin < 100) {
 			if (player.physique.skin > 99) rival.physique.skin = player.physique.skin;
 			else rival.physique.skin = Math.floor(Math.random() * 2) + 100;
 		}
 		if (rival.physique.wings < 10) rival.physique.wings++;
-		if (rival.physique.hornstype == 0) {
-			rival.physique.hornstype = 2;
-			rival.physique.horns = 2;
-		}
-		if (rival.physique.tailtype == 0) {
-			rival.physique.tail = 2;
-			rival.physique.tailtype = 2;
-		}			
+		if (rival.physique.hornstype != 2) rival.physique.hornstype = 2;
+		rival.physique.horns += 2;
+		if (rival.physique.tailtype != 2) rival.physique.tailtype = 2;
+		rival.physique.tail = 2;			
 		new Message("", 
 			"<h1>" + rival.name + " Eats the Red Nut</h1>\
 			<p>" + rival.name + " eats the nut....</p>", true);
