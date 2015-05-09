@@ -32,7 +32,7 @@
 				var ev = avatar.physique.gentialscnt - (Math.floor(avatar.physique.gentialscnt / 2) * 2);
 				for (var i = avatar.physique.gentialscnt; i > 0; i--) {
 					var evi = i - (Math.floor(i / 2) * 2);
-					var ab = (evi == 1) ? 15 : -15;
+					var ab = (evi == 1) ? 10 : -10;
 					var ang = ev == 1 ? ab * Math.floor(i / 2) : ab * Math.floor((i + 1) / 2);	
 					drawPenis(ctx, ang, penis, hasc);
 				}
