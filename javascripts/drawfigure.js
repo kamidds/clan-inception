@@ -124,7 +124,7 @@
 				var erect = avatar.desire > 50 && cock == true;
 				var xoff = 80;
 				var yoff = 215;
-				if (erect) yoff = yoff - 13;
+				if (erect) yoff = yoff - 12;
 				ctx.translate(xoff - (rot / 3), yoff);
 				if (erect) ctx.scale(1, -1);
 				ctx.rotate(rot*Math.PI/180);
@@ -1654,7 +1654,8 @@
 						ctx.stroke();		
 						
 						var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 13);
-						if (hasc == true) {
+						var erect = avatar.desire > 50 && hasc == true;
+						if (hasc == true && erect == false) {
 							if (avatar.physique.breasts < 80) drawBellyButton(ctx);
 							drawGenitals(ctx);
 						}
@@ -1674,7 +1675,7 @@
 						drawNose(ctx);
 						drawCleavage(ctx)
 						drawLips(ctx);
-						if (hasc == false) {
+						if (hasc == false || erect) {
 							drawGenitals(ctx);
 							if (avatar.physique.breasts < 80) drawBellyButton(ctx);
 						}
