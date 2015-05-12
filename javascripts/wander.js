@@ -66,7 +66,6 @@ function Wander()
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 25) WanderFood("<h1>Found: Grapes</h1><p>You find some odd grapes, with double berries, it may feed your clan</p>", "eatGrapesYou", "eatGrapesWoman");
 			else if (val < 30) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
-
 			else WanderBattle("snow forest");
 		}
 	);
@@ -86,7 +85,7 @@ function Wander()
 	$("#wander_button_swamp").click(
 		function(){
 			setPlaceVisited("Swamp");
-			var val = getRandomInt(1, 38);
+			var val = getRandomInt(1, 41);
 			if (val < 3) WanderNothing();
 			else if (val < 7) WanderFood("<h1>Found: Small Melon</h1><p>You find small strange melon, it may feed your clan</p>", "eatSmallMelonYou", "eatSmallMelonWoman");
 			else if (val < 15) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
@@ -94,19 +93,21 @@ function Wander()
 			else if (val < 25) WanderFood("<h1>Found: Green Berry</h1><p>You find small green berry that smells strange, it may feed your clan</p>", "eatGreenBerryYou", "eatGreenBerryWoman");
 			else if (val < 30) WanderFood("<h1>Found: Pale Berry</h1><p>You find small pale berry that smells strange, it may feed your clan</p>", "eatPaleBerryYou", "eatPaleBerryWoman");
 			else if (val < 35) WanderFood("<h1>Found: Dark Berry</h1><p>You find small dark coloured berry that smells strange, it may feed your clan</p>", "eatDarkBerryYou", "eatDarkBerryWoman");
+			else if (val < 37) WanderFood("<h1>Found: Rainbow Flower</h1><p>You find small multicoloured flower that looks surprisingly edible, it may feed your clan</p>", "eatRainbowflowerYou", "eatRainbowflowerWoman");
 			else WanderBattle("cold swamp");
 		}
 	);
 	$("#wander_button_beach").click(
 		function(){
 			setPlaceVisited("Beach");
-			var val = getRandomInt(1, 39);
+			var val = getRandomInt(1, 40);
 			if (val < 3) WanderNothing();
 			else if (val < 15) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
 			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 25) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
 			else if (val < 30) WanderFood("<h1>Found: Paw Fruit</h1><p>You find small fruit look like paw, you feel the force of your ancestors in it</p>", "eatPawFruitYou", "eatPawFruitWoman");
 			else if (val < 35) WanderFood("<h1>Found: Tri-Sea-thing</h1><p>You find strange sea creature, long and slimy with three bodies, it may feed your clan</p>", "eatTriCreatureYou", "eatTriCreatureWoman");
+            else if (val < 36) WanderFood("<h1>Found: Hairy Nut</h1><p>You find a large nut, it may feed your clan</p>", "eatHairyNutYou", "eatHairyNutWoman");
 			else WanderBattle("chilly beach");
 		}
 	);	
@@ -882,6 +883,72 @@ function eatDarkBerryWoman(index)
 		redraw();
 	}, 1000);
 }
+
+function eatHairyNutYou()
+{
+    var style = player.physique.hairstyle
+    if (style == 0) {
+        player.physique.hairstyle = getRandomInt(1, 9);
+        var conclusion = "you feel like your skull is on fire"
+    }
+    else if (style >= 1) {
+        player.physique.hairstyle = 0;
+        var conclusion = "you feel your hair fall out"
+    }
+    new Message("Camp()", 
+        "<h1>Eat the Hairy Nut</h1>\
+        <p>You eat the nut and " + conclusion + "</p>");
+	redraw();
+}
+function eatHairyNutWoman(index)
+{
+
+	rival = player.women[index];
+    var style = rival.physique.hairstyle
+	redraw();
+    if (style == 0) {
+        rival.physique.hairstyle = getRandomInt(1, 9);
+        var conclusion = "hair grows from her head."
+    }
+    else if (style >= 1) {
+        rival.physique.hairstyle = 0;
+        var conclusion "her hair falls out."
+    }
+	new Message("", 
+		"<h1>" + rival.name + " Eats the Hairy Nut</h1>\
+		<p>" + rival.name + " eats the nut....</p>", true);
+	setTimeout(function() {
+		$("#message").append("and you watch as " +conclusion);
+		$("#message").click(function() { $(".stats").show(); Camp(); });
+		redraw();
+	}, 1000);
+}
+
+function eatRainbowflowerYou()
+{
+	player.physique.hairc = getRandomInt(1, 16);
+	new Message("Camp()", 
+		"<h1>Eat the Rainbow Flower</h1>\
+		<p>You eat the flower and feel warmth on your scalp.</p>");
+	redraw();
+}
+
+function eatRainbowflowerWoman(index)
+{
+	rival = player.women[index];
+	redraw();
+	rival.physique.hairc = getRandomInt(1, 16);	
+	new Message("", 
+		"<h1>" + rival.name + " Eats the Rainbow Flower</h1>\
+		<p>" + rival.name + " eats the berry....</p>", true);
+	setTimeout(function() {
+		$("#message").append("and a wave of colour spreads over her hair.");
+		$("#message").click(function() { $(".stats").show(); Camp(); });
+		redraw();
+	}, 1000);
+}
+
+
 
 // Find Thoth
 
