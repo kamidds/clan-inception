@@ -123,7 +123,7 @@ function saveGame(cancel)
 	$("#saving").append("<button id='save_button_export' class='btn btn-woman push--right' title='Export'>Export</button>");
 	$("#save_button_export").click(
 		function() { 
-			$("#saving").append("<br><textarea onclick='this.select()' readonly cols='40' rows='10'>" + saveString() + "</textarea>");
+			$("#saving").append("<br><textarea onclick='this.select()' cols='40' rows='10'>" + saveString() + "</textarea>");
 		}
 	);
 	$("#saving").append("<button id='save_button_cancel' class='btn btn-woman push--right' title='Cancel'>Cancel</button>");
