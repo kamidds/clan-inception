@@ -180,6 +180,7 @@ function Hunt()
 	$("#wander_button_beach").click(
 		function(){
 			setPlaceVisited("Beach");
+			var val = getRandomInt(1, 41);
 			if (val < 3) WanderNothing();
 			else WanderBattle("chilly beach");
 		}
