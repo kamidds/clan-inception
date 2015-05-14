@@ -13,7 +13,7 @@ function setPlaceVisited(place)
 
 function Forage()
 {
-	if ($("#wander_buttons").is(":visible")) {
+	if ($("#forage_buttons").is(":visible")) {
 		$("#camp_feed").html("");
 		return;
 	}
@@ -28,20 +28,20 @@ function Forage()
 	
 	$("#camp_feed").html(
 		"<h2>Where do you hunt?</h2>\
-		<div id='wander_buttons' class='push--top'></div>\
-		<div id='wander_display'></div>");
-	//$.each(places, function(index, place) { $("#wander_display").append(index + ": " + place + ", ");	});
+		<div id='forage_buttons' class='push--top'></div>\
+		<div id='forage_display'></div>");
+	//$.each(places, function(index, place) { $("#forage_display").append(index + ": " + place + ", ");	});
 	
 	// add places
-	$("#wander_buttons").append("\
-		<button id='wander_button_forest' class='btn btn-woman push--right' title='Forest'>Forest</button>\
-		<button id='wander_button_hills' class='btn btn-woman push--right' title='Hills'>Hills</button>\
-		<button id='wander_button_swamp' class='btn btn-woman push--right' title='Swamp'>Swamp</button>\
-		<button id='wander_button_beach' class='btn btn-woman push--right' title='Beach'>Beach</button>\
+	$("#forage_buttons").append("\
+		<button id='forage_button_forest' class='btn btn-woman push--right' title='Forest'>Forest</button>\
+		<button id='forage_button_hills' class='btn btn-woman push--right' title='Hills'>Hills</button>\
+		<button id='forage_button_swamp' class='btn btn-woman push--right' title='Swamp'>Swamp</button>\
+		<button id='forage_button_beach' class='btn btn-woman push--right' title='Beach'>Beach</button>\
 	");
 	if (getPlaceCnt("Volcano") != 0) {
-		$("#wander_buttons").append("<button id='wander_button_volcano' class='btn btn-woman push--right' title='Explore the volcano'>Volcano</button>");
-		$("#wander_button_volcano").click(
+		$("#forage_buttons").append("<button id='forage_button_volcano' class='btn btn-woman push--right' title='Explore the volcano'>Volcano</button>");
+		$("#forage_button_volcano").click(
 			function(){
 				setPlaceVisited("Volcano");
 				var val = getRandomInt(1, 37);
@@ -56,7 +56,7 @@ function Forage()
 			}
 		)
 	}
-	$("#wander_button_forest").click(
+	$("#forage_button_forest").click(
 		function(){
 			setPlaceVisited("Forest");
 			var val = getRandomInt(1, 34);
@@ -69,7 +69,7 @@ function Forage()
 			else WanderNothing();
 		}
 	);
-	$("#wander_button_hills").click(
+	$("#forage_button_hills").click(
 		function(){
 			setPlaceVisited("Hills");
 			var val = getRandomInt(1, 37);
@@ -82,7 +82,7 @@ function Forage()
 			else WanderNothing();
 		}
 	);
-	$("#wander_button_swamp").click(
+	$("#forage_button_swamp").click(
 		function(){
 			setPlaceVisited("Swamp");
 			var val = getRandomInt(1, 41);
@@ -97,7 +97,7 @@ function Forage()
 			else WanderNothing();
 		}
 	);
-	$("#wander_button_beach").click(
+	$("#forage_button_beach").click(
 		function(){
 			setPlaceVisited("Beach");
 			var val = getRandomInt(1, 40);
