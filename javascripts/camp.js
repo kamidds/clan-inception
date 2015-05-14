@@ -35,7 +35,7 @@ function Camp(){
 	$("#output").append("<div id='camp_feed'></div>");		
 		
   $("#women_button").click(displayWomen);
-  $("#forage_button").click(Wander);
+  $("#forage_button").click(Forage);
   $("#hunt_button").click(Hunt);
   $("#load_button").click(function(){
 		if (loadGame("Camp()") == 0) alert("No saved games");
