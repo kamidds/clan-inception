@@ -27,7 +27,7 @@ function Forage()
 	}
 	
 	$("#camp_feed").html(
-		"<h2>Where do you hunt?</h2>\
+		"<h2>Where do you forage?</h2>\
 		<div id='forage_buttons' class='push--top'></div>\
 		<div id='forage_display'></div>");
 	//$.each(places, function(index, place) { $("#forage_display").append(index + ": " + place + ", ");	});
