@@ -13,7 +13,7 @@ function Camp(){
 	
 	if (player.activity != "") $("#output").append("<p align='left'>" + player.activity + "</p>");
 	
-	//editPlayer();
+	//editPlayer(); 
 
 	if (player.experience > 0) {
 		$("#output").append(
