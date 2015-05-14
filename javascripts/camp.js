@@ -18,7 +18,8 @@ function Camp(){
 	if (player.experience > 0) {
 		$("#output").append(
 			"<button id='women_button' class='btn' title='Examine the women'>Women</button>\
-			<button id='wander_button' class='btn' title='Hunt!'>Wander</button>\
+			<button id='forage_button' class='btn' title='Forage!'>Forage</button>\
+			<button id='hunt_button' class='btn' title='Hunt!'>Hunt</button>\
 			<button id='exp_button' class='btn' title='Train yourself'>Train</button>\
 			<button id='load_button' class='btn' title='Load the Saved game'>Load</button>\
 			<button id='save_button' class='btn' title='Save the game'>Save</button>");
@@ -33,7 +34,7 @@ function Camp(){
 	$("#output").append("<div id='camp_feed'></div>");		
 		
   $("#women_button").click(displayWomen);
-  $("#wander_button").click(Wander);
+  $("#forage_button").click(Wander);
   $("#load_button").click(function(){
 		if (loadGame("Camp()") == 0) alert("No saved games");
 	});
