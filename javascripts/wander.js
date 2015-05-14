@@ -985,7 +985,7 @@ function eatHairyNutWoman(index)
     }
     else if (style >= 1) {
         rival.physique.hairstyle = 0;
-        var conclusion "her hair falls out."
+        var conclusion = "her hair falls out."
     }
 	new Message("", 
 		"<h1>" + rival.name + " Eats the Hairy Nut</h1>\
