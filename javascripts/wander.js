@@ -11,7 +11,7 @@ function setPlaceVisited(place)
 	else places[place] += 1;
 }
 
-function Wander()
+function Forage()
 {
 	if ($("#wander_buttons").is(":visible")) {
 		$("#camp_feed").html("");
