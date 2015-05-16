@@ -11,7 +11,103 @@ function setPlaceVisited(place)
 	else places[place] += 1;
 }
 
-function Wander()
+function Forage()
+{
+	if ($("#forage_buttons").is(":visible")) {
+		$("#camp_feed").html("");
+		return;
+	}
+	if ($("#women_buttons").is(":visible")) resetRival();
+	
+	if (player.round > 5 && getPlaceCnt("Volcano") == 0) {
+		setPlaceVisited("Volcano");
+		new Message("Camp()", "<h2>Fire Mountain?</h2>\
+		<p>You see a mountain smoking with red rivers flowing down it's side. Looks dangerous, but maybe you return there another time?")
+		return;
+	}
+	
+	$("#camp_feed").html(
+		"<h2>Where do you forage?</h2>\
+		<div id='forage_buttons' class='push--top'></div>\
+		<div id='forage_display'></div>");
+	//$.each(places, function(index, place) { $("#forage_display").append(index + ": " + place + ", ");	});
+	
+	// add places
+	$("#forage_buttons").append("\
+		<button id='forage_button_forest' class='btn btn-woman push--right' title='Forest'>Forest</button>\
+		<button id='forage_button_hills' class='btn btn-woman push--right' title='Hills'>Hills</button>\
+		<button id='forage_button_swamp' class='btn btn-woman push--right' title='Swamp'>Swamp</button>\
+		<button id='forage_button_beach' class='btn btn-woman push--right' title='Beach'>Beach</button>\
+	");
+	if (getPlaceCnt("Volcano") != 0) {
+		$("#forage_buttons").append("<button id='forage_button_volcano' class='btn btn-woman push--right' title='Explore the volcano'>Volcano</button>");
+		$("#forage_button_volcano").click(
+			function(){
+				setPlaceVisited("Volcano");
+				var val = getRandomInt(1, 8);
+				if (val < 2) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
+				else if (val < 3) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
+				else if (val < 4) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
+				else if (val < 5) WanderFood("<h1>Found: Red Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatDemonNutYou", "eatDemonNutWoman");
+				else if (val < 6) WanderFood("<h1>Found: Split Mushroom</h1><p>You find strange mushroom, with long and stiff shape and two stalks, it may feed your clan</p>", "eatTwinMushroomYou", "eatTwinMushroomWoman");
+				else WanderNothing();
+			}
+		)
+	}
+	$("#forage_button_forest").click(
+		function(){
+			setPlaceVisited("Forest");
+			var val = getRandomInt(1, 7);
+			if (val < 2) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
+			else if (val < 3) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
+			else if (val < 4) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
+			else if (val < 5) WanderFood("<h1>Found: Grapes</h1><p>You find some odd grapes, with double berries, it may feed your clan</p>", "eatGrapesYou", "eatGrapesWoman");
+			else if (val < 6) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
+			else WanderNothing();
+		}
+	);
+	$("#forage_button_hills").click(
+		function(){
+			setPlaceVisited("Hills");
+			var val = getRandomInt(1, 10);
+			if (val < 2) WanderFood("<h1>Found: Clean Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDomesticNutYou", "eatDomesticNutWoman");
+			else if (val < 3) WanderFood("<h1>Found: Long Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatOrientationNutYou", "eatOrientationNutWoman");
+			else if (val < 4) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
+			else if (val < 5) WanderFood("<h1>Found: White Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatMilkNutYou", "eatMilkNutWoman");
+			else if (val < 9) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
+			else WanderNothing();
+		}
+	);
+	$("#forage_button_swamp").click(
+		function(){
+			setPlaceVisited("Swamp");
+			var val = getRandomInt(1, 8);
+			if (val < 2) WanderFood("<h1>Found: Small Melon</h1><p>You find small strange melon, it may feed your clan</p>", "eatSmallMelonYou", "eatSmallMelonWoman");
+			else if (val < 3) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
+			else if (val < 4) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
+			else if (val < 5) WanderFood("<h1>Found: Green Berry</h1><p>You find small green berry that smells strange, it may feed your clan</p>", "eatGreenBerryYou", "eatGreenBerryWoman");
+			else if (val < 6) WanderFood("<h1>Found: Pale Berry</h1><p>You find small pale berry that smells strange, it may feed your clan</p>", "eatPaleBerryYou", "eatPaleBerryWoman");
+			else if (val < 7) WanderFood("<h1>Found: Dark Berry</h1><p>You find small dark coloured berry that smells strange, it may feed your clan</p>", "eatDarkBerryYou", "eatDarkBerryWoman");
+			else if (val < 8) WanderFood("<h1>Found: Rainbow Flower</h1><p>You find small multicoloured flower that looks surprisingly edible, it may feed your clan</p>", "eatRainbowflowerYou", "eatRainbowflowerWoman");
+			else WanderNothing();
+		}
+	);
+	$("#forage_button_beach").click(
+		function(){
+			setPlaceVisited("Beach");
+			var val = getRandomInt(1, 7);
+			if (val < 2) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
+			else if (val < 3) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
+			else if (val < 4) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
+			else if (val < 5) WanderFood("<h1>Found: Paw Fruit</h1><p>You find small fruit look like paw, you feel the force of your ancestors in it</p>", "eatPawFruitYou", "eatPawFruitWoman");
+			else if (val < 6) WanderFood("<h1>Found: Tri-Sea-thing</h1><p>You find strange sea creature, long and slimy with three bodies, it may feed your clan</p>", "eatTriCreatureYou", "eatTriCreatureWoman");
+            		else if (val < 7) WanderFood("<h1>Found: Hairy Nut</h1><p>You find a large nut, it may feed your clan</p>", "eatHairyNutYou", "eatHairyNutWoman");
+			else WanderNothing();
+		}
+	);	
+}
+
+function Hunt()
 {
 	if ($("#wander_buttons").is(":visible")) {
 		$("#camp_feed").html("");
@@ -44,14 +140,9 @@ function Wander()
 		$("#wander_button_volcano").click(
 			function(){
 				setPlaceVisited("Volcano");
-				var val = getRandomInt(1, 37);
+				var val = getRandomInt(1, 7);
 				if (getPlaceCnt("Volcano") == 2) val = 0;
 				if (val < 4) MeetDemon();
-				else if (val < 11) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
-				else if (val < 16) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
-				else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-				else if (val < 28) WanderFood("<h1>Found: Red Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatDemonNutYou", "eatDemonNutWoman");
-				else if (val < 33) WanderFood("<h1>Found: Split Mushroom</h1><p>You find strange mushroom, with long and stiff shape and two stalks, it may feed your clan</p>", "eatTwinMushroomYou", "eatTwinMushroomWoman");
 				else WanderBattle("hot volcano");
 			}
 		)
@@ -59,55 +150,32 @@ function Wander()
 	$("#wander_button_forest").click(
 		function(){
 			setPlaceVisited("Forest");
-			var val = getRandomInt(1, 34);
+			var val = getRandomInt(1, 7);
 			if (val < 3) WanderNothing();
-			else if (val < 11) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
-			else if (val < 16) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
-			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else if (val < 25) WanderFood("<h1>Found: Grapes</h1><p>You find some odd grapes, with double berries, it may feed your clan</p>", "eatGrapesYou", "eatGrapesWoman");
-			else if (val < 30) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
 			else WanderBattle("snow forest");
 		}
 	);
 	$("#wander_button_hills").click(
 		function(){
 			setPlaceVisited("Hills");
-			var val = getRandomInt(1, 37);
+			var val = getRandomInt(1, 7);
 			if (val < 3) WanderNothing();
-			else if (val < 10) WanderFood("<h1>Found: Clean Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDomesticNutYou", "eatDomesticNutWoman");
-			else if (val < 16) WanderFood("<h1>Found: Long Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatOrientationNutYou", "eatOrientationNutWoman");
-			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else if (val < 28) WanderFood("<h1>Found: White Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatMilkNutYou", "eatMilkNutWoman");
-			else if (val < 33) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
 			else WanderBattle("snow hills");
 		}
 	);
 	$("#wander_button_swamp").click(
 		function(){
 			setPlaceVisited("Swamp");
-			var val = getRandomInt(1, 41);
+			var val = getRandomInt(1, 7);
 			if (val < 3) WanderNothing();
-			else if (val < 7) WanderFood("<h1>Found: Small Melon</h1><p>You find small strange melon, it may feed your clan</p>", "eatSmallMelonYou", "eatSmallMelonWoman");
-			else if (val < 15) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else if (val < 20) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
-			else if (val < 25) WanderFood("<h1>Found: Green Berry</h1><p>You find small green berry that smells strange, it may feed your clan</p>", "eatGreenBerryYou", "eatGreenBerryWoman");
-			else if (val < 30) WanderFood("<h1>Found: Pale Berry</h1><p>You find small pale berry that smells strange, it may feed your clan</p>", "eatPaleBerryYou", "eatPaleBerryWoman");
-			else if (val < 35) WanderFood("<h1>Found: Dark Berry</h1><p>You find small dark coloured berry that smells strange, it may feed your clan</p>", "eatDarkBerryYou", "eatDarkBerryWoman");
-			else if (val < 37) WanderFood("<h1>Found: Rainbow Flower</h1><p>You find small multicoloured flower that looks surprisingly edible, it may feed your clan</p>", "eatRainbowflowerYou", "eatRainbowflowerWoman");
 			else WanderBattle("cold swamp");
 		}
 	);
 	$("#wander_button_beach").click(
 		function(){
 			setPlaceVisited("Beach");
-			var val = getRandomInt(1, 40);
+			var val = getRandomInt(1, 7);
 			if (val < 3) WanderNothing();
-			else if (val < 15) WanderFood("<h1>Found: Swollen Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatMaternalNutYou", "eatMaternalNutWoman");
-			else if (val < 20) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-			else if (val < 25) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
-			else if (val < 30) WanderFood("<h1>Found: Paw Fruit</h1><p>You find small fruit look like paw, you feel the force of your ancestors in it</p>", "eatPawFruitYou", "eatPawFruitWoman");
-			else if (val < 35) WanderFood("<h1>Found: Tri-Sea-thing</h1><p>You find strange sea creature, long and slimy with three bodies, it may feed your clan</p>", "eatTriCreatureYou", "eatTriCreatureWoman");
-            else if (val < 36) WanderFood("<h1>Found: Hairy Nut</h1><p>You find a large nut, it may feed your clan</p>", "eatHairyNutYou", "eatHairyNutWoman");
 			else WanderBattle("chilly beach");
 		}
 	);	
@@ -912,7 +980,7 @@ function eatHairyNutWoman(index)
     }
     else if (style >= 1) {
         rival.physique.hairstyle = 0;
-        var conclusion "her hair falls out."
+        var conclusion = "her hair falls out."
     }
 	new Message("", 
 		"<h1>" + rival.name + " Eats the Hairy Nut</h1>\
