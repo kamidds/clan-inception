@@ -21,6 +21,12 @@ function createRival(exp)
 	rival.spendExperience = RivalSpendExperience;
 	rival.experience = exp;
 	rival.goods = getRandomInt(3, 10);
+	// Can they be futa, yes if the player is or any of their women
+	var iFuta = player.futa;
+	$.each(player.women, function( index, value ) {
+		iFuta += player.women[index].Mods.futa;
+	});
+	rival.futa = iFuta > 0 && Math.random() < 0.2 ? player.futa : 0;
 	
 	updateRival();
 	
