@@ -38,12 +38,7 @@ function drawStats()
 	if (getPerceptionRate() >= getRandomInt(0, 100)) $("#rival_changra").html(rival.changra);
 	else $("#rival_changra").html("?");
 
-	var ch = player.children;
-	$.each(player.women, function( index, value ) {
-		ch += player.women[index].children;
-	});
-
-  $("#player_women").html(player.women.length + ' (kids ' + ch + ')');
+  $("#player_women").html(player.women.length);
   $("#rival_women").html(rival.women.length);
 
   $("#player_perception").html(player.perception());

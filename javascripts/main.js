@@ -29,3 +29,5 @@ function randomFemaleName()
     "Sharifa", "Subira", "Tahirah", "Tauret", "Thema", "Thermuthis", "Tuyu", "Uatit", "Zahra", "Zalika"];
   return getRandomElem(names);
 }
+
+document.title = "Clan: Inception 2.0.6";

@@ -5,13 +5,36 @@ function Camp(){
 	$(".stats").show();
 	$("#otherstats").show();
 	$("#goods").show();
+	
+	$("#player_goods").html(player.goods);
+	
+	var ch = 0;
+	$.each(player.women, function( index, value ) {
+		ch += player.women[index].children;
+	});
+	if (player.futa > 0) $("#player_kids").html(player.children + "/" + ch);
+	else $("#player_kids").html(ch);
 
   player.rest();
 	resetRival();
 	
 	$("#output").html("<h1>Camp - Week " + player.round + "</h1>");
 	
-	if (player.activity != "") $("#output").append("<p align='left'>" + player.activity + "</p>");
+	var ps = false;
+	if (player.activity != "") {
+		$("#output").append("<p align='left'>" + player.activity);
+		ps = true;
+	}
+	$.each(player.women, function( index, value ) {
+		if (player.women[index].activity.indexOf("birth") != -1) {
+			if (!ps) {
+				ps = true;
+				$("#output").append("<p align='left'>");
+			} else $("#output").append("<br/>");
+			$("#output").append(player.women[index].activity.split("She").join(player.women[index].name));
+		}
+	});
+	if (ps) $("#output").append("</p>");
 	
 	//editPlayer();
 
