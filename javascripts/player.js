@@ -8,6 +8,7 @@ var player = new Avatar(getRandomInt(23, 28),
                         );
 // Initialise player specific variables
 player.experience = 5;
+player.melon = 1;
 
 // Get an unused name for a new woman, to limit cases of the same name being randomly chosen
 function getUnusedFemaleName() {
