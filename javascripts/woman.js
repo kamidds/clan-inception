@@ -29,7 +29,7 @@ function displayWomen(){
 		$("#woman_button_"+index).click(function(){
 			displayWoman(index);
 			$("#woman_display").append(
-				if (melon <0){ 
+			
 				"<button id='woman_test' class='btn' title='test_Woman'>Test</button>");
 			
 			$("#woman_test").click(
@@ -39,7 +39,7 @@ function displayWomen(){
 						}
 				);	
 				
-		}});
+		});
 	});
 	
 	
