@@ -32,9 +32,6 @@ function displayWomen(){
 			$("#woman_display").append("<button id='woman_melon' class='btn' title='melon'>Eat Melon</button>");
 				$("#woman_melon").click(function(){eatMelonWoman(index);player.melon -= 1;});}	
 				
-				if (player.melon > 0){
-			$("#woman_display").append("<button id='woman_melon2' class='btn' title='melon2'>Eat Melon 2</button>");
-				$("#woman_melon").click(function(){eatMelonWoman(index);player.melon -= 1;});}	
 				
 		});
 	});
