@@ -119,7 +119,7 @@ $(document).ready(function() {
 	// Work around for IE compatibility for playing offline
 	!localStorage&&(l=location, p=l.pathname.replace(/(^..)(:)/,"$1$$"), (l.href=l.protocol+"//127.0.0.1"+p));
 
-  new Message("insertCharacterCreationIO()", "<h1 class='fancy'>Clan: Inception</h1>\
+  Message("insertCharacterCreationIO()", "<h1 class='fancy'>Clan: Inception</h1>\
 			<button id='load_button' class='btnsmall' title='Load the Saved game'>Load Game</button>\
 			<button id='new_button' class='btnsmall' title='New Game'>New Game</button>\
       <p>You man of Iberninth. This hard land. Much ice, many bear, always strong wind like howling wolf. \

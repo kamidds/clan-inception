@@ -21,7 +21,7 @@ function Forage()
 	
 	if (player.round > 5 && getPlaceCnt("Volcano") === 0) {
 		setPlaceVisited("Volcano");
-		new Message("Camp()", "<h2>Fire Mountain?</h2>\
+		Message("Camp()", "<h2>Fire Mountain?</h2>\
 		<p>You see a mountain smoking with red rivers flowing down it's side. Looks dangerous, but maybe you return there another time?");
 		return;
 	}
@@ -117,7 +117,7 @@ function Hunt()
 	
 	if (player.round > 5 && getPlaceCnt("Volcano") === 0) {
 		setPlaceVisited("Volcano");
-		new Message("Camp()", "<h2>Fire Mountain?</h2>\
+		Message("Camp()", "<h2>Fire Mountain?</h2>\
 		<p>You see a mountain smoking with red rivers flowing down it's side. Looks dangerous, but maybe you return there another time?");
 		return;
 	}
@@ -211,13 +211,13 @@ function WanderBattle(plc)
 		);
 		$("#fight_button_leave").click(
 			function() {
-				new Message("Camp();", "You no want this weakling and leave him.");
+				Message("Camp();", "You no want this weakling and leave him.");
 			}
 		);
 		
 	} else {
 		// Cannot avoid
-		new Message("new Battle(rival)", "<h1>Wandering</h1>\
+		Message("new Battle(rival)", "<h1>Wandering</h1>\
 			<p>You wander through " + plc + " until spot lone man. He see you and grin. He think \
 			you become womanfolk of his clan. He wrong.</p>");
 	}
@@ -229,7 +229,7 @@ function WanderBattle(plc)
 function WanderNothing()
 {
 	advanceRound();
-	new Message("Camp()", "<h1>Failure</h1><p>You failed to hunt anything or anyone, and return to camp</p>");
+	Message("Camp()", "<h1>Failure</h1><p>You failed to hunt anything or anyone, and return to camp</p>");
 }
 
 
@@ -256,7 +256,7 @@ function WanderFood(desc, actionyou, actionwoman)
 	$("#eat_buttons").append("<button id='eat_button_throw' class='btn btn-woman push--right'>Other Use</button>");
 	$("#eat_button_throw").click(function(){
 		player.goods += 2;
-		new Message("Camp()", "<h1>Other Use</h1><p>You store it away to be used as needed for crafting.</p>");
+		Message("Camp()", "<h1>Other Use</h1><p>You store it away to be used as needed for crafting.</p>");
 	});		
 }
 
@@ -268,12 +268,12 @@ function eatMelonYou()
 		// Can benefit
 		player.Mods.breasts += 5;
 		if (player.Mods.breasts > 200) player.Mods.breasts = 200;
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Melon</h1>\
 			<p>You eat the melon and feel your ancestors spirit, teaching you how to make your women feed your children better.</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Melon</h1>\
 			<p>You eat the melon and your belly full</p>");		
 	}			
@@ -289,7 +289,7 @@ function eatMelonWoman(index)
 		if (rival.Mods.breasts > 200) rival.Mods.breasts = 200;
 		if (rival.physique.breasts > 30 && getRandomInt(1, 100) < 20) {
 			rival.physique.breastrows += 1;
-			new Message("", 
+			Message("", 
 				"<h1>" + rival.name + " Eats the Melon</h1>\
 				<p>" + rival.name + " eats the melon....</p>", true);
 			setTimeout(function() {
@@ -299,7 +299,7 @@ function eatMelonWoman(index)
 				redraw();
 			}, 1000);
 		} else {
-			new Message("", 
+			Message("", 
 				"<h1>" + rival.name + " Eats the Melon</h1>\
 				<p>" + rival.name + " eats the melon....</p>", true);
 			setTimeout(function() {
@@ -311,7 +311,7 @@ function eatMelonWoman(index)
 		}
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Melon</h1>\
 			<p>" + rival.name + " eats the melon and her belly full</p>");		
 	}
@@ -325,12 +325,12 @@ function eatSmallMelonYou()
 		// Can benefit
 		player.Mods.breasts -= 5;
 		if (player.Mods.breasts < -20) player.Mods.breasts = -20;
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Small Melon</h1>\
 			<p>You eat the melon and feel your bad ancestors spirit, you forget how to make your women feed your children.</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Small Melon</h1>\
 			<p>You eat the small melon and your belly full</p>");		
 	}			
@@ -344,7 +344,7 @@ function eatSmallMelonWoman(index)
 		// Can benefit
 		rival.Mods.breasts -= 5;
 		if (rival.Mods.breasts < -20) rival.Mods.breasts = -20;
-		new Message("", 
+		Message("", 
 			"<h1>" + rival.name + " Eats the Small Melon</h1>\
 			<p>" + rival.name + " eats the small melon....</p>", true);
 		setTimeout(function() {
@@ -355,7 +355,7 @@ function eatSmallMelonWoman(index)
 		}, 1000);
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Small Melon</h1>\
 			<p>" + rival.name + " eats the melon and her belly full</p>");		
 	}
@@ -371,7 +371,7 @@ function eatPawFruitYou()
 		player.physique.tailtype = 3;
 	}	
 	redraw();
-	new Message("Camp()", 
+	Message("Camp()", 
 			"<h1>Eat the Fruit</h1>\
 			<p>You eat the melon and feel your ancestors spirit, your chest and rear feel strange.</p>");
 }
@@ -385,7 +385,7 @@ function eatPawFruitWoman(index)
 		rival.physique.tail += 1;
 		rival.physique.tailtype = 3;
 	}
-	new Message("", 
+	Message("", 
 		"<h1>" + rival.name + " Eats the Fruit</h1>\
 		<p>" + rival.name + " eats the fruit....</p>", true);
 	setTimeout(function() {
@@ -405,12 +405,12 @@ function eatMushroomYou()
 		// Can benefit
 		player.Mods.cock += 1;
 		redraw();
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Mushroom</h1>\
 			<p>You eat the mushroom and you feel your cock stiffen and swells with the power of your ancestors!</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Mushroom</h1>\
 			<p>You eat the mushroom and your belly full</p>");		
 	}			
@@ -423,7 +423,7 @@ function eatMushroomWoman(index)
 	if (rival.Mods.futa < 20) {
 		// Can benefit
 		rival.Mods.futa += 1;
-		new Message("", 
+		Message("", 
 			"<h1>" + rival.name + " Eats the Mushroom</h1>\
 			<p>" + rival.name + " eats the mushroom....</p>", true);
 		setTimeout(function() {
@@ -435,7 +435,7 @@ function eatMushroomWoman(index)
 		}, 1000);
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Mushroom</h1>\
 			<p>" + rival.name + " eats the mushroom and her belly full</p>");		
 	}
@@ -450,12 +450,12 @@ function eatTwinMushroomYou()
 		if (player.Mods.cock < 20) player.Mods.cock += 1;
 		player.physique.gentialscnt = 2;
 		redraw();
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Split Mushroom</h1>\
 			<p>You eat the mushroom and you feel your cock stiffen and swells with the power of your ancestors, but then it splits in two!</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Mushroom</h1>\
 			<p>You eat the mushroom and your belly full</p>");		
 	}			
@@ -468,7 +468,7 @@ function eatTwinMushroomWoman(index)
 	if (rival.physique.gentialscnt != 2) {
 		// Can benefit
 		if (rival.Mods.futa < 20) rival.Mods.futa += 1;
-		new Message("", 
+		Message("", 
 			"<h1>" + rival.name + " Eats the Twin Mushroom</h1>\
 			<p>" + rival.name + " eats the twin mushroom....</p>", true);
 		setTimeout(function() {
@@ -485,7 +485,7 @@ function eatTwinMushroomWoman(index)
 		}, 1000);
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Mushroom</h1>\
 			<p>" + rival.name + " eats the mushroom and her belly full</p>");		
 	}
@@ -500,12 +500,12 @@ function eatTriCreatureYou()
 		player.Mods.cock += 1;
 		player.physique.gentialscnt = 3;
 		redraw();
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Tri-Seathing</h1>\
 			<p>You eat the sea creature and you feel your cock stiffen and swells with the power of your ancestors, but then it splits into three cocks!</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Thing</h1>\
 			<p>You eat the thing and your belly full</p>");		
 	}			
@@ -518,7 +518,7 @@ function eatTriCreatureWoman(index)
 	if (rival.physique.gentialscnt != 3) {
 		// Can benefit
 		if (rival.Mods.futa < 20) rival.Mods.futa += 1;
-		new Message("", 
+		Message("", 
 			"<h1>" + rival.name + " Eats the Tri-Seacreature</h1>\
 			<p>" + rival.name + " eats the seathing....</p>", true);
 		setTimeout(function() {
@@ -535,7 +535,7 @@ function eatTriCreatureWoman(index)
 		}, 1000);
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Thing</h1>\
 			<p>" + rival.name + " eats the sae creature and her belly full</p>");		
 	}
@@ -550,12 +550,12 @@ function eatGrapesYou()
 		// Can benefit
 		player.Mods.balls += 1;
 		redraw();
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Grapes</h1>\
 			<p>You eat the grapes and you feel your balls swell with the power of your ancestors!</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Grapes</h1>\
 			<p>You eat the grapes and your belly full</p>");		
 	}			
@@ -568,7 +568,7 @@ function eatGrapesWoman(index)
 	if (rival.Mods.balls < 20) {
 		// Can benefit
 		rival.Mods.balls += 1;
-		new Message("", 
+		Message("", 
 			"<h1>" + rival.name + " Eats the Grapes</h1>\
 			<p>" + rival.name + " eats the grapes....</p>", true);
 		setTimeout(function() {
@@ -580,7 +580,7 @@ function eatGrapesWoman(index)
 		}, 1000);
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Grapes</h1>\
 			<p>" + rival.name + " eats the grapes and her belly full</p>");		
 	}
@@ -594,7 +594,7 @@ function eatDominationNutYou()
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Nut</h1>\
 		<p>You eat the strong nut, but you feel your ancestors power weaken you!</p>");			
 }
@@ -607,7 +607,7 @@ function eatDominationNutWoman(index)
 	rival.calcPhysique();
 	redraw();
 
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
 		<p>" + rival.name + " eats the nut and the power of the nut makes them more obedient.</p>");
 }
@@ -621,7 +621,7 @@ function eatDomesticNutYou()
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Nut</h1>\
 		<p>You eat the nut, but you feel your ancestors power weaken you!</p>");			
 }
@@ -634,7 +634,7 @@ function eatDomesticNutWoman(index)
 	rival.calcPhysique();
 	redraw();
 
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
 		<p>" + rival.name + " eats the nut and the power of the nut teaches them to clean your camp better.</p>");
 }
@@ -648,7 +648,7 @@ function eatMaternalNutYou()
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Nut</h1>\
 		<p>You eat the nut, but you feel your ancestors power weaken you!</p>");			
 }
@@ -661,7 +661,7 @@ function eatMaternalNutWoman(index)
 	rival.calcPhysique();
 	redraw();
 
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
 		<p>" + rival.name + " eats the nut and the power of the nut makes them ready to bear your children.</p>");
 }
@@ -675,7 +675,7 @@ function eatAllureNutYou()
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Nut</h1>\
 		<p>You eat the nut, but you feel your ancestors power weaken you!</p>");			
 }
@@ -688,7 +688,7 @@ function eatAllureNutWoman(index)
 	rival.calcPhysique();
 	redraw();
 
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
 		<p>" + rival.name + " eats the pretty nut and the power of the nut make her prettier.</p>");
 }
@@ -702,7 +702,7 @@ function eatOrientationNutYou()
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Nut</h1>\
 		<p>You eat the nut, but you feel your ancestors power weaken you!</p>");			
 }
@@ -715,7 +715,7 @@ function eatOrientationNutWoman(index)
 	rival.calcPhysique();
 	redraw();
 
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
 		<p>" + rival.name + " eats the long nut and the power of the nut make her desire you.</p>");
 }
@@ -739,12 +739,12 @@ function eatMilkNutYou()
 		}			
 		if (player.physique.breasts > 25 && getRandomInt(1, 100) < 20) player.physique.breastrows += 1;
 
-		new Message("Camp()", 
-			"<h1>Eat the Melon</h1>\
+		Message("Camp()", 
+			"<h1>Eat the White Nut</h1>\
 			<p>You eat the nut and feel your ancestors spirit, teaching you how to make your women feed your children better.</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the White Nut</h1>\
 			<p>You eat the nut and your belly full</p>");		
 	}
@@ -769,7 +769,7 @@ function eatMilkNutWoman(index)
 		}		
 		if (rival.physique.breasts > 25 && getRandomInt(1, 100) < 20) {
 			rival.physique.breastrows += 1;
-			new Message("", 
+			Message("", 
 				"<h1>" + rival.name + " Eats the White Nut</h1>\
 				<p>" + rival.name + " eats the nut....</p>", true);
 			setTimeout(function() {
@@ -780,7 +780,7 @@ function eatMilkNutWoman(index)
 				redraw();
 			}, 1000);
 		} else {
-			new Message("", 
+			Message("", 
 				"<h1>" + rival.name + " Eats the White Nut</h1>\
 				<p>" + rival.name + " eats the nut....</p>", true);
 			setTimeout(function() {
@@ -793,7 +793,7 @@ function eatMilkNutWoman(index)
 		}
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the White Nut</h1>\
 			<p>" + rival.name + " eats the nut and her belly full</p>");		
 	}
@@ -812,12 +812,12 @@ function eatDemonNutYou()
 		if (player.physique.tailtype != 2) player.physique.tailtype = 2;
 		player.physique.tail += 2;
 
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Red Nut</h1>\
 			<p>You eat the nut and feel a surge of heat from the fires of the mountain.</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Red Nut</h1>\
 			<p>You eat the nut and your belly full</p>");		
 	}
@@ -839,7 +839,7 @@ function eatDemonNutWoman(index)
 		rival.physique.horns += 2;
 		if (rival.physique.tailtype != 2) rival.physique.tailtype = 2;
 		rival.physique.tail = 2;			
-		new Message("", 
+		Message("", 
 			"<h1>" + rival.name + " Eats the Red Nut</h1>\
 			<p>" + rival.name + " eats the nut....</p>", true);
 		setTimeout(function() {
@@ -849,7 +849,7 @@ function eatDemonNutWoman(index)
 		}, 1000);
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Red Nut</h1>\
 			<p>" + rival.name + " eats the nut and her belly full</p>");		
 	}
@@ -863,12 +863,12 @@ function eatGreenBerryYou()
 		// Can benefit
 		player.physique.skin = 102;		
 
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Berry</h1>\
 			<p>You eat the berry and feel a flush of cold.</p>");
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>Eat the Green Berry</h1>\
 			<p>You eat the berry and your belly full</p>");		
 	}
@@ -882,7 +882,7 @@ function eatGreenBerryWoman(index)
 	if (rival.physique.skin != 102) {
 		// Can benefit
 		rival.physique.skin = 102;	
-		new Message("", 
+		Message("", 
 			"<h1>" + rival.name + " Eats the Green Berry</h1>\
 			<p>" + rival.name + " eats the berry....</p>", true);
 		setTimeout(function() {
@@ -892,7 +892,7 @@ function eatGreenBerryWoman(index)
 		}, 1000);
 	} else {
 		// No effect
-		new Message("Camp()", 
+		Message("Camp()", 
 			"<h1>" + rival.name + " Eats the Green Berry</h1>\
 			<p>" + rival.name + " eats the berry and her belly full</p>");		
 	}
@@ -904,7 +904,7 @@ function eatPaleBerryYou()
 {
 	player.physique.skin = getRandomInt(1, 10);		
 
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Pale Berry</h1>\
 		<p>You eat the berry and feel a flush of warmth.</p>");
 	redraw();
@@ -915,7 +915,7 @@ function eatPaleBerryWoman(index)
 	rival = player.women[index];
 	redraw();
 	rival.physique.skin = getRandomInt(1, 10);	
-	new Message("", 
+	Message("", 
 		"<h1>" + rival.name + " Eats the Pale Berry</h1>\
 		<p>" + rival.name + " eats the berry....</p>", true);
 	setTimeout(function() {
@@ -931,7 +931,7 @@ function eatDarkBerryYou()
 {
 	player.physique.skin = getRandomInt(10, 20);		
 
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Dark Berry</h1>\
 		<p>You eat the berry and feel a flush of warmth.</p>");
 	redraw();
@@ -942,7 +942,7 @@ function eatDarkBerryWoman(index)
 	rival = player.women[index];
 	redraw();
 	rival.physique.skin = getRandomInt(10, 20);	
-	new Message("", 
+	Message("", 
 		"<h1>" + rival.name + " Eats the Dark Berry</h1>\
 		<p>" + rival.name + " eats the berry....</p>", true);
 	setTimeout(function() {
@@ -963,7 +963,7 @@ function eatHairyNutYou()
         player.physique.hairstyle = 0;
         var conclusion = "you feel your hair fall out"
     }
-    new Message("Camp()", 
+    Message("Camp()", 
         "<h1>Eat the Hairy Nut</h1>\
         <p>You eat the nut and " + conclusion + "</p>");
 	redraw();
@@ -982,7 +982,7 @@ function eatHairyNutWoman(index)
         rival.physique.hairstyle = 0;
         var conclusion = "her hair falls out."
     }
-	new Message("", 
+	Message("", 
 		"<h1>" + rival.name + " Eats the Hairy Nut</h1>\
 		<p>" + rival.name + " eats the nut....</p>", true);
 	setTimeout(function() {
@@ -995,7 +995,7 @@ function eatHairyNutWoman(index)
 function eatRainbowflowerYou()
 {
 	player.physique.hairc = getRandomInt(1, 16);
-	new Message("Camp()", 
+	Message("Camp()", 
 		"<h1>Eat the Rainbow Flower</h1>\
 		<p>You eat the flower and feel warmth on your scalp.</p>");
 	redraw();
@@ -1006,7 +1006,7 @@ function eatRainbowflowerWoman(index)
 	rival = player.women[index];
 	redraw();
 	rival.physique.hairc = getRandomInt(1, 16);	
-	new Message("", 
+	Message("", 
 		"<h1>" + rival.name + " Eats the Rainbow Flower</h1>\
 		<p>" + rival.name + " eats the berry....</p>", true);
 	setTimeout(function() {
@@ -1027,7 +1027,7 @@ function MeetThoth(){
 	updateRival();
 	rival.name = "Thoth";
 	redraw();
-	new Message("new nameThoth()", "<h1>Thoth</h1><p>After wander three \
+	Message("new nameThoth()", "<h1>Thoth</h1><p>After wander three \
 		day, you find track in snow. Is woman track, alone. You lift \
 		nose and smell air, and her scent like she-deer in heat.</p>\
 		<p>You follow track like master hunter. Soon, she found walking ahead. Her \
@@ -1104,7 +1104,7 @@ function nameThoth(){
 		redraw();
 		$(".stats").hide();
     player.women.push(rival);
-    new Message("Camp()", "<h1>"+rival.name+"</h1>\
+    Message("Camp()", "<h1>"+rival.name+"</h1>\
       <p>'"+rival.name+"!' she cry, nipple hard as rock, warm juice flowing down crotch. '"+rival.name+"!'</p>\
       <p>And you no hold it in any longer. You spray warm seed inside her. You groan \
       while "+rival.name+" moan woman-like. She yours now, filled with your seed. Soon, \
@@ -1122,7 +1122,7 @@ function MeetDemon()
 	rival = demon;
 	redraw();
 	if (getPlaceCnt("Volcano") == 2) {
-		new Message("Camp()", "<h1>Demon!</h1><p>After wander near the fire mountain \
+		Message("Camp()", "<h1>Demon!</h1><p>After wander near the fire mountain \
 			day, you find tracks in the scortched earth, barefoot and a womans!\
 			You hunt her, to claim her as a new woman for you clan!</p>\
 			<p>You charge and she moves away, staying from your grasp and that of your ancestors. She speak oddly</p>\
@@ -1133,6 +1133,6 @@ function MeetDemon()
 			<p>You will return to capture this woman!</p>\
 		");
 	} else {
-			new Message("Camp()", "<h1>Nothing</h1><p>You failed to hunt anything but you do see the red woman far away, you could not catch her.</p>");
+			Message("Camp()", "<h1>Nothing</h1><p>You failed to hunt anything but you do see the red woman far away, you could not catch her.</p>");
 	}
 }
