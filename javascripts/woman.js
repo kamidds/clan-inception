@@ -28,11 +28,22 @@ function displayWomen(){
 		$("#women_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		$("#woman_button_"+index).click(function(){
 			displayWoman(index);
+			//Item Melon
 			if (player.melon > 0){
-			$("#woman_display").append("<button id='woman_melon' class='btn' title='melon'>Eat Melon</button>");
-				$("#woman_melon").click(function(){eatMelonWoman(index);player.melon -= 1;});}	
-				
-				
+			$("#woman_display").append(
+				"<button id='woman_melon' class='btn' title='melon'>Eat Melon</button>");
+				$("#woman_melon").click(function(){
+					eatMelonWoman(index);
+					player.melon -= 1;
+				});}	
+			//Item MaternalNut	
+			if (player.maternalnut > 0){
+			$("#woman_display").append(
+				"<button id='woman_maternalnut' class='btn' title='maternalnut'>Eat swollen Nut</button>");
+				$("#woman_melon").click(function(){
+					eatMaternalNutWoman(index);
+					player.maternalnut -= 1;
+				});}		
 		});
 	});
 	
