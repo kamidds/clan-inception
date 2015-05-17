@@ -30,6 +30,7 @@ function Battle(currrival) {
 	}
 	$("#rcwomen").show();
   $("#rcchangra").show();
+	$("#goods").hide();
 	
   var nextRivalAction = new RivalAction();
 

@@ -1617,6 +1617,13 @@
 							else ctx.lineTo(155 + pos,v);
 						}
 						ctx.stroke();
+						ctx.beginPath();
+						ctx.strokeStyle = "red";
+						ctx.lineWidth = 3;
+						ctx.moveTo(159 + pos, 20);
+						ctx.lineTo(159 + pos, 20 + (370 * (avatar.femininity() / 100)));
+						ctx.stroke();
+
 						
 						var heightheight = (height*.0095) + .81;
 						var heightscale = 1 - ((30 - height) / 250);

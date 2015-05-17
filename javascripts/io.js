@@ -21,7 +21,16 @@ function drawStats()
 
   function appendStat(elem, type, avatar){
     var avatarObj = eval(avatar);
-    var appendTo = avatarObj[type] >= 50 ? ".stat-bar--fem" : ".stat-bar--masc";
+		var appendTo;
+		if (avatarObj == player) {
+			appendTo = ".stat-bar--masc";	
+			$(elem).children(appendTo).first().append("<div class='avatar-stat avatar-stat--maxmin'></div>");
+			$(elem).children(appendTo).first().children(".avatar-stat--maxmin").first().css("width", calcStatWidth(avatarObj.minimums[type])+"%");
+			appendTo = ".stat-bar--fem";
+			$(elem).children(appendTo).first().append("<div class='avatar-stat avatar-stat--maxmin'></div>");		
+			$(elem).children(appendTo).first().children(".avatar-stat--maxmin").first().css("width", calcStatWidth(avatarObj.maximums[type])+"%");
+		}
+		appendTo = avatarObj[type] >= 50 ? ".stat-bar--fem" : ".stat-bar--masc";			
     $(elem).children(appendTo).first().append("<div class='avatar-stat avatar-stat--"+avatar+"'></div>");
     $(elem).children(appendTo).first().children(".avatar-stat--"+avatar).first().css("width", calcStatWidth(avatarObj[type])+"%");
   }

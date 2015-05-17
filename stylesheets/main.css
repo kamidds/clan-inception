@@ -172,6 +172,10 @@ p{
   background: blue;
 }
 
+.avatar-stat--maxmin{
+  background: white;
+}
+
 .stat-text{
   position: absolute;
   bottom: 0;
