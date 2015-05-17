@@ -19,10 +19,10 @@ function Forage()
 	}
 	if ($("#women_buttons").is(":visible")) resetRival();
 	
-	if (player.round > 5 && getPlaceCnt("Volcano") == 0) {
+	if (player.round > 5 && getPlaceCnt("Volcano") === 0) {
 		setPlaceVisited("Volcano");
 		new Message("Camp()", "<h2>Fire Mountain?</h2>\
-		<p>You see a mountain smoking with red rivers flowing down it's side. Looks dangerous, but maybe you return there another time?")
+		<p>You see a mountain smoking with red rivers flowing down it's side. Looks dangerous, but maybe you return there another time?");
 		return;
 	}
 	
@@ -39,7 +39,7 @@ function Forage()
 		<button id='forage_button_swamp' class='btn btn-woman push--right' title='Swamp'>Swamp</button>\
 		<button id='forage_button_beach' class='btn btn-woman push--right' title='Beach'>Beach</button>\
 	");
-	if (getPlaceCnt("Volcano") != 0) {
+	if (getPlaceCnt("Volcano") !== 0) {
 		$("#forage_buttons").append("<button id='forage_button_volcano' class='btn btn-woman push--right' title='Explore the volcano'>Volcano</button>");
 		$("#forage_button_volcano").click(
 			function(){
@@ -52,7 +52,7 @@ function Forage()
 				else if (val < 6) WanderFood("<h1>Found: Split Mushroom</h1><p>You find strange mushroom, with long and stiff shape and two stalks, it may feed your clan</p>", "eatTwinMushroomYou", "eatTwinMushroomWoman");
 				else WanderNothing();
 			}
-		)
+		);
 	}
 	$("#forage_button_forest").click(
 		function(){
@@ -115,10 +115,10 @@ function Hunt()
 	}
 	if ($("#women_buttons").is(":visible")) resetRival();
 	
-	if (player.round > 5 && getPlaceCnt("Volcano") == 0) {
+	if (player.round > 5 && getPlaceCnt("Volcano") === 0) {
 		setPlaceVisited("Volcano");
 		new Message("Camp()", "<h2>Fire Mountain?</h2>\
-		<p>You see a mountain smoking with red rivers flowing down it's side. Looks dangerous, but maybe you return there another time?")
+		<p>You see a mountain smoking with red rivers flowing down it's side. Looks dangerous, but maybe you return there another time?");
 		return;
 	}
 	
@@ -135,7 +135,7 @@ function Hunt()
 		<button id='wander_button_swamp' class='btn btn-woman push--right' title='Swamp'>Swamp</button>\
 		<button id='wander_button_beach' class='btn btn-woman push--right' title='Beach'>Beach</button>\
 	");
-	if (getPlaceCnt("Volcano") != 0) {
+	if (getPlaceCnt("Volcano") !== 0) {
 		$("#wander_buttons").append("<button id='wander_button_volcano' class='btn btn-woman push--right' title='Explore the volcano'>Volcano</button>");
 		$("#wander_button_volcano").click(
 			function(){
@@ -145,7 +145,7 @@ function Hunt()
 				if (val < 4) MeetDemon();
 				else WanderBattle("hot volcano");
 			}
-		)
+		);
 	}
 	$("#wander_button_forest").click(
 		function(){
@@ -187,7 +187,7 @@ function Hunt()
 function WanderBattle(plc)
 {
 	advanceRound();
-  if (player.women.length == 0) {
+  if (player.women.length === 0) {
 		MeetThoth();
 		return;
 	}

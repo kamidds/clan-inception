@@ -17,18 +17,21 @@ function ASavedGame()
 function loadGame(cancel) 
 {
 	var cnt = 0;
-	for (var id = 1; id < 5; id++) {
-		var str = localStorage.getItem('clani' + id);
-		var sg = JSON.parse(str);
-		if (sg != undefined) cnt++;
+	var id;
+	var str;
+	var sg;
+	for (id = 1; id < 5; id++) {
+		str = localStorage.getItem('clani' + id);
+		sg = JSON.parse(str);
+		if (sg !== undefined) cnt++;
 	}
-	if (cnt == 0) return 0;
+	if (cnt === 0) return 0;
 
 	$("#output").html("<h1>Loading a game</h1><div id='loading'></div>");
-	for (var id = 1; id < 5; id++) {
-		var str = localStorage.getItem('clani' + id);
-		var sg = JSON.parse(str);
-		if (sg != undefined) {
+	for (id = 1; id < 5; id++) {
+		str = localStorage.getItem('clani' + id);
+		sg = JSON.parse(str);
+		if (sg !== undefined) {
 			cnt++;
 			var temp = JSON.parse(sg.player);
 			$("#loading").append("<button myid='" + id + "' id='load_button_"+id+"' class='btn btn-woman push--right' title='" + temp.name + ", week " + temp.round + "'>Save Game "+id+"</button>");
@@ -68,7 +71,7 @@ function loadGameId(id)
 }
 function loadGameString(str, id)
 {
-	if (str == undefined) {
+	if (str === undefined) {
 		alert("Save not found.");
 		return;
 	}
@@ -86,7 +89,7 @@ function loadGameString(str, id)
 		player.women[i].upgradeSave();
 	}
 	places = { };
-	if (sg.places != undefined) {
+	if (sg.places !== undefined) {
 		var tempplaces = JSON.parse(sg.places);
 		$.each(tempplaces, function(index, place) {
 			places[index] = tempplaces[index];
@@ -95,7 +98,7 @@ function loadGameString(str, id)
 	}
 	
 	createDemon();
-	if (sg.demon != undefined) {
+	if (sg.demon !== undefined) {
 		var tempdemon = JSON.parse(sg.demon);
 		jQuery.extend(demon, tempdemon);
 		demon.upgradeSave();
@@ -103,9 +106,9 @@ function loadGameString(str, id)
 	resetRival();
 	rival.name = "";
 	
-	if (id == undefined) alert("Imported Game, week " + player.round);
+	if (id === undefined) alert("Imported Game, week " + player.round);
 	else alert("Loaded Game " + id + ", week " + player.round);
-	new Camp();
+	Camp();
 }
 
 // Save Games

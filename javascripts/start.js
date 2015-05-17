@@ -21,7 +21,7 @@ function insertCharacterCreationIO(){
     </table>\
     <table><tr><td><b>Points:</b></td><td><div id='CustomPoints'></div></td></tr></table>\
     <br><button id='accept' class='btn'>Start</button>\
-    <button id='load_button' class='btn'>Load</button>")
+    <button id='load_button' class='btn'>Load</button>");
 
 
   $("#slider_eyes").slider({value: player["physique"].irisc,min:1,max:30,slide:function(event, ui){player["physique"].irisc=ui.value; drawfigure('player_avatar', player);}});
@@ -60,7 +60,7 @@ function insertCharacterCreationIO(){
 		$("#CustomPoints").html(pts);
 
 	  player.domesticity=51-ui.value; 
-	  drawfigure('player_avatar', player)}}
+	  drawfigure('player_avatar', player);}}
   );
   $("#slider_allure").slider({value:51-player.allure,min:20,max:30,slide:function(event, ui)
   {
@@ -70,7 +70,7 @@ function insertCharacterCreationIO(){
 		$("#CustomPoints").html(pts);
 
 	  player.allure=51-ui.value; 
-	  drawfigure('player_avatar', player)}}
+	  drawfigure('player_avatar', player);}}
   );
   $("#slider_orientation").slider({value:51-player.orientation,min:20,max:30,slide:function(event, ui)
   {
@@ -80,7 +80,7 @@ function insertCharacterCreationIO(){
 		$("#CustomPoints").html(pts);
 
 	  player.orientation=51-ui.value; 
-	  drawfigure('player_avatar', player)}}
+	  drawfigure('player_avatar', player);}}
   );
 	$('#chkFuta').change(function() {
 		if($(this).is(":checked")) {
@@ -93,10 +93,10 @@ function insertCharacterCreationIO(){
 
   $("#player_name_input").click(function(){
     $("#player_name_input").focus();
-  })
+  });
   $("#load_button").click(function(){
     new loadGame("location.reload();");
-  })
+  });
   $("#accept").click(function(){
     player.name = $("#player_name_input").val();
     $.each(AVATAR_TRAITS, function(index, trait){
@@ -104,10 +104,10 @@ function insertCharacterCreationIO(){
       player.minimums[trait] = player[trait] - 15;
       player.maximums[trait] = player[trait] + 35;
       player.description[trait] = Math.floor(player[trait]/10);
-    })
+    });
 		if (pts > 10) player.experience += Math.floor(pts / 10) * 5;
 		player.round = 1;
-    new Camp();    
+    Camp();    
   });
 	
 	drawfigure('player_avatar', player);
@@ -137,7 +137,7 @@ $(document).ready(function() {
       lone man and ambush. You make man your woman. You start new clan . . . or you \
       become part of other clan in process. Either way, you warmer.</p>");
 	$("#load_button").click(function(){
-		if (loadGame("location.reload();") == 0) {
+		if (loadGame("location.reload();") === 0) {
 			alert("No saved games, starting a new game");
 		}
 	});

@@ -24,7 +24,7 @@ function Train()
 				}
 				IsDoneTraining();
 			}
-		)
+		);
 	}
 	
 	// Breast size increase
@@ -42,7 +42,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	
 	// Perception increase
 	$("#train_buttons").append("<button id='train_button_2' class='btn btn-woman push--right' title='See though your enemies'>Perception+ (" + (player.Mods.perception / 5) + ")</button>");
@@ -57,7 +57,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	
 	// Changra increase
 	$("#train_buttons").append("<button id='train_button_3' class='btn btn-woman push--right' title='More Power!'>Changra+ (" + (player.Mods.changra / 5) + ")</button>");
@@ -73,7 +73,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	
 	// Amazon
 	$("#train_buttons").append("<button id='train_button_4' class='btn btn-woman push--right' title='Strong women!'>Amazon+ (" + (player.Mods.amazon / 2) + ")</button>");
@@ -90,7 +90,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	
 	// Cocks
 	$("#train_buttons").append("<button id='train_button_5' class='btn btn-woman push--right' title='Big Cock!'>Cock+ (" + (player.Mods.cock / 2) + ")</button>");
@@ -108,7 +108,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Balls
 	$("#train_buttons").append("<button id='train_button_18' class='btn btn-woman push--right' title='Big Balls!'>Balls+ (" + (player.Mods.balls / 2) + ")</button>");
 	$("#train_button_18").click(
@@ -125,7 +125,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)	
+	);
 
 	// Futa
 	$("#train_buttons").append("<button id='train_button_6' class='btn btn-woman push--right' title='Futa!'>Futa+ (" + (player.Mods.futa / 2) + ")</button>");
@@ -144,7 +144,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	
 	$("#train_buttons").append("<br>");
 	
@@ -161,7 +161,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Push Domesticity
 	$("#train_buttons").append("<button id='train_button_9' class='btn btn-woman push--right' title='Force Domesticity more!'>Domesticity+ (" + (player.Mods.pushdomesticity / 2) + ")</button>");
 	$("#train_button_9").click(
@@ -175,7 +175,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Push Maternalism
 	$("#train_buttons").append("<button id='train_button_7' class='btn btn-woman push--right' title='Force Maternalism more!'>Maternalism+ (" + (player.Mods.pushmaternalism / 2) + ")</button>");
 	$("#train_button_7").click(
@@ -189,7 +189,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Push Allure
 	$("#train_buttons").append("<button id='train_button_10' class='btn btn-woman push--right' title='Force Alure more!'>Allure+ (" + (player.Mods.pushallure / 2) + ")</button>");
 	$("#train_button_10").click(
@@ -203,7 +203,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Push Orientation
 	$("#train_buttons").append("<button id='train_button_11' class='btn btn-woman push--right' title='Force Orientation more!'>Orientation+ (" + (player.Mods.pushorientation / 2) + ")</button>");
 	$("#train_button_11").click(
@@ -217,7 +217,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	
 	$("#train_buttons").append("<br>");
 	
@@ -234,7 +234,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	
 	// Resist Domesticity
 	$("#train_buttons").append("<button id='train_button_14' class='btn btn-woman push--right' title='Resist Domesticity!'>Resist Domesticity (" + player.Mods.resistdomesticity + ")</button>");
@@ -249,7 +249,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Resist Maternalism
 	$("#train_buttons").append("<button id='train_button_15' class='btn btn-woman push--right' title='Resist Maternalism!'>Resist Maternalism (" + player.Mods.resistmaternalism + ")</button>");
 	$("#train_button_15").click(
@@ -263,7 +263,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Resist Allure
 	$("#train_buttons").append("<button id='train_button_16' class='btn btn-woman push--right' title='Resist Allure!'>Resist Allure (" + player.Mods.resistallure + ")</button>");
 	$("#train_button_16").click(
@@ -277,7 +277,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 	// Resist Orientation
 	$("#train_buttons").append("<button id='train_button_17' class='btn btn-woman push--right' title='Resist Orientation!'>Resist Orientation (" + player.Mods.resistorientation + ")</button>");
 	$("#train_button_17").click(
@@ -291,7 +291,7 @@ function Train()
 			}
 			IsDoneTraining();
 		}
-	)
+	);
 }
 
 function IsDoneTraining()

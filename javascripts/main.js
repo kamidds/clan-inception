@@ -5,7 +5,7 @@ var places = { };
 // Names
 function randomMaleName()
 {
-  names = ['Abasi', 'Abubakar', 'Agymah', 'Ak', 'Amenoteph', 'Amon', 'An-Her', 'Anok',
+  var names = ['Abasi', 'Abubakar', 'Agymah', 'Ak', 'Amenoteph', 'Amon', 'An-Her', 'Anok',
   'Apophis', 'Asim', 'Atemu', 'Badru', 'Bakari', 'Baruti', 'Behdeti', 'Chibale',
   'Chigaru', 'Chuma', 'Cris', 'Ctesphon', 'Fadil', 'Fenukuh', 'Hanif', 'Hak', 'Heru',
   'Horemheb', 'Ini-Herit', 'Issa', 'Karanthes', 'Khafra', 'Khaldun', 'Khaza', 'Kutamun',
@@ -17,7 +17,7 @@ function randomMaleName()
 
 function randomFemaleName()
 {
-  names = ["Akila", "Amunet", "Ankhetitat", "Ast", "Astarte", "Atet", "Aziza", "Bahiti", "Bakt", "Bastet", "Beketaten", "Betresh", "Chione", "Dendera",
+  var names = ["Akila", "Amunet", "Ankhetitat", "Ast", "Astarte", "Atet", "Aziza", "Bahiti", "Bakt", "Bastet", "Beketaten", "Betresh", "Chione", "Dendera",
     "Dalila", "Echidna", "Eshe", "Eopei", "Enskerk", 
 		"Hafsha", "Hatshepsut", "Heqet", "Herneith", "Hesi", "Hasra", "Henite", "Herit", "Hunra", "Iseret", 
 		"Kakra", "Kanika", "Kasmut", "Kawit", "Kesi", "Kephira", "Kemat", "Khonsu", "Kema", 

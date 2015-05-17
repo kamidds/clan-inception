@@ -53,7 +53,7 @@ function resetRival()
 // allocate experience
 function RivalSpendExperience()
 {
-	if (rival.experience == 0) return;
+	if (rival.experience === 0) return;
 	
 	// Ranks
 	var ranks = rival.experience / 5;
@@ -106,7 +106,7 @@ function RivalVictory()
 
   $('#woman_name').click(function() {
     $("#woman_name").focus();
-  })
+  });
 
   $("#name_woman").click(function() {
     rival.name = $("#woman_name").val().length > 0 ? $("#woman_name").val() : getUnusedFemaleName();
@@ -116,12 +116,12 @@ function RivalVictory()
 		rival.goods = 0;
     rival.round = player.round;		// day captured
     Camp();
-  })
+  });
   $("#reject_woman").click(function() {
     player.experience += 5;
 		player.goods += rival.goods;	
     new Message("Camp();", "You no want this weakling and leave her to be claimed by another.");
-  })	
+  });	
 }
 
 // You lost
@@ -141,7 +141,7 @@ function RivalDefeat()
 		fates.push("bearing him healthy sons");
 	}
 	if (fates.length === 0) {
-		fates.push("sneaking away, though. You not man, but you refuse to be woman of this one")
+		fates.push("sneaking away, though. You not man, but you refuse to be woman of this one");
 	}
 	var fate = toCommaSeperatedList(fates);
 	fate = "<p>With mighty howl, rival man stomp and point palm at you. His Changra surge into you, and your Changra evaporate like mist in sunlight. You collapse at rival man's feet, and he stare down as you pant and try collect your Changra. Finally he laugh and offer you hand.</p>\
@@ -175,7 +175,7 @@ function RivalDefeat()
 				player.Mods.changra -= 5;
 				new Message("Camp();", "You resist you desire for the man and run away, you weaker for this");
 			}
-		)
+		);
 	} else $("#end_buttons").append("<p><b>You not strong in will enough to do anything else.</b></p>");
 	return true;
 }
@@ -189,7 +189,7 @@ function RivalGetTell(action) {
 		"bellow laugh.",
 		"flare nostrils like dragon.",
 		"stomp ground"
-	])
+	]);
 
 	var drainDescription = getRandomElem([
 		"close eyes and hum to self.",
@@ -197,7 +197,7 @@ function RivalGetTell(action) {
 		"whisper to self.",
 		"close eyes and breathe deep.",
 		"focused and very still."
-	])
+	]);
 
 	var reflectDescription = getRandomElem([
 		"plant feed in ground and stare at you defiant.",
@@ -205,7 +205,7 @@ function RivalGetTell(action) {
 		"step back, arms crossed in front of face.",
 		"crouch low, arms crossed in front of face.",
 		"crouched and very still."
-	])
+	]);
 
 	var restDescription = getRandomElem([
 		"breathe deep.",
@@ -213,7 +213,7 @@ function RivalGetTell(action) {
 		"look pale.",
 		"wipe sweat face.",
 		"very still."
-	])
+	]);
 
 	var hesitateDescription = getRandomElem([
 		"look uncertain.",
@@ -221,7 +221,7 @@ function RivalGetTell(action) {
 		"bite lip.",
 		"look at ground.",
 		"chew lip."
-	])
+	]);
 
 	switch(action) {
 		case "push": return rival.name + " " + pushDescription;

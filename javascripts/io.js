@@ -1,7 +1,7 @@
 function redraw() 
 {
 	drawfigure("player_avatar", player);
-	if (rival.name != "") drawfigure("rival_avatar", rival);
+	if (rival.name !== "") drawfigure("rival_avatar", rival);
 	else {
 		var canvas = document.getElementById("rival_avatar");
 		var ctx = canvas.getContext("2d");
@@ -21,17 +21,17 @@ function drawStats()
 
   function appendStat(elem, type, avatar){
     var avatarObj = eval(avatar);
-    var appendTo = avatarObj[type] >= 50 ? ".stat-bar--fem" : ".stat-bar--masc"
+    var appendTo = avatarObj[type] >= 50 ? ".stat-bar--fem" : ".stat-bar--masc";
     $(elem).children(appendTo).first().append("<div class='avatar-stat avatar-stat--"+avatar+"'></div>");
     $(elem).children(appendTo).first().children(".avatar-stat--"+avatar).first().css("width", calcStatWidth(avatarObj[type])+"%");
   }
 
   $(".stat-bar-container").each(function(){
     $(this).empty();
-    $(this).append("<span class='stat-bar stat-bar--fem'></span><span class='stat-bar stat-bar--masc'></span>")
-    var type = $(this).attr("id")
-    appendStat(this, type, "player")
-    appendStat(this, type, "rival")
+    $(this).append("<span class='stat-bar stat-bar--fem'></span><span class='stat-bar stat-bar--masc'></span>");
+    var type = $(this).attr("id");
+    appendStat(this, type, "player");
+    appendStat(this, type, "rival");
   });
 
   $("#player_changra").html(player.changra);
@@ -48,13 +48,13 @@ function drawStats()
 function Message(action, message, noclick){
   $(".stats").hide();
   $("#output").html("<div id='message' class='clickable'>"+message+"</div>");
-	if (noclick != true) {
+	if (noclick !== true) {
 		$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
 
 		$("#message").click(
 			function() {
 				$(".stats").show();
-				eval(action)
+				eval(action);
 			}
 		);
 	}

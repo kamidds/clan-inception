@@ -23,7 +23,7 @@ function getUnusedFemaleName() {
 				break;
 			}
 		}
-    if (nok == true) break;
+    if (nok === true) break;
     ntry += 1;
   }
   return str;

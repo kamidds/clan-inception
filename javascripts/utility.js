@@ -9,7 +9,7 @@ function differenceBetween(x, y) { return x > y ? x - y : y - x; }
 function toCommaSeperatedList(array){
   if (array.length >= 3) return array.slice(0, array.length - 1).join(', ') + ", and " + array.slice(-1);
   else if (array.length === 2) return array[0] + " and " + array[1];
-  else return array[0]
+  else return array[0];
 }
 
 //accepts any value like '#ffffff', 'rgba(255,255,255,1)', 'hsl(0,100%,100%)', or 'white'

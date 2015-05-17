@@ -47,19 +47,20 @@
 				ctx.lineWidth = a;
 				
 				/*Testes*/
-				var a = testes;
+				a = testes;
 				a = a/1.4;
 				var b = a / 2;  //size
 				var c = a / 3;
 				var d = a / 5;
 				var e = a / 10;
 				var f = 1;
+				var z;
 				
 				if (testes < 11)
 				{
 					// Balls
 					ctx.lineWidth = 1.5;
-					var z = 0;
+					z = 0;
 					if (waist < 0) z = waist * -0.15;
 					ctx.moveTo(76 - d, 202 + f + z);
 					// left
@@ -107,7 +108,7 @@
 					d = a / 5;
 					e = a / 10;
 					c = 0;
-					var z = 0;
+					z = 0;
 					if (legs > 10 && legs <= 20) c = (legs - 10) / 10;
 					else if (legs > 20) c = 10 / 10;
 					ctx.moveTo(79, 204 + (f / 1.2));
@@ -121,7 +122,7 @@
 			function drawPenis(ctx, rot, size, cock)
 			{
 				ctx.save();
-				var erect = avatar.desire > 50 && cock == true;
+				var erect = avatar.desire > 50 && cock === true;
 				var xoff = 80;
 				var yoff = 215;
 				if (erect) yoff = yoff - 12;
@@ -155,7 +156,7 @@
 				var l = avatar.Mods.cock;
 				
 				/*Penis*/
-				if (cock == true) {
+				if (cock === true) {
 					ctx.moveTo(75 + e - xoff, 200 + f - yoff);
 					ctx.quadraticCurveTo(72 + e - xoff, 202 + f + l - yoff,
 															 73 + d + e - xoff, 230 + f - (a + b) + l - yoff);

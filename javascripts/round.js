@@ -8,5 +8,5 @@ function advanceRound() {
     woman.setActivity();
     woman.advancePregnancy();
     woman.advanceDesire();
-  })
+  });
 }

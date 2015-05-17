@@ -21,7 +21,7 @@ function Camp(){
 	$("#output").html("<h1>Camp - Week " + player.round + "</h1>");
 	
 	var ps = false;
-	if (player.activity != "") {
+	if (player.activity !== "") {
 		$("#output").append("<p align='left'>" + player.activity);
 		ps = true;
 	}
@@ -61,7 +61,7 @@ function Camp(){
   $("#forage_button").click(Forage);
   $("#hunt_button").click(Hunt);
   $("#load_button").click(function(){
-		if (loadGame("Camp()") == 0) alert("No saved games");
+		if (loadGame("Camp()") === 0) alert("No saved games");
 	});
   $("#save_button").click(function() {
 		saveGame("Camp()");
