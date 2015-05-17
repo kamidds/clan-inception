@@ -398,11 +398,12 @@ function eatMaternalNutWoman(index)
 	rival.maternalism += 5;
 	rival.capTraits();
 	rival.calcPhysique();
+	Message("Camp()", 
+	"<h1>" + rival.name + " Eats the Nut</h1>\
+	<p>" + rival.name + " eats the nut and the power of the nut makes them ready to bear your children.</p>");
+	setTimeout(1000);
 	redraw();
 
-	Message("Camp()", 
-		"<h1>" + rival.name + " Eats the Nut</h1>\
-		<p>" + rival.name + " eats the nut and the power of the nut makes them ready to bear your children.</p>");
 }
 
 
