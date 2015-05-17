@@ -257,7 +257,7 @@ function WanderFood(desc, actionyou, actionwoman)go
 	$("#eat_button_throw").click(function(){
 		player.goods += 2;
 		if (actionyou == "eatMelonYou"){player.melon +=1;}
-		}
+		
 		Message("Camp()", "<h1>Other Use</h1><p>You store it away to be used as needed for crafting.</p>");
 	});		
 }
