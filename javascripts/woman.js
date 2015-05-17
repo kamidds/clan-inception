@@ -29,7 +29,7 @@ function displayWomen(){
 		$("#woman_button_"+index).click(function(){
 			displayWoman(index);
 			$("#woman_button_"+index).append(
-				"<button id='test_button' class='btn' title='Test'>Test</button>\");
+				"<button id='woman_test' class='btn' title='test_Woman'>Test</button>");
 		});
 	});
 }
