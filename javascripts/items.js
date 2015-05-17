@@ -401,9 +401,13 @@ function eatMaternalNutWoman(index)
 
 	Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
-		<p>" + rival.name + " eats the nut and the power of the nut makes them ready to bear your children.</p>");
+		<p>" + rival.name + " eats the nut...</p>");
 		
-	setTimeout(function(){ redraw(); }, 1000);
+	setTimeout(function(){ 
+		$("#message").append(" and the power of the nut makes them ready to bear your children.</p>");
+		redraw(); 
+		
+	}, 1000);
 	
 
 }
