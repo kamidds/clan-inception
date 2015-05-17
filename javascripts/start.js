@@ -28,6 +28,7 @@ function insertCharacterCreationIO(){
   $("#slider_skin").slider({value:player["physique"].skin,min:1,max:30,step:.1,slide:function(event, ui){player["physique"].skin=ui.value; drawfigure('player_avatar', player);}});
   $("#slider_hair").slider({value:player["physique"].hairc,min:1,max:30,step:.1,slide:function(event, ui){player["physique"].hairc=ui.value; drawfigure('player_avatar', player);}});
   
+  var melon = 0;
   var pts = 10;
 	$("#CustomPoints").html(pts);
   
