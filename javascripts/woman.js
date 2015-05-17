@@ -40,7 +40,7 @@ function displayWomen(){
 			if (player.maternalnut > 0){
 			$("#woman_display").append(
 				"<button id='woman_maternalnut' class='btn' title='maternalnut'>Eat swollen Nut</button>");
-				$("#woman_melon").click(function(){
+				$("#woman_maternalnut").click(function(){
 					eatMaternalNutWoman(index);
 					player.maternalnut -= 1;
 				});}		
