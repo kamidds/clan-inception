@@ -374,7 +374,7 @@ function eatDomesticNutWoman(index)
 
 	Message("Camp()", 
 		"<h1>" + rival.name + " Eats the Nut</h1>\
-		<p>" + rival.name + " eats the nut and the power of the nut teaches them to clean your camp better.</p>");
+		<p>" + rival.name + " eats the nut and the power of the nut teaches her to clean your camp better.</p>");
 }
 
 
@@ -404,7 +404,7 @@ function eatMaternalNutWoman(index)
 		<p>" + rival.name + " eats the nut...</p>");
 		
 	setTimeout(function(){ 
-		$("#message").append(" and the power of the nut makes them ready to bear your children.</p>");
+		$("#message").append(" and the power of the nut makes her better to bear your children.</p>");
 		redraw(); 
 		
 	}, 1000);
