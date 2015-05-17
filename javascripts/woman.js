@@ -28,8 +28,8 @@ function displayWomen(){
 		$("#women_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		$("#woman_button_"+index).click(function(){
 			displayWoman(index);
-			$("#woman_buttons").append(
-				"<button id='woman_test' class='btn btn-woman push--right' title='test_Woman'>Test</button>");
+			$("#woman_button").append(
+				"<button id='woman_test' class='btn' title='test_Woman'>Test</button>");
 		});
 	});
 }
