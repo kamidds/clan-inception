@@ -393,6 +393,7 @@ function eatMaternalNutYou()
 
 function eatMaternalNutWoman(index)
 {
+	redraw();
 	rival = player.women[index];
 	rival.maternalism += 5;
 	rival.capTraits();
