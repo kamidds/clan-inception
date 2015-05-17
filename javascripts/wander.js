@@ -235,7 +235,7 @@ function WanderNothing()
 
 // Found a consumable item (common function)
 
-function WanderFood(desc, actionyou, actionwoman)go
+function WanderFood(desc, actionyou, actionwoman)
 {
 	$(".stats").hide();
 	advanceRound();
