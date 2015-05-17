@@ -30,14 +30,18 @@ function displayWomen(){
 			displayWoman(index);
 			$("#woman_display").append(
 				"<button id='woman_test' class='btn' title='test_Woman'>Test</button>");
+			
+			$("#woman_test").click(
+				function(){
+					eatMelonWoman(index);
+					
+						}
+				);	
+				
 		});
 	});
 	
-	$("#woman_test").click(
-		function(){
-			eatMelonWoman(index);
-		}
-	);	
+	
 	
 }
 
