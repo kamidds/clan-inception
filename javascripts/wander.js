@@ -259,6 +259,9 @@ function WanderFood(desc, actionyou, actionwoman)
 		if (actionyou == "eatMelonYou" ){
 			player.melon +=1;
 		}
+		if (actionyou == "eatMaternalNutYou" ){
+			player.maternalnut +=1;
+		}		
 		Message("Camp()", "<h1>Other Use</h1><p>You store it away to be used as needed for crafting.</p>");
 	});		
 }
