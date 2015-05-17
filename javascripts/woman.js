@@ -30,9 +30,9 @@ function displayWomen(){
 			displayWoman(index);
 			$("#woman_display").append(
 			
-				"<button id='woman_test' class='btn' title='test_Woman'>Test</button>");
+				"<button id='woman_melon' class='btn' title='melon'>Eat Melon</button>");
 			
-			$("#woman_test").click(
+			$("#woman_melon").click(
 				function(){
 					eatMelonWoman(index);
 					
