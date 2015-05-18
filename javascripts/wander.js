@@ -253,7 +253,7 @@ function WanderFood(desc, actionyou, actionwoman)
 		$("#woman_button_"+index).click(function(){
 		
 			if ($("#woman_eat_buttons").is(":visible")) {
-				$("#eat_buttons").html("");
+				$("#eat_button_Woman").html("");
 				return;
 			}
 			
