@@ -254,6 +254,11 @@ function WanderFood(desc, actionyou, actionwoman)
 		
 			if ($("#woman_eat_buttons").is(":visible")) {
 				$("#woman_eat_buttons").html("");
+			} else {
+				$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
+			<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\
+			</div>");	
+				}
 			}
 			
 			rival = player.women[index];
@@ -261,9 +266,7 @@ function WanderFood(desc, actionyou, actionwoman)
 			$("#otherstats").show();
 			redraw();
 			
-			$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
-			<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\
-			</div>");
+			
 			$("#eat_button_Woman").click(function(){
 			eval(actionwoman + "(" + index + ")");
 			});
