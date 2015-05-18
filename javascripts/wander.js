@@ -249,8 +249,10 @@ function WanderFood(desc, actionyou, actionwoman)
 	});	
 	$.each(player.women, function( index, value ) {
 		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
+		
 		$("#woman_button_"+index).click(function(){
 			rival = player.women[index];
+			redraw();
 			$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
 			<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\
 			</div>");
@@ -261,18 +263,12 @@ function WanderFood(desc, actionyou, actionwoman)
 		});
 	});
 	$("#eat_buttons").append("<button id='eat_button_throw' class='btn btn-woman push--right'>Other Use</button>");
+	
 	$("#eat_button_throw").click(function(){
 		player.goods += 2;
-		if (actionyou == "eatMelonYou" ){
-			player.melon +=1;
-		}
-		if (actionyou == "eatMaternalNutYou" ){
-			player.maternalnut +=1;
-		}		
 		Message("Camp()", "<h1>Other Use</h1><p>You store it away to be used as needed for crafting.</p>");
 	});		
 }
-
 
 
 // Find Thoth
