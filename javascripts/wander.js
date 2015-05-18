@@ -256,6 +256,8 @@ function WanderFood(desc, actionyou, actionwoman)
 		$("#woman_button_"+index).click(function(){
 		
 			if ($("#woman_eat_buttons").is(":visible")) {
+					$("#eat_button_Woman").click(function(){
+					eval(actionwoman + "(" + index + ")");
 			} 
 			else {
 				$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
