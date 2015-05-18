@@ -235,6 +235,7 @@ function WanderNothing()
 
 // Found a consumable item (common function)
 
+
 function WanderFood(desc, actionyou, actionwoman)
 {
 //	$(".stats").hide();
@@ -253,15 +254,14 @@ function WanderFood(desc, actionyou, actionwoman)
 		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		
 		$("#woman_button_"+index).click(function(){
-			
-					
-			if ($("#eat_button_Woman").is(":visible")) {
-				$("#eat_button_Woman").html("");
-				return;
-			}
 		
-			$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
+			if ($("#woman_eat_buttons").is(":visible")) {
+			} 
+			else {
+				$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
 				<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\</div>");	
+			}
+			
 			
 			rival = player.women[index];
 			$(".stats").show();
@@ -283,6 +283,7 @@ function WanderFood(desc, actionyou, actionwoman)
 		Message("Camp()", "<h1>Other Use</h1><p>You store it away to be used as needed for crafting.</p>");
 	});		
 }
+
 
 
 // Find Thoth
