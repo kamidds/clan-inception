@@ -251,8 +251,8 @@ function WanderFood(desc, actionyou, actionwoman)
 		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		
 		$("#woman_button_"+index).click(function(){
-			rival = player.women[index];
-			redraw();
+			displayWoman(index);
+			
 			$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
 			<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\
 			</div>");
