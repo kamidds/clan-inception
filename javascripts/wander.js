@@ -237,28 +237,29 @@ function WanderNothing()
 
 function WanderFood(desc, actionyou, actionwoman)
 {
-	$(".stats").hide();
+//	$(".stats").hide();
+
 	advanceRound();
-  $("#output").html(desc);
+  	$("#output").html(desc);
+  	
 	$("#output").append("<h2>Who will eat it?</h2>\
 	<div id='eat_buttons' class='push--top'>\
 	<button id='eat_button_you' class='btn btn-woman push--right'>You</button>\
 	</div>");
-	$("#eat_button_you").click(function(){
-			eval(actionyou + "()");
-	});	
+	
+	$("#eat_button_you").click(function(){eval(actionyou + "()");});	
+	
 	$.each(player.women, function( index, value ) {
 		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		
 		$("#woman_button_"+index).click(function(){
 		
 			if ($("#woman_eat_buttons").is(":visible")) {
-				$("#woman_eat_buttons").html("");
-			} else {
+			} 
+			else {
 				$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
-			<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\
-			</div>");	
-				}
+				<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\</div>");	
+			}
 			
 			
 			rival = player.women[index];
@@ -273,6 +274,7 @@ function WanderFood(desc, actionyou, actionwoman)
 		
 		});
 	});
+	
 	$("#eat_buttons").append("<button id='eat_button_throw' class='btn btn-woman push--right'>Other Use</button>");
 	
 	$("#eat_button_throw").click(function(){
