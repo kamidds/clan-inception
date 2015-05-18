@@ -259,7 +259,7 @@ function WanderFood(desc, actionyou, actionwoman)
 			<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\
 			</div>");	
 				}
-			}
+			
 			
 			rival = player.women[index];
 			$(".stats").show();
