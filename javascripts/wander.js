@@ -270,7 +270,7 @@ function WanderFood(desc, actionyou, actionwoman)
 			
 			
 			$("#eat_button_Woman").click(function(){
-			new Function(actionwoman + "(" + index + ")");
+			actionwoman + "(" + index + ")";
 			});
 		
 		});
