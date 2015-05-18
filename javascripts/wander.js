@@ -251,6 +251,12 @@ function WanderFood(desc, actionyou, actionwoman)
 		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		
 		$("#woman_button_"+index).click(function(){
+		
+			if ($("#woman_eat_buttons").is(":visible")) {
+				$("#woman_eat_buttons").html("");
+				return;
+			}
+			
 			rival = player.women[index];
 			$(".stats").show();
 			$("#otherstats").show();
