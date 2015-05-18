@@ -259,7 +259,10 @@ function WanderFood(desc, actionyou, actionwoman)
 			} 
 			else {
 				$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
-				<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\</div>");	
+				<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\</div>");
+				
+				$("#eat_button_Woman").click(function(){
+					eval(actionwoman + "(" + index + ")");
 			}
 			
 			
@@ -267,10 +270,6 @@ function WanderFood(desc, actionyou, actionwoman)
 			$(".stats").show();
 			$("#otherstats").show();
 			redraw();
-			
-			
-			$("#eat_button_Woman").click(function(){
-			actionwoman + "(" + index + ")";
 			});
 		
 		});
