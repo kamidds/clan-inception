@@ -253,8 +253,7 @@ function WanderFood(desc, actionyou, actionwoman)
 		$("#woman_button_"+index).click(function(){
 		
 			if ($("#woman_eat_buttons").is(":visible")) {
-				$("#eat_button_Woman").html("");
-				return;
+				$("#woman_eat_buttons").html("");
 			}
 			
 			rival = player.women[index];
