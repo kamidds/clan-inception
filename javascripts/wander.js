@@ -250,14 +250,13 @@ function WanderFood(desc, actionyou, actionwoman)
 	$("#eat_button_you").click(function(){eval(actionyou + "()");});	
 	
 	$.each(player.women, function( index, value ) {
-		$("#eat_buttons").append("<div id='woman_buttons' class='push--right'>\
-		<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
+		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		
 		$("#woman_button_"+index).click(function(){
 			
 					
-			if ($("#women_buttons").is(":visible")) {
-				$("#woman_eat_buttons").html("");
+			if ($("#eat_button_Woman").is(":visible")) {
+				$("#eat_button_Woman").html("");
 				return;
 			}
 		
