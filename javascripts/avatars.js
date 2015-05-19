@@ -160,8 +160,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
       var desire = 0;
       if (subject.orientation < 50) {
        desire = objectGender < 0 ? objectGender * -2 : (objectGender * 2) * ((50 - subject.orientation) / 50);
-      }
-      else {
+      } else {
        desire = objectGender > 0 ? objectGender * 2 : (objectGender * -2) * ((subject.orientation - 50) / 50);
       }
       return (desire * ((110 - subject.submissiveness) / 100)) / 2;
@@ -179,7 +178,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
       if (prob > 0) { this.pregnancy = 2.5; }
     }
     this.desire = 0;
-		if (!player.isPregnant() && (this.Mods.futa > 0 || this.futa > 0) && (player.futa > 0 || player.isFemale())) {
+		if (!player.isPregnant() && (this.Mods.futa > 0 || this.futa > 0 || !this.isFemale()) && (player.futa > 0 || player.isFemale())) {
 			var prob2= (player.maternalism + 50) - getRandomInt(50, 100);
       if (prob2 > 0) { player.pregnancy = 2.5; }
 		}
