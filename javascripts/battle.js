@@ -160,7 +160,8 @@ function Battle(currrival) {
       desiredTraits = desiredTraits.sort(function(a,b) {
         return b.desire - a.desire;
       });
-      this.trait = desiredTraits[0].trait;
+			if (desiredTraits.length > 0) this.trait = desiredTraits[0].trait;
+			else this.trait = "submissiveness";
     };
 
 		// Does your rival hesitate?
@@ -170,7 +171,8 @@ function Battle(currrival) {
     }
 		
 		// Are you defeated
-		if (player["physique"].testes > 11 && player.submissiveness >= rival.desires["submissiveness"] && player.domesticity >= rival.desires["domesticity"] && player.maternalism >= rival.desires["maternalism"] && player.allure >= rival.desires["allure"] && player.orientation >= rival.desires["orientation"]) {
+		var tst = player.calcTestes(false);
+		if (tst > 11 && player.submissiveness >= rival.desires["submissiveness"] && player.domesticity >= rival.desires["domesticity"] && player.maternalism >= rival.desires["maternalism"] && player.allure >= rival.desires["allure"] && player.orientation >= rival.desires["orientation"]) {
 			playerDefeated = true;
 			rival.Defeat();
 			return new Rest(rival);
@@ -330,16 +332,12 @@ function Battle(currrival) {
       if (projectedTotal > avatar.maximums[trait]) {
         projectedTotal -= avatar.maximums[trait];
         projectedTotal /= 2;
-        avatar.maximums[trait] += projectedTotal;
-        avatar.minimums[trait] += projectedTotal;
-        avatar.natural[trait] += projectedTotal;
+				avatar.changeNatural(trait, projectedTotal);
         avatar[trait] = avatar.maximums[trait];
       } else if (projectedTotal < avatar.minimums[trait]) {
         projectedTotal = avatar.minimums[trait] - projectedTotal;
         projectedTotal /= 2;
-        avatar.maximums[trait] -= projectedTotal;
-        avatar.minimums[trait] -= projectedTotal;
-        avatar.natural[trait] -= projectedTotal;
+				avatar.changeNatural(trait, -1 * projectedTotal);
         avatar[trait] = avatar.minimums[trait];
       } else {
         avatar[trait] = projectedTotal;
@@ -347,14 +345,10 @@ function Battle(currrival) {
       describeChange(avatar, trait);
     } else {
       if (projectedTotal > avatar.maximums[trait]) {
-        avatar.maximums[trait] += 2;
-        avatar.minimums[trait] += 2;
-        avatar.natural[trait] += 2;
+				avatar.changeNatural(trait, 2);
         avatar[trait] = avatar.maximums[trait];
       } else if (projectedTotal < avatar.minimums[trait]) {
-        avatar.maximums[trait] -= 2;
-        avatar.minimums[trait] -= 2;
-        avatar.natural[trait] -= 2;
+        avatar.changeNatural(trait, -2);
         avatar[trait] = avatar.minimums[trait];
       } else {
         avatar[trait] = projectedTotal;

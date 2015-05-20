@@ -30,4 +30,4 @@ function randomFemaleName()
   return getRandomElem(names);
 }
 
-document.title = "Clan: Inception 2.0.6";
+document.title = "Clan: Inception 2.0.7";

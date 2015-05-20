@@ -123,12 +123,18 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	
 	this.isFemale = function() { return this.femininity() > 49; };
 
-
   this.masculinity = function() { return 100 - this.femininity(); };
 
   this.cunning = function() { return this.Mods.perception + ((this.femininity() + this.allure) / 2); };
 
 	this.perception = function() { return this.Mods.perception + Math.ceil((this.femininity() + 100 - this.domesticity)/2); };
+	
+	this.changeNatural = function(trait, val) 
+	{
+		this.maximums[trait] += val;
+    this.minimums[trait] += val;
+    this.natural[trait] += val;
+	}
 
   this.rest = function() {
     this.changra = 500;
@@ -212,6 +218,12 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
   };
 	
 	// Physique
+	
+	this.calcTestes = function(nb) {
+		var val	= ((this.orientation * 4) + this.submissiveness + this.domesticity + this.maternalism + this.allure)/40;
+		if (this.Mods.balls > 0 && nb !== false) val = val > 0 ? this.Mods.balls * -2 : (val + this.Mods.balls * -2);
+		return val;
+	};
 
   this.calcPhysique = function() {
 		
@@ -276,12 +288,6 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
       return minValue(val, 0);
     };
 
-    this.calcTestes = function() {
-			var val	= ((this.orientation * 4) + this.submissiveness + this.domesticity + this.maternalism + this.allure)/40;
-			if (this.Mods.balls > 0) val = val > 0 ? this.Mods.balls * -2 : (val + this.Mods.balls * -2);
-			return val;
-    };
-
     this.calcPenis = function() {
       return (this.orientation + this.allure + this.submissiveness)/10;
     };
@@ -324,7 +330,11 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	{
 		$.each(AVATAR_TRAITS, function( index, trait ) {
 			that[trait] = minValue(that[trait], -4);
+			that.minimums[trait] = minValue(that.minimums[trait], -4);
+			that.natural[trait] = minValue(that.natural[trait], -4);
 			that[trait] = maxValue(Math.floor(that[trait]), 100);
+			that.maximums[trait] = maxValue(Math.floor(that.maximums[trait]), 100);
+			that.natural[trait] = maxValue(Math.floor(that.natural[trait]), 100);
 		});
 		
 		that.changra = minValue(that.changra, 0);

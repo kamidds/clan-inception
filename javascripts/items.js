@@ -1,3 +1,5 @@
+var ITEM_STATCHANGE = 10;		// constant
+
 // Breast Melon
 
 function eatMelonYou()
@@ -328,7 +330,8 @@ function eatGrapesWoman(index)
 
 function eatDominationNutYou()
 {
-	player.submissiveness += 5;
+	player.changeNatural("submissiveness", ITEM_STATCHANGE);
+	player.submissiveness += ITEM_STATCHANGE;
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
@@ -340,7 +343,8 @@ function eatDominationNutYou()
 function eatDominationNutWoman(index)
 {
 	rival = player.women[index];
-	rival.submissiveness += 5;
+	rival.changeNatural("submissiveness", ITEM_STATCHANGE);
+	rival.submissiveness += ITEM_STATCHANGE;
 	rival.capTraits();
 	rival.calcPhysique();
 	redraw();
@@ -355,7 +359,8 @@ function eatDominationNutWoman(index)
 
 function eatDomesticNutYou()
 {
-	player.domesticity += 5;
+	player.changeNatural("domesticity", ITEM_STATCHANGE);
+	player.domesticity += ITEM_STATCHANGE;
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
@@ -367,7 +372,8 @@ function eatDomesticNutYou()
 function eatDomesticNutWoman(index)
 {
 	rival = player.women[index];
-	rival.domesticity += 5;
+	rival.changeNatural("domesticity", ITEM_STATCHANGE);
+	rival.domesticity += ITEM_STATCHANGE;
 	rival.capTraits();
 	rival.calcPhysique();
 	redraw();
@@ -382,7 +388,8 @@ function eatDomesticNutWoman(index)
 
 function eatMaternalNutYou()
 {
-	player.maternalism += 5;
+	player.changeNatural("maternalism", ITEM_STATCHANGE);
+	player.maternalism += ITEM_STATCHANGE;
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
@@ -395,7 +402,8 @@ function eatMaternalNutWoman(index)
 {
 	redraw();
 	rival = player.women[index];
-	rival.maternalism += 5;
+	rival.changeNatural("maternalism", ITEM_STATCHANGE);
+	rival.maternalism += ITEM_STATCHANGE;
 	rival.capTraits();
 	rival.calcPhysique();
 
@@ -417,7 +425,8 @@ function eatMaternalNutWoman(index)
 
 function eatAllureNutYou()
 {
-	player.allure += 5;
+	player.changeNatural("allure", ITEM_STATCHANGE);
+	player.allure += ITEM_STATCHANGE;
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
@@ -429,7 +438,8 @@ function eatAllureNutYou()
 function eatAllureNutWoman(index)
 {
 	rival = player.women[index];
-	rival.allure += 5;
+	rival.changeNatural("allure", ITEM_STATCHANGE);	
+	rival.allure += ITEM_STATCHANGE;
 	rival.capTraits();
 	rival.calcPhysique();
 	redraw();
@@ -444,7 +454,8 @@ function eatAllureNutWoman(index)
 
 function eatOrientationNutYou()
 {
-	player.orientation += 5;
+	player.changeNatural("orientation", ITEM_STATCHANGE);
+	player.orientation += ITEM_STATCHANGE;
 	player.capTraits();
 	player.calcPhysique();
 	redraw();
@@ -456,7 +467,8 @@ function eatOrientationNutYou()
 function eatOrientationNutWoman(index)
 {
 	rival = player.women[index];
-	rival.orientation += 5;
+	rival.changeNatural("orientation", ITEM_STATCHANGE);	
+	rival.orientation += ITEM_STATCHANGE;
 	rival.capTraits();
 	rival.calcPhysique();
 	redraw();

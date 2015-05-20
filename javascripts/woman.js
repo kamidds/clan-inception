@@ -1,4 +1,5 @@
-//WOman Functions
+//Woman Functions
+/*jshint multistr:true*/
 
 function displayWomen(){
 	function displayWoman(index){
