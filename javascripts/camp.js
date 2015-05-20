@@ -1,3 +1,6 @@
+// At Camp
+/*jshint multistr:true*/
+
 function Camp(){
 	
 	$("#rcwomen").hide();
