@@ -1,6 +1,7 @@
 //
 // rival object, generally your oponent in combat, but can also be used as in intermediate object when
 // reviewing your clan or meeting other people
+/*jshint multistr:true*/
 var rival;
 
 // Functions
@@ -12,7 +13,6 @@ function createRival(exp)
 	var minTrait = femininity - 10;
 	var maxTrait = femininity + 10;
 	rival = new Avatar(getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait), getRandomInt(minTrait, maxTrait));
-	rival.name = "Rival man";		// Generic man
 	
 	// Standard Victory/Defeat/Tells for Generic man
 	rival.Victory = RivalVictory;
@@ -27,6 +27,7 @@ function createRival(exp)
 		iFuta += player.women[index].Mods.futa;
 	});
 	rival.futa = iFuta > 0 && Math.random() < 0.2 ? player.futa : 0;
+	rival.name = rival.isFemale() || rival.futa > 0 ? "Rival woman" : "Rival man";		// Generic man
 	
 	updateRival();
 	
@@ -97,7 +98,7 @@ function RivalVictory()
 {
   $("#output").html(
     "<h1>You Howl!</h1>\
-    <p>And unleash your spirit Changra. The air smell of burning and lightning, and then your rival crumble, weeping like woman. Her Changra burned away. She yours, and soon she forget how to be man. You take what <i>she</i> was carrying from their hunt.</p>\
+    <p>And unleash your spirit Changra. The air smell of burning and lightning, and then your rival crumble, weeping like woman. Her Changra burned away. She yours, and soon she forget how to be what she was. You take what <i>she</i> was carrying from their hunt.</p>\
     <p>As she quiver and snivel, you must decide on name for her.</p>\
     <input id='woman_name' value='" + getUnusedFemaleName() + "'>\
     <button id='name_woman' class='btn'>Give Name</button>\
@@ -120,38 +121,42 @@ function RivalVictory()
   $("#reject_woman").click(function() {
     player.experience += 5;
 		player.goods += rival.goods;	
-    new Message("Camp();", "You no want this weakling and leave her to be claimed by another.");
+    Message("Camp();", "You no want this weakling and leave her to be claimed by another.");
   });	
 }
 
 // You lost
 function RivalDefeat()
 {
+	var rivalhis = rival.hisher();
+	var rivalhim = rival.himher();
 	var fates = [];
 	if (player.submissiveness > 75) {
-		fates.push("meekly obeying his wishes");
+		fates.push("meekly obeying " + rivalhis + " wishes");
 	}
 	if (player.domesticity > 75) {
-		fates.push("spending your days tending to his household");
+		fates.push("spending your days tending to " + rivalhis + " household");
 	}
 	if (player.allure > 75) {
-		fates.push("spreading your legs for him every night");
+		fates.push("spreading your legs for " + rivalhim + " every night");
 	}
 	if (player.maternalism > 75) {
-		fates.push("bearing him healthy sons");
+		fates.push("bearing " + rivalhim + " healthy sons");
 	}
 	if (fates.length === 0) {
 		fates.push("sneaking away, though. You not man, but you refuse to be woman of this one");
 	}
 	var fate = toCommaSeperatedList(fates);
-	fate = "<p>With mighty howl, rival man stomp and point palm at you. His Changra surge into you, and your Changra evaporate like mist in sunlight. You collapse at rival man's feet, and he stare down as you pant and try collect your Changra. Finally he laugh and offer you hand.</p>\
-	<p>'You have no Changra,' he say, pulling you up. 'You womanfolk. You mine now, and you be called "+randomFemaleName()+".'</p>\
-	<p>You very confused, and you follow man back to clan. You struggle remember what was to be man, but those thoughts become strange to you, until finally all you know is to be woman.</p>\
-	<p>Rival man in your thoughts always now. Soon, you " + fate + ".</p>";
+	var rivalhe = rival.heshe();
+	var rivalmanlwr = rival.name == "Rival man" || rival.name == "Rival woman" ? rival.name.toLowerCase() : rival.name;
+	fate = "<p>With mighty howl, " + rivalmanlwr + " stomp and point palm at you, " + rivalhis + " Changra surge into you, and your Changra evaporate like mist in sunlight. You collapse at " + rivalmanlwr + "'s feet, and he stare down as you pant and try collect your Changra. Finally " + rivalhe + " laugh and offer you hand.</p>\
+	<p>'You have no Changra,' " + rivalhe + " say, pulling you up. 'You womanfolk. You mine now, and you be called "+randomFemaleName()+".'</p>\
+	<p>You very confused, and you follow " + rivalhim + " back to clan. You struggle remember what was to be man, but those thoughts become strange to you, until finally all you know is to be woman.</p>\
+	<p>" + rival.name + " in your thoughts always now. Soon, you " + fate + ".</p>";
 	
 	if (fates.length === 0) {
 		// Escape, not feminine enough
-		new Message("Camp();", fate);
+		Message("Camp();", fate);
 		return false;
 	}
 	
@@ -165,7 +170,7 @@ function RivalDefeat()
 	$("#end_buttons").append("<button id='end_button_submit' class='btn btn-woman push--right' title='Submit'>Submit</button>");
 	$("#end_button_submit").click(
 		function(){
-			new Message("location.reload();", "You give up and submit to your man");
+			Message("location.reload();", "You give up and submit to your man");
 		}
 	);
 	if (player.Mods.ironwill > 0) {
@@ -173,7 +178,7 @@ function RivalDefeat()
 			$("#end_button_resist").click(
 			function() {
 				player.Mods.changra -= 5;
-				new Message("Camp();", "You resist you desire for the man and run away, you weaker for this");
+				Message("Camp();", "You resist you desire for the " + rivalmanlwr + " and run away, you weaker for this");
 			}
 		);
 	} else $("#end_buttons").append("<p><b>You not strong in will enough to do anything else.</b></p>");

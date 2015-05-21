@@ -265,7 +265,8 @@ function WanderFood(desc, actionyou, actionwoman)
 		$("#eat_button_you_infuse").click(function(){eval(actionyou + "(true)");});	
 	}
 	$.each(player.women, function( index, value ) {
-		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
+		if (player.women[index].isFemale()) $("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
+		else $("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-man push--right'>"+value.name+"</button>");
 		
 		$("#woman_button_"+index).click(function(){
 		

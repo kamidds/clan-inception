@@ -1,4 +1,5 @@
 /*jslint white: false, maxerr: 999, indent: 2 */
+/*jshint multistr:true*/
 
 function getPerceptionRate() {
   var perception = 75;
@@ -18,10 +19,10 @@ function Battle(currrival) {
 
   var description = "";
 	
-	var rivalmanlwr = rival.name == "Rival man" ? "rival man" : rival.name;
+	var rivalmanlwr = rival.name == "Rival man" || rival.name == "Rival woman" ? rival.name.toLowerCase() : rival.name;
 	var rivalhe = rival.heshe();
 	var rivalhim = rival.himher();
-	if (rival.name == "Rival man") {
+	if (rival.name == "Rival man" || rival.name == "Rival woman") {
 		$("#rcwomen").html("Rival's Women: <span id='rival_women'>");
 		$("#rcchangra").html("Rival's Changra: <span id='rival_changra'>");
 	} else {
@@ -207,7 +208,7 @@ function Battle(currrival) {
     }
   }
 
-  function describeTrait(trait, direction) {
+  function describeTrait(trait) {
 
     function describeSubmissiveness() {
       switch (player.description[trait]) {
@@ -505,7 +506,7 @@ function Battle(currrival) {
     this.avatar.currentAction = this;
 
     this.standard = function() {
-			var val = rival.name == "Rival man" ? this.opponent.allure : 25;
+			var val = rival.name == ("Rival man" || rival.name == "Rival woman") ? this.opponent.allure : 25;
       if (getRandomInt(0, 100) < val) {
         alert("You run like she-deer!");
         this.avatar.changra -= 15;
