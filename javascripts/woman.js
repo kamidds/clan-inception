@@ -26,7 +26,8 @@ function displayWomen(){
 		<div id='woman_display'></div>");
 		
 	$.each(player.women, function( index, value ) {
-		$("#women_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
+		if (player.women[index].isFemale()) $("#women_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
+		else $("#women_buttons").append("<button id='woman_button_"+index+"' class='btn btn-man push--right'>"+value.name+"</button>");
 		$("#woman_button_"+index).click(function(){
 			displayWoman(index);
 

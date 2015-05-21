@@ -67,7 +67,9 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"resistdomesticity": 0,
 		"resistmaternalism": 0,
 		"resistallure": 0,
-		"resistorientation": 0		
+		"resistorientation": 0,
+		// Crafting
+		"infuse": 0
 	};
 	this.getTrainingRanks = function(nc)
 	{
@@ -124,6 +126,10 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	this.isFemale = function() { return this.femininity() > 49; };
 
   this.masculinity = function() { return 100 - this.femininity(); };
+	
+	this.heshe = function() { return this.femininity() > 49 || this.futa > 0 ? "she" : "he"; }
+	this.HeShe = function() { return this.femininity() > 49 || this.futa > 0 ? "She" : "He"; }
+	this.himher = function() { return this.femininity() > 49 || this.futa > 0 ? "her" : "him"; }
 
   this.cunning = function() { return this.Mods.perception + ((this.femininity() + this.allure) / 2); };
 
@@ -152,7 +158,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     if (this.isPregnant()) {
       this.pregnancy += 2.5;
       if (this.pregnancy >= getRandomInt(90, 105)) {
-				this.activity = this == player ? "You" : "She";
+				this.activity = this == player ? "You" : this.HeShe();
 				this.activity  += " give birth to fine " + (Math.random() < 0.5 ? "son" : "daughter") + " last night. Your clan grow.";
         this.pregnancy = 0;
         this.children += 1;
@@ -196,11 +202,11 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
   };
 
   this.tend = function(avatar) {
-    avatar.activity = "She dutifully tend camp for you.";
+    avatar.activity = avatar.HeShe() + " dutifully tend camp for you.";
   };
 
   this.fuck = function(avatar) {
-    avatar.activity = "She come to you every night and spread legs. You fuck like animal.";
+    avatar.activity = avatar.HeShe() + " come to you every night and spread legs. You fuck like animal.";
     avatar.fornicate();
   };
 
@@ -391,6 +397,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.cock)) that.Mods.cock = 0;
 		if (isNaN(that.Mods.futa)) that.Mods.futa = 0;
 		if (isNaN(that.Mods.balls)) that.Mods.balls = 0;
+		if (isNaN(that.Mods.infuse)) that.Mods.infuse = 0;
 		if (isNaN(that.Mods.pushsubmissiveness)) that.Mods.pushsubmissiveness = 0;
 		if (isNaN(that.Mods.pushdomesticity)) that.Mods.pushdomesticity = 0;
 		if (isNaN(that.Mods.pushmaternalism)) that.Mods.pushmaternalism = 0;

@@ -78,7 +78,10 @@ function Forage()
 			else if (val < 50) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
 			else if (val < 75) WanderFood("<h1>Found: White Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatMilkNutYou", "eatMilkNutWoman");
 			else if (val < 90) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
-			else if (val < 95) WanderNothing();
+			else if (val < 95) {
+				if (smith.round > 0) TradeSmith();
+				else MeetSmith();
+			}
 			else WanderBattle("snow hills");
 		}
 	);
@@ -120,6 +123,7 @@ function Hunt()
 		return;
 	}
 	if ($("#women_buttons").is(":visible")) resetRival();
+
 	
 	if (player.round > 5 && getPlaceCnt("Volcano") === 0) {
 		setPlaceVisited("Volcano");
@@ -163,9 +167,13 @@ function Hunt()
 	);
 	$("#wander_button_hills").click(
 		function(){
-			setPlaceVisited("Hills");
+			setPlaceVisited("Hills");		
+			if (player.round > 10 && smith.round == 0) {
+				MeetSmith();
+				return;
+			}
 			var val = getRandomInt(1, 7);
-			if (val < 3) WanderNothing();
+			if (val < 3) TradeSmith();
 			else WanderBattle("snow hills");
 		}
 	);
@@ -246,15 +254,16 @@ function WanderFood(desc, actionyou, actionwoman)
 //	$(".stats").hide();
 
 	advanceRound();
-  	$("#output").html(desc);
+	$("#output").html(desc);
   	
 	$("#output").append("<h2>Who will eat it?</h2>\
 	<div id='eat_buttons' class='push--top'>\
-	<button id='eat_button_you' class='btn btn-woman push--right'>You</button>\
-	</div>");
-	
-	$("#eat_button_you").click(function(){eval(actionyou + "()");});	
-	
+	<button id='eat_button_you' class='btn btn-woman push--right'>You (Raw)</button></div>");
+	$("#eat_button_you").click(function(){eval(actionyou + "(false)");});	
+	if (player.Mods.infuse > 0 && player.goods > 0) {
+		$("#eat_buttons").append("<button id='eat_button_you_infuse' class='btn btn-woman push--right'>You (Cooked)</button>");
+		$("#eat_button_you_infuse").click(function(){eval(actionyou + "(true)");});	
+	}
 	$.each(player.women, function( index, value ) {
 		$("#eat_buttons").append("<button id='woman_button_"+index+"' class='btn btn-woman push--right'>"+value.name+"</button>");
 		
@@ -262,19 +271,24 @@ function WanderFood(desc, actionyou, actionwoman)
 		
 			if ($("#woman_eat_buttons").is(":visible")) {
 					$("#eat_button_Woman").unbind('click').click(function(){
-					eval(actionwoman + "(" + index + ")");
+					eval(actionwoman + "(" + index + ",false)");
 					});
-			} 
-			else {
+			} else {
 				$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
-				<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose</button>\</div>");
+				<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose (Raw)</button>\</div>");
 			
 				$("#eat_button_Woman").click(function(){
-					eval(actionwoman + "(" + index + ")");
+					eval(actionwoman + "(" + index + ",false)");
 				});	
+				if (player.Mods.infuse > 0 && player.goods > 0) {
+					$("#woman_eat_buttons").append("<button id='eat_button_Woman_Cooked' class='btn btn-woman push--right'>Choose (Cooked)</button>");
+				
+					$("#eat_button_Woman_Cooked").click(function(){
+						eval(actionwoman + "(" + index + ",true)");
+					});	
+				}
 			
 			}
-			
 			
 			rival = player.women[index];
 			$(".stats").show();
@@ -388,28 +402,4 @@ function nameThoth(){
       your clan reborn.</p>\
 		");
   });
-}
-
-
-// Meet Demon
-
-function MeetDemon()
-{
-	advanceRound();
-	rival = demon;
-	redraw();
-	if (getPlaceCnt("Volcano") == 2) {
-		Message("Camp()", "<h1>Demon!</h1><p>After wander near the fire mountain \
-			day, you find tracks in the scortched earth, barefoot and a womans!\
-			You hunt her, to claim her as a new woman for you clan!</p>\
-			<p>You charge and she moves away, staying from your grasp and that of your ancestors. She speak oddly</p>\
-			<p>'You are a new one for me to prey on, but you do seem stronger than most who become my toys.\
-			I will let you go for now. Come back when you are stronger, then we will fight, either I will enslave you \
-			or you will enslave me as your woman'</p>\
-			<p>She laughs amused at the idea you defeat her. You furious and decide to attack any way. She smiles and her wings stretch out, she flies away!!!</p>\
-			<p>You will return to capture this woman!</p>\
-		");
-	} else {
-			Message("Camp()", "<h1>Nothing</h1><p>You failed to hunt anything but you do see the red woman far away, you could not catch her.</p>");
-	}
 }

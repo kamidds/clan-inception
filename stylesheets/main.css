@@ -302,6 +302,9 @@ background:#987;
 .btn-woman{
   background: purple;
 }
+.btn-man{
+  background: rebeccapurple;
+}
 
 .battle-description{
   margin-bottom: 7px;

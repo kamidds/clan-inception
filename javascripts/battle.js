@@ -19,8 +19,8 @@ function Battle(currrival) {
   var description = "";
 	
 	var rivalmanlwr = rival.name == "Rival man" ? "rival man" : rival.name;
-	var rivalhe = rival.femininity() > 49 || rival.futa > 0 ? "she" : "he";
-	var rivalhim = rival.femininity() > 49 || rival.futa > 0 ? "her" : "him";
+	var rivalhe = rival.heshe();
+	var rivalhim = rival.himher();
 	if (rival.name == "Rival man") {
 		$("#rcwomen").html("Rival's Women: <span id='rival_women'>");
 		$("#rcchangra").html("Rival's Changra: <span id='rival_changra'>");

@@ -10,6 +10,9 @@ function ASavedGame()
 	
 	// Demon
 	this.demon = "";
+	
+	// Smith
+	this.smith = "";
 }
 	
 // Load Games
@@ -103,6 +106,12 @@ function loadGameString(str, id)
 		jQuery.extend(demon, tempdemon);
 		demon.upgradeSave();
 	}
+	createSmith();
+	if (sg.smith !== undefined) {
+		var tempsmith = JSON.parse(sg.smith);
+		jQuery.extend(smith, tempsmith);
+		smith.upgradeSave();
+	}	
 	resetRival();
 	rival.name = "";
 	
@@ -142,6 +151,7 @@ function saveString()
 	var sg = new ASavedGame();
 	sg.player = JSON.stringify(JSON.decycle(player));
 	sg.demon = JSON.stringify(JSON.decycle(demon));
+	sg.smith = JSON.stringify(JSON.decycle(smith));
 	sg.places = JSON.stringify(JSON.decycle(places));
 	return JSON.stringify(JSON.decycle(sg));
 }
