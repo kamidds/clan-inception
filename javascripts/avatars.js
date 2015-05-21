@@ -130,6 +130,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	this.heshe = function() { return this.femininity() > 49 || this.futa > 0 ? "she" : "he"; }
 	this.HeShe = function() { return this.femininity() > 49 || this.futa > 0 ? "She" : "He"; }
 	this.himher = function() { return this.femininity() > 49 || this.futa > 0 ? "her" : "him"; }
+	this.hisher = function() { return this.femininity() > 49 || this.futa > 0 ? "her" : "his"; }
 
   this.cunning = function() { return this.Mods.perception + ((this.femininity() + this.allure) / 2); };
 

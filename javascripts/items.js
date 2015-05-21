@@ -42,7 +42,7 @@ function eatMelonWoman(index, bCooked)
 				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Melon</h1>\
 				<p>" + WomanEatDescription(bCooked) + " the melon....</p>", true);
 			setTimeout(function() {
-				$("#message").append("and her breasts swell a little and grow a new set of breasts.</p>\
+				$("#message").append("and " + rival.hisher() + " breasts swell a little and grow a new set of breasts.</p>\
 				<p align='center'><font size='-4'>click to continue</font></p>");
 				$("#message").click(function() { $(".stats").show(); Camp(); });
 				redraw();
@@ -52,7 +52,7 @@ function eatMelonWoman(index, bCooked)
 				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Melon</h1>\
 				<p>" + WomanEatDescription(bCooked) + " the melon....</p>", true);
 			setTimeout(function() {
-				$("#message").append("and her breasts swell a little.</p>\
+				$("#message").append("and " + rival.hisher() + " breasts swell a little.</p>\
 				<p align='center'><font size='-4'>click to continue</font></p>");
 				$("#message").click(function() { $(".stats").show(); Camp(); });
 				redraw();
@@ -62,7 +62,7 @@ function eatMelonWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Melon</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the melon and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the melon and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -99,7 +99,7 @@ function eatSmallMelonWoman(index, bCooked)
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Small Melon</h1>\
 			<p>" + WomanEatDescription(bCooked) + " the small melon....</p>", true);
 		setTimeout(function() {
-			$("#message").append("and her breasts shrink a little.</p>\
+			$("#message").append("and " + rival.hisher() + " breasts shrink a little.</p>\
 			<p align='center'><font size='-4'>click to continue</font></p>");
 			$("#message").click(function() { $(".stats").show(); Camp(); });
 			redraw();
@@ -108,7 +108,7 @@ function eatSmallMelonWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Small Melon</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the melon and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the melon and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -182,8 +182,8 @@ function eatMushroomWoman(index, bCooked)
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
 			<p>" + WomanEatDescription(bCooked) + " the mushroom....</p>", true);
 		setTimeout(function() {
-			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill her and she grows a cock.</p>");
-			else $("#message").append("and her cock swells.</p>");
+			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows a cock.</p>");
+			else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
 			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
 			$("#message").click(function() { $(".stats").show(); Camp(); });
 			redraw();
@@ -192,7 +192,7 @@ function eatMushroomWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the mushroom and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the mushroom and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -229,11 +229,11 @@ function eatTwinMushroomWoman(index, bCooked)
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Twin Mushroom</h1>\
 			<p>" + WomanEatDescription(bCooked) + " the twin mushroom....</p>", true);
 		setTimeout(function() {
-			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill her and she grows a pair of cocks.</p>");
+			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.himher() + " and " + rival.heshe() + " grows a pair of cocks.</p>");
 			else {
-				if (rival.physique.gentialscnt == 1) $("#message").append("and her cock swells and splits in two!</p>");
-				else if (rival.physique.gentialscnt == 3) $("#message").append("and her cocks swells and join until there are only two!</p>");
-				else $("#message").append("and her cock swells.</p>");
+				if (rival.physique.gentialscnt == 1) $("#message").append("and " + rival.hisher() + " cock swells and splits in two!</p>");
+				else if (rival.physique.gentialscnt == 3) $("#message").append("and " + rival.hisher() + " cocks swells and join until there are only two!</p>");
+				else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
 			}
 			rival.physique.gentialscnt = 2;
 			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
@@ -244,7 +244,7 @@ function eatTwinMushroomWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the mushroom and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the mushroom and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -281,11 +281,11 @@ function eatTriCreatureWoman(index, bCooked)
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Tri-Seacreature</h1>\
 			<p>" + WomanEatDescription(bCooked) + " the seathing....</p>", true);
 		setTimeout(function() {
-			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill her and she grows three cocks.</p>");
+			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows three cocks.</p>");
 			else {
-				if (rival.physique.gentialscnt == 1) $("#message").append("and her cock swells and splits into three!</p>");
-				else if (rival.physique.gentialscnt == 2) $("#message").append("and her cocks swells and split into three!</p>");
-				else $("#message").append("and her cock swells.</p>");
+				if (rival.physique.gentialscnt == 1) $("#message").append("and " + rival.hisher() + " cock swells and splits into three!</p>");
+				else if (rival.physique.gentialscnt == 2) $("#message").append("and " + rival.hisher() + " cocks swells and split into three!</p>");
+				else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
 			}
 			rival.physique.gentialscnt = 3;
 			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
@@ -296,7 +296,7 @@ function eatTriCreatureWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Thing</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the sae creature and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the sae creature and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -333,8 +333,8 @@ function eatGrapesWoman(index, bCooked)
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Grapes</h1>\
 			<p>" + WomanEatDescription(bCooked) + " the grapes....</p>", true);
 		setTimeout(function() {
-			if (rival.Mods.balls == 1) $("#message").append("and the power of your ancestors fill her and she grows a set of balls.</p>");
-			else $("#message").append("and her balls swell.</p>");
+			if (rival.Mods.balls == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows a set of balls.</p>");
+			else $("#message").append("and " + rival.hisher() + " balls swell.</p>");
 			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
 			$("#message").click(function() { $(".stats").show(); Camp(); });
 			redraw();
@@ -343,7 +343,7 @@ function eatGrapesWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Grapes</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the grapes and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the grapes and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -360,7 +360,7 @@ function eatDominationNutYou(bCooked)
 	redraw();
 	Message("Camp()", 
 		"<h1>" + YouEatTitle(bCooked) + " Nut</h1>\
-		<p>" + YouEatDescription(bCooked) + " strong nut, but you feel your ancestors power weaken you!</p>");			
+		<p>" + YouEatDescription(bCooked) + " strong nut, but you feel your ancestors power " + (bCooked ? "strengthen" : "weaken") + " you!</p>");			
 }
 
 function eatDominationNutWoman(index, bCooked)
@@ -376,7 +376,7 @@ function eatDominationNutWoman(index, bCooked)
 
 	Message("Camp()", 
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Nut</h1>\
-		<p>" + WomanEatDescription(bCooked) + " the nut and the power of the nut makes them more obedient.</p>");
+		<p>" + WomanEatDescription(bCooked) + " the nut and the power of the nut makes " + rival.himher() + " more " + (bCooked ? "dominant" : "obedient") + ".</p>");
 }
 
 
@@ -393,7 +393,7 @@ function eatDomesticNutYou(bCooked)
 	redraw();
 	Message("Camp()", 
 		"<h1>" + YouEatTitle(bCooked) + " Nut</h1>\
-		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power weaken you!</p>");			
+		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power " + (bCooked ? "strengthen" : "weaken") + " you!</p>");			
 }
 
 function eatDomesticNutWoman(index, bCooked)
@@ -409,7 +409,7 @@ function eatDomesticNutWoman(index, bCooked)
 
 	Message("Camp()", 
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Nut</h1>\
-		<p>" + WomanEatDescription(bCooked) + " the nut and the power of the nut teaches her to clean your camp better.</p>");
+		<p>" + WomanEatDescription(bCooked) + " the nut and the power of the nut teaches " + rival.himher() + " to " + (bCooked ? "to explore and hunt" : "better clean your camp") + ".</p>");
 }
 
 
@@ -426,7 +426,7 @@ function eatMaternalNutYou(bCooked)
 	redraw();
 	Message("Camp()", 
 		"<h1>" + YouEatTitle(bCooked) + " Nut</h1>\
-		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power weaken you!</p>");			
+		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power " + (bCooked ? "strengthen" : "weaken") + " you!</p>");			
 }
 
 function eatMaternalNutWoman(index, bCooked)
@@ -445,7 +445,7 @@ function eatMaternalNutWoman(index, bCooked)
 		<p>" + WomanEatDescription(bCooked) + " the nut...</p>");
 		
 	setTimeout(function(){ 
-		$("#message").append(" and the power of the nut makes her better to bear your children.</p>");
+		$("#message").append(" and the power of the nut makes " + rival.himher() + " " + (bCooked ? "better to father children" : "better to bear your children") + ".</p>");
 		redraw(); 
 		
 	}, 1000);
@@ -465,7 +465,7 @@ function eatAllureNutYou(bCooked)
 	redraw();
 	Message("Camp()", 
 		"<h1>" + YouEatTitle(bCooked) + " Nut</h1>\
-		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power weaken you!</p>");			
+		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power " + (bCooked ? "strengthen" : "weaken") + " you!</p>");			
 }
 
 function eatAllureNutWoman(index, bCooked)
@@ -481,7 +481,7 @@ function eatAllureNutWoman(index, bCooked)
 
 	Message("Camp()", 
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Nut</h1>\
-		<p>" + WomanEatDescription(bCooked) + " the pretty nut and the power of the nut make her prettier.</p>");
+		<p>" + WomanEatDescription(bCooked) + " the pretty nut and the power of the nut make " + rival.himher() + " " + (bCooked ? "handsome" : "prettier") + ".</p>");
 }
 
 
@@ -498,7 +498,7 @@ function eatOrientationNutYou(bCooked)
 	redraw();
 	Message("Camp()", 
 		"<h1>" + YouEatTitle(bCooked) + " Nut</h1>\
-		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power weaken you!</p>");			
+		<p>" + YouEatDescription(bCooked) + " nut, but you feel your ancestors power " + (bCooked ? "strengthen" : "weaken") + " you!</p>");			
 }
 
 function eatOrientationNutWoman(index, bCooked)
@@ -514,7 +514,7 @@ function eatOrientationNutWoman(index, bCooked)
 
 	Message("Camp()", 
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Nut</h1>\
-		<p>" + WomanEatDescription(bCooked) + " the long nut and the power of the nut make her desire you.</p>");
+		<p>" + WomanEatDescription(bCooked) + " the long nut and the power of the nut make " + rival.himher() + " " + (bCooked ? "no desire" : "desire") + " you.</p>");
 }
 
 
@@ -596,7 +596,7 @@ function eatMilkNutWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " White Nut</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the nut and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the nut and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -646,7 +646,7 @@ function eatDemonNutWoman(index, bCooked)
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Red Nut</h1>\
 			<p>" + WomanEatDescription(bCooked) + " the nut....</p>", true);
 		setTimeout(function() {
-			$("#message").append("and the fire of the mountain changes her body");
+			$("#message").append("and the fire of the mountain changes " + rival.hisher() + " body");
 			$("#message").click(function() { $(".stats").show(); Camp(); });
 			redraw();
 		}, 1000);
@@ -654,7 +654,7 @@ function eatDemonNutWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Red Nut</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the nut and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the nut and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -691,7 +691,7 @@ function eatGreenBerryWoman(index, bCooked)
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Green Berry</h1>\
 			<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 		setTimeout(function() {
-			$("#message").append("and a wave of green spreads over her skin.");
+			$("#message").append("and a wave of green spreads over " + rival.hisher() + " skin.");
 			$("#message").click(function() { $(".stats").show(); Camp(); });
 			redraw();
 		}, 1000);
@@ -699,7 +699,7 @@ function eatGreenBerryWoman(index, bCooked)
 		// No effect
 		Message("Camp()", 
 			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Green Berry</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the berry and her belly full</p>");		
+			<p>" + WomanEatDescription(bCooked) + " the berry and " + rival.hisher() + " belly full</p>");		
 	}
 }
 
@@ -726,7 +726,7 @@ function eatPaleBerryWoman(index, bCooked)
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Pale Berry</h1>\
 		<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 	setTimeout(function() {
-		$("#message").append("and a wave of colour spreads over her skin.");
+		$("#message").append("and a wave of colour spreads over " + rival.hisher() + " skin.");
 		$("#message").click(function() { $(".stats").show(); Camp(); });
 		redraw();
 	}, 1000);
@@ -755,7 +755,7 @@ function eatDarkBerryWoman(index, bCooked)
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Dark Berry</h1>\
 		<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 	setTimeout(function() {
-		$("#message").append("and a wave of colour spreads over her skin.");
+		$("#message").append("and a wave of colour spreads over " + rival.hisher() + " skin.");
 		$("#message").click(function() { $(".stats").show(); Camp(); });
 		redraw();
 	}, 1000);
@@ -789,11 +789,11 @@ function eatHairyNutWoman(index, bCooked)
 	redraw();
 	if (style === 0) {
 			rival.physique.hairstyle = getRandomInt(1, 9);
-			conclusion = "hair grows from her head.";
+			conclusion = "hair grows from " + rival.hisher() + " head.";
 	}
 	else if (style >= 1) {
 			rival.physique.hairstyle = 0;
-			conclusion = "her hair falls out.";
+			conclusion = rival.hisher() + " hair falls out.";
 	}
 	Message("", 
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Hairy Nut</h1>\
@@ -825,7 +825,7 @@ function eatRainbowflowerWoman(index, bCooked)
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Rainbow Flower</h1>\
 		<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 	setTimeout(function() {
-		$("#message").append("and a wave of colour spreads over her hair.");
+		$("#message").append("and a wave of colour spreads over " + rival.hisher() + " hair.");
 		$("#message").click(function() { $(".stats").show(); Camp(); });
 		redraw();
 	}, 1000);
