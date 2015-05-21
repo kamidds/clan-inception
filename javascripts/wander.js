@@ -173,7 +173,7 @@ function Hunt()
 				return;
 			}
 			var val = getRandomInt(1, 7);
-			if (val < 3) TradeSmith();
+			if (val < 3 && smith.round > 0) TradeSmith();
 			else WanderBattle("snow hills");
 		}
 	);
