@@ -109,9 +109,11 @@ function TradeSmith()
 		$("#output").html("<h1>Trading</h1><p>You meet the woman and her clan again and talk of making and ancestors. She tell you she can teach you about</p>\
 		<div id='teach_buttons' class='push--top'>\
 		<button id='teach_infuse' class='btn btn-woman push--right'>Infuse</button>\
+		<button id='leave_btn' class='btn btn-woman push--right'>Leave</button>\
 		</div>");
 	
 		$("#teach_infuse").click(function(){TeachInfuse();});
+		$("#leave_btn").click(function(){Camp();});
 		$("#output").append("<div id='train_output'></div>");
 
 	} else {
@@ -122,8 +124,8 @@ function TradeSmith()
 
 function TeachInfuse()
 {
-	if (player.goods < 10) $("#train_output").append("<p>You talk of this and she say you need to give her 2 hands of goods for her to teach you</p>");
-	else if (player.experience < 5) $("#train_output").append("<p>You not interested in training more now, maybe when you more of a man.</p>");
+	if (player.goods < 10) $("#train_output").html("<p>You talk of this and she say you need to give her 2 hands of goods for her to teach you</p>");
+	else if (player.experience < 5) $("#train_output").html("<p>You not interested in training more now, maybe when you more of a man.</p>");
 	else {
 		player.goods -= 10;
 		player.experience -= 5;

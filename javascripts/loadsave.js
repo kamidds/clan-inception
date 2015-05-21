@@ -33,15 +33,17 @@ function loadGame(cancel)
 	$("#output").html("<h1>Loading a game</h1><div id='loading'></div>");
 	for (id = 1; id < 5; id++) {
 		str = localStorage.getItem('clani' + id);
-		sg = JSON.parse(str);
-		if (sg !== undefined) {
-			cnt++;
-			var temp = JSON.parse(sg.player);
-			$("#loading").append("<button myid='" + id + "' id='load_button_"+id+"' class='btn btn-woman push--right' title='" + temp.name + ", week " + temp.round + "'>Save Game "+id+"</button>");
-			
-			$("#load_button_"+id).click(
-				function() { loadGameId($(this).attr("myid")); }
-			);
+		if (str !== "" && str !== null) {
+			sg = JSON.parse(str);
+			if (sg !== undefined) {
+				cnt++;
+				var temp = JSON.parse(sg.player);
+				$("#loading").append("<button myid='" + id + "' id='load_button_"+id+"' class='btn btn-woman push--right' title='" + temp.name + ", week " + temp.round + "'>Save Game "+id+"</button>");
+				
+				$("#load_button_"+id).click(
+					function() { loadGameId($(this).attr("myid")); }
+				);
+			}
 		}
 	}
 	$("#loading").append("<button id='load_button_import' class='btn btn-woman push--right' title='Import'>Import</button>");
