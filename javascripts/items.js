@@ -35,7 +35,7 @@ function eatMelonWoman(index, bCooked)
 		// Can benefit
 		rival.Mods.breasts += bCooked ? 7 : 5;
 		if (rival.Mods.breasts > 200) rival.Mods.breasts = 200;
-		var ch = bCooked ? 40 : 20;
+		var ch = bCooked ? 80 : 20;
 		if (rival.physique.breasts > 30 && getRandomInt(1, 100) < ch) {
 			rival.physique.breastrows += 1;
 			Message("", 
@@ -535,7 +535,7 @@ function eatMilkNutYou(bCooked)
 			player.physique.tail += 1;
 			player.physique.tailtype = 1;
 		}
-		var ch = bCooked ? 40 : 20;
+		var ch = bCooked ? 80 : 20;
 		if (player.physique.breasts > 25 && getRandomInt(1, 100) < ch) player.physique.breastrows += 1;
 
 		Message("Camp()", 
@@ -567,7 +567,7 @@ function eatMilkNutWoman(index, bCooked)
 			rival.physique.tail += 1;
 			rival.physique.tailtype = 1;
 		}
-		var ch = bCooked ? 40 : 20;
+		var ch = bCooked ? 80 : 20;
 		if (rival.physique.breasts > 25 && getRandomInt(1, 100) < ch) {
 			rival.physique.breastrows += 1;
 			Message("", 
