@@ -273,6 +273,9 @@ function WanderFood(desc, actionyou, actionwoman)
 					$("#eat_button_Woman").unbind('click').click(function(){
 					eval(actionwoman + "(" + index + ",false)");
 					});
+					$("#eat_button_Woman_Cooked").unbind('click').click(function(){
+					eval(actionwoman + "(" + index + ",true)");
+					});					
 			} else {
 				$("#eat_buttons").append("<div id='woman_eat_buttons' class='push--top'>\
 				<button id='eat_button_Woman' class='btn btn-woman push--right'>Choose (Raw)</button>\</div>");
