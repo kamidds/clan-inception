@@ -606,13 +606,8 @@ function eatMaternalNutWoman(index, bCooked)
 
 	Message("Camp()", 
 		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Nut</h1>\
-		<p>" + WomanEatDescription(bCooked) + " the nut...</p>");
-		
-	setTimeout(function(){ 
-		$("#message").append(" and the power of the nut makes " + rival.himher() + " " + (bCooked ? "better to father children" : "better to bear your children") + ".</p>");
+		<p>" + WomanEatDescription(bCooked) + " the nut  and the power of the nut makes " + rival.himher() + " " + (bCooked ? "better to father children" : "better to bear your children") + ".</p>");
 		redraw(); 
-		
-	}, 1000);
 }
 
 
@@ -811,6 +806,7 @@ function eatDemonNutWoman(index, bCooked)
 			<p>" + WomanEatDescription(bCooked) + " the nut....</p>", true);
 		setTimeout(function() {
 			$("#message").append("and the fire of the mountain changes " + rival.hisher() + " body");
+			$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");
 			$("#message").click(function() { $(".stats").show(); Camp(); });
 			redraw();
 		}, 1000);
@@ -856,6 +852,7 @@ function eatGreenBerryWoman(index, bCooked)
 			<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 		setTimeout(function() {
 			$("#message").append("and a wave of green spreads over " + rival.hisher() + " skin.");
+			$("#message").append("</p><p align='center'><font size='-4'>click to continue</font></p>");			
 			$("#message").click(function() { $(".stats").show(); Camp(); });
 			redraw();
 		}, 1000);
@@ -891,6 +888,7 @@ function eatPaleBerryWoman(index, bCooked)
 		<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 	setTimeout(function() {
 		$("#message").append("and a wave of colour spreads over " + rival.hisher() + " skin.");
+		$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");		
 		$("#message").click(function() { $(".stats").show(); Camp(); });
 		redraw();
 	}, 1000);
@@ -920,6 +918,7 @@ function eatDarkBerryWoman(index, bCooked)
 		<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 	setTimeout(function() {
 		$("#message").append("and a wave of colour spreads over " + rival.hisher() + " skin.");
+		$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");		
 		$("#message").click(function() { $(".stats").show(); Camp(); });
 		redraw();
 	}, 1000);
@@ -964,6 +963,7 @@ function eatHairyNutWoman(index, bCooked)
 		<p>" + WomanEatDescription(bCooked) + " the nut....</p>", true);
 	setTimeout(function() {
 		$("#message").append("and you watch as " +conclusion);
+		$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");		
 		$("#message").click(function() { $(".stats").show(); Camp(); });
 		redraw();
 	}, 1000);
@@ -990,6 +990,7 @@ function eatRainbowflowerWoman(index, bCooked)
 		<p>" + WomanEatDescription(bCooked) + " the berry....</p>", true);
 	setTimeout(function() {
 		$("#message").append("and a wave of colour spreads over " + rival.hisher() + " hair.");
+		$("#message").append(".</p><p align='center'><font size='-4'>click to continue</font></p>");
 		$("#message").click(function() { $(".stats").show(); Camp(); });
 		redraw();
 	}, 1000);
