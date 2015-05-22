@@ -154,150 +154,281 @@ function eatPawFruitWoman(index, bCooked)
 
 function eatMushroomYou(bCooked)
 {
-	if (bCooked) player.goods--;
-	if (player.Mods.cock < 20) {
-		// Can benefit
-		player.Mods.cock += bCooked ? 2 : 1;
-		redraw();
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cock stiffen and swells with the power of your ancestors!</p>");
+	if (!bCooked) {
+		if (player.Mods.cock < 20) {
+			// Can benefit
+			player.Mods.cock += 1;
+			redraw();
+			Message("Camp()", 
+				"<h1>" + YouEatTitle(bCooked) + " Mushroom</h1>\
+				<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cock stiffen and swells with the power of your ancestors!</p>");
+			return;
+		}
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + YouEatDescription(bCooked) + " mushroom and your belly full</p>");		
-	}			
+		player.goods--;
+		if (player.Mods.cock > 0) {
+			// Can benefit
+			player.Mods.cock -= 1;
+			redraw();
+			Message("Camp()", 
+				"<h1>" + YouEatTitle(bCooked) + " Mushroom</h1>\
+				<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cock soften and shrink with the power of your ancestors!</p>");
+			return;
+		}	
+	}
+	// No effect
+	Message("Camp()", 
+		"<h1>" + YouEatTitle(bCooked) + " Mushroom</h1>\
+		<p>" + YouEatDescription(bCooked) + " mushroom and your belly full</p>");		
 }
 
 function eatMushroomWoman(index, bCooked)
 {
-	if (bCooked) player.goods--;
 	rival = player.women[index];
-	redraw();
-	if (rival.Mods.futa < 20) {
-		// Can benefit
-		rival.Mods.futa += bCooked ? 2 : 1;
-		Message("", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the mushroom....</p>", true);
-		setTimeout(function() {
-			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows a cock.</p>");
-			else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
-			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
-			$("#message").click(function() { $(".stats").show(); Camp(); });
-			redraw();
-		}, 1000);
+	redraw();	
+	if (bCooked) {
+		player.goods--;
+		if (rival.Mods.futa > 0) {
+			// Can benefit
+			rival.Mods.futa -= 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the mushroom....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.futa == 0) $("#message").append("and the power of your ancestors fill " + rival.himher() + " and " + rival.hisher() + " cock vanishes.</p>");
+				else $("#message").append("and " + rival.hisher() + " cock shrinks.</p>");
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the mushroom and " + rival.hisher() + " belly full</p>");		
+		if (rival.Mods.futa < 20) {
+			// Can benefit
+			rival.Mods.futa += bCooked ? 2 : 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the mushroom....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows a cock.</p>");
+				else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}
 	}
+	// No effect
+	Message("Camp()", 
+		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
+		<p>" + WomanEatDescription(bCooked) + " the mushroom and " + rival.hisher() + " belly full</p>");	
 }
 
 // Twin Cock Mushroom
 
 function eatTwinMushroomYou(bCooked)
 {
-	if (bCooked) player.goods--;
-	if (player.physique.gentialscnt != 2) {
-		// Can benefit
-		if (player.Mods.cock < 20) player.Mods.cock += 1;
-		player.physique.gentialscnt = 2;
-		redraw();
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Split Mushroom</h1>\
-			<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cock stiffen and swells with the power of your ancestors, but then it splits in two!</p>");
+	if (bCooked) {
+		player.goods--;
+		if (player.physique.gentialscnt == 2 || player.physique.gentialscnt == 3) {
+			// Can benefit
+			if (player.Mods.cock > 0) player.Mods.cock -= 1;
+			if (player.physique.gentialscnt == 3) player.physique.gentialscnt = 2;
+			else player.physique.gentialscnt = 1;
+			redraw();
+			if (player.physique.gentialscnt == 2) {
+				Message("Camp()", 
+					"<h1>" + YouEatTitle(bCooked) + " Split Mushroom</h1>\
+					<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cocks stiffen and they merge into a pair of cocks!</p>");
+			} else {
+				Message("Camp()", 
+					"<h1>" + YouEatTitle(bCooked) + " Split Mushroom</h1>\
+					<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cocks stiffen and they merge into a single cock!</p>");
+			}
+			return;
+		}	
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + YouEatDescription(bCooked) + " mushroom and your belly full</p>");		
-	}			
+		if (player.physique.gentialscnt != 2) {
+			// Can benefit
+			if (player.Mods.cock < 20) player.Mods.cock += 1;
+			if (player.physique.gentialscnt == 1) {
+				Message("Camp()", 
+					"<h1>" + YouEatTitle(bCooked) + " Split Mushroom</h1>\
+					<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cock stiffen and swells with the power of your ancestors, but then it splits in two!</p>");
+			} else {
+				Message("Camp()", 
+					"<h1>" + YouEatTitle(bCooked) + " Split Mushroom</h1>\
+					<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cocks stiffen and swells with the power of your ancestors, but then they merge into two cocks!</p>");				
+			}
+			player.physique.gentialscnt = 2;
+			redraw();				
+			return;
+		}
+	}
+	// No effect
+	Message("Camp()", 
+		"<h1>" + YouEatTitle(bCooked) + " Mushroom</h1>\
+		<p>" + YouEatDescription(bCooked) + " mushroom and your belly full</p>");		
 }
 
 function eatTwinMushroomWoman(index, bCooked)
 {
-	if (bCooked) player.goods--;
 	rival = player.women[index];
-	redraw();
-	if (rival.physique.gentialscnt != 2) {
-		// Can benefit
-		if (rival.Mods.futa < 20) rival.Mods.futa += 1;
-		Message("", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Twin Mushroom</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the twin mushroom....</p>", true);
-		setTimeout(function() {
-			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.himher() + " and " + rival.heshe() + " grows a pair of cocks.</p>");
-			else {
-				if (rival.physique.gentialscnt == 1) $("#message").append("and " + rival.hisher() + " cock swells and splits in two!</p>");
-				else if (rival.physique.gentialscnt == 3) $("#message").append("and " + rival.hisher() + " cocks swells and join until there are only two!</p>");
-				else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
-			}
-			rival.physique.gentialscnt = 2;
-			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
-			$("#message").click(function() { $(".stats").show(); Camp(); });
-			redraw();
-		}, 1000);
+	redraw();	
+	if (bCooked) {
+		player.goods--;
+		if (rival.physique.gentialscnt == 2 || rival.physique.gentialscnt == 3) {
+			// Can benefit
+			if (rival.Mods.futa > 0) rival.Mods.futa -= 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Twin Mushroom</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the twin mushroom....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.futa == 0) $("#message").append("and the power of your ancestors fill " + rival.himher() + " and " + rival.hisher() + " cocks vanish.</p>");
+				else {
+					if (rival.physique.gentialscnt == 3) $("#message").append("and " + rival.hisher() + " cocks shrink and merge into a two cocks!</p>");
+					else if (rival.physique.gentialscnt == 2) $("#message").append("and " + rival.hisher() + " cocks swells and join until you have a single cock only!</p>");
+					else $("#message").append("and " + rival.hisher() + " cock shrinks.</p>");
+				}
+				if (rival.physique.gentialscnt == 3) rival.physique.gentialscnt = 2;
+				else rival.physique.gentialscnt = 1;
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the mushroom and " + rival.hisher() + " belly full</p>");		
+		if (rival.physique.gentialscnt != 2) {
+			// Can benefit
+			if (rival.Mods.futa < 20) rival.Mods.futa += 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Twin Mushroom</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the twin mushroom....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.himher() + " and " + rival.heshe() + " grows a pair of cocks.</p>");
+				else {
+					if (rival.physique.gentialscnt == 1) $("#message").append("and " + rival.hisher() + " cock swells and splits in two!</p>");
+					else if (rival.physique.gentialscnt == 3) $("#message").append("and " + rival.hisher() + " cocks swells and join until there are only two!</p>");
+					else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
+				}
+				rival.physique.gentialscnt = 2;
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}
 	}
+	// No effect
+	Message("Camp()", 
+		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Mushroom</h1>\
+		<p>" + WomanEatDescription(bCooked) + " the mushroom and " + rival.hisher() + " belly full</p>");		
 }
 
 // Tri Creature
 
 function eatTriCreatureYou(bCooked)
 {
-	if (bCooked) player.goods--;
-	if (player.physique.gentialscnt != 3) {
-		// Can benefit
-		player.Mods.cock += 1;
-		player.physique.gentialscnt = 3;
-		redraw();
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Tri-Seathing</h1>\
-			<p>" + YouEatDescription(bCooked) + " sea creature and you feel your cock stiffen and swells with the power of your ancestors, but then it splits into three cocks!</p>");
+	if (bCooked) {
+		player.goods--;
+		if (player.physique.gentialscnt == 2 || player.physique.gentialscnt == 3) {
+			// Can benefit
+			if (player.Mods.cock > 0) player.Mods.cock -= 1;
+			if (player.physique.gentialscnt == 3) player.physique.gentialscnt = 2;
+			else player.physique.gentialscnt = 1;
+			redraw();
+			if (player.physique.gentialscnt == 2) {
+				Message("Camp()", 
+					"<h1>" + YouEatTitle(bCooked) + " Split Mushroom</h1>\
+					<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cocks stiffen and they merge into a pair of cocks!</p>");
+			} else {
+				Message("Camp()", 
+					"<h1>" + YouEatTitle(bCooked) + " Split Mushroom</h1>\
+					<p>" + YouEatDescription(bCooked) + " mushroom and you feel your cocks stiffen and they merge into a single cock!</p>");
+			}
+			return;
+		}
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Thing</h1>\
-			<p>" + YouEatDescription(bCooked) + " thing and your belly full</p>");		
-	}			
+		if (player.physique.gentialscnt != 3) {
+			// Can benefit
+			player.Mods.cock += 1;
+			player.physique.gentialscnt = 3;
+			redraw();
+			Message("Camp()", 
+				"<h1>" + YouEatTitle(bCooked) + " Tri-Seathing</h1>\
+				<p>" + YouEatDescription(bCooked) + " sea creature and you feel your cock stiffen and swells with the power of your ancestors, but then it splits into three cocks!</p>");
+			return;
+		}
+	}
+	
+	// No effect
+	Message("Camp()", 
+		"<h1>" + YouEatTitle(bCooked) + " Thing</h1>\
+		<p>" + YouEatDescription(bCooked) + " thing and your belly full</p>");	
 }
 
 function eatTriCreatureWoman(index, bCooked)
 {
-	if (bCooked) player.goods--;
 	rival = player.women[index];
 	redraw();
-	if (rival.physique.gentialscnt != 3) {
-		// Can benefit
-		if (rival.Mods.futa < 20) rival.Mods.futa += 1;
-		Message("", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Tri-Seacreature</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the seathing....</p>", true);
-		setTimeout(function() {
-			if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows three cocks.</p>");
-			else {
-				if (rival.physique.gentialscnt == 1) $("#message").append("and " + rival.hisher() + " cock swells and splits into three!</p>");
-				else if (rival.physique.gentialscnt == 2) $("#message").append("and " + rival.hisher() + " cocks swells and split into three!</p>");
-				else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
-			}
-			rival.physique.gentialscnt = 3;
-			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
-			$("#message").click(function() { $(".stats").show(); Camp(); });
-			redraw();
-		}, 1000);
+	if (bCooked) {
+		player.goods--;
+		if (rival.physique.gentialscnt == 2 || rival.physique.gentialscnt == 3) {
+			// Can benefit
+			if (rival.Mods.futa > 0) rival.Mods.futa -= 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Tri-Seacreature</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the seathing....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.futa == 0) $("#message").append("and the power of your ancestors fill " + rival.himher() + " and " + rival.hisher() + " cocks vanish.</p>");
+				else {
+					if (rival.physique.gentialscnt == 3) $("#message").append("and " + rival.hisher() + " cocks shrink and merge into a two cocks!</p>");
+					else if (rival.physique.gentialscnt == 2) $("#message").append("and " + rival.hisher() + " cocks swells and join until you have a single cock only!</p>");
+					else $("#message").append("and " + rival.hisher() + " cock shrinks.</p>");
+				}
+				if (rival.physique.gentialscnt == 3) rival.physique.gentialscnt = 2;
+				else rival.physique.gentialscnt = 1;
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Thing</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the sae creature and " + rival.hisher() + " belly full</p>");		
+		if (rival.physique.gentialscnt != 3) {
+			// Can benefit
+			if (rival.Mods.futa < 20) rival.Mods.futa += 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Tri-Seacreature</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the seathing....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.futa == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows three cocks.</p>");
+				else {
+					if (rival.physique.gentialscnt == 1) $("#message").append("and " + rival.hisher() + " cock swells and splits into three!</p>");
+					else if (rival.physique.gentialscnt == 2) $("#message").append("and " + rival.hisher() + " cocks swells and split into three!</p>");
+					else $("#message").append("and " + rival.hisher() + " cock swells.</p>");
+				}
+				rival.physique.gentialscnt = 3;
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}		
 	}
+	// No effect
+	Message("Camp()", 
+		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Thing</h1>\
+		<p>" + WomanEatDescription(bCooked) + " the sae creature and " + rival.hisher() + " belly full</p>");
 }
 
 
@@ -305,46 +436,79 @@ function eatTriCreatureWoman(index, bCooked)
 
 function eatGrapesYou(bCooked)
 {
-	if (bCooked) player.goods--;
-	if (player.Mods.balls < 20) {
-		// Can benefit
-		player.Mods.balls += bCooked ? 2 : 1;
-		redraw();
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Grapes</h1>\
-			<p>" + YouEatDescription(bCooked) + " grapes and you feel your balls swell with the power of your ancestors!</p>");
+	if (bCooked) {
+		player.goods--;
+		if (player.Mods.balls > 0) {
+			// Can benefit
+			player.Mods.balls -= 1;
+			redraw();
+			Message("Camp()", 
+				"<h1>" + YouEatTitle(bCooked) + " Grapes</h1>\
+				<p>" + YouEatDescription(bCooked) + " grapes and you feel your balls shrink with the power of your ancestors!</p>");
+			return;
+		}
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + YouEatTitle(bCooked) + " Grapes</h1>\
-			<p>" + YouEatDescription(bCooked) + " grapes and your belly full</p>");		
-	}			
+		if (player.Mods.balls < 20) {
+			// Can benefit
+			player.Mods.balls += 1;
+			redraw();
+			Message("Camp()", 
+				"<h1>" + YouEatTitle(bCooked) + " Grapes</h1>\
+				<p>" + YouEatDescription(bCooked) + " grapes and you feel your balls swell with the power of your ancestors!</p>");
+			return;
+		}			
+	}
+	// No effect
+	Message("Camp()", 
+		"<h1>" + YouEatTitle(bCooked) + " Grapes</h1>\
+		<p>" + YouEatDescription(bCooked) + " grapes and your belly full</p>");			
 }
 
 function eatGrapesWoman(index, bCooked)
 {
-	if (bCooked) player.goods--;
 	rival = player.women[index];
 	redraw();
-	if (rival.Mods.balls < 20) {
-		// Can benefit
-		rival.Mods.balls += bCooked ? 2 : 1;
-		Message("", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Grapes</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the grapes....</p>", true);
-		setTimeout(function() {
-			if (rival.Mods.balls == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows a set of balls.</p>");
-			else $("#message").append("and " + rival.hisher() + " balls swell.</p>");
-			$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
-			$("#message").click(function() { $(".stats").show(); Camp(); });
-			redraw();
-		}, 1000);
+	
+	if (bCooked) {
+		player.goods--;
+		if (rival.Mods.balls > 0) {
+			// Can benefit
+			rival.Mods.balls -= 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Grapes</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the grapes....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.balls == 0) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.hisher() + " balls vanish.</p>");
+				else $("#message").append("and " + rival.hisher() + " balls shrink.</p>");
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}
 	} else {
-		// No effect
-		Message("Camp()", 
-			"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Grapes</h1>\
-			<p>" + WomanEatDescription(bCooked) + " the grapes and " + rival.hisher() + " belly full</p>");		
+		if (rival.Mods.balls < 20) {
+			// Can benefit
+			rival.Mods.balls += 1;
+			Message("", 
+				"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Grapes</h1>\
+				<p>" + WomanEatDescription(bCooked) + " the grapes....</p>", true);
+			setTimeout(function() {
+				if (rival.Mods.balls == 1) $("#message").append("and the power of your ancestors fill " + rival.hisher() + " and " + rival.heshe() + " grows a set of balls.</p>");
+				else $("#message").append("and " + rival.hisher() + " balls swell.</p>");
+				$("#message").append("<p align='center'><font size='-4'>click to continue</font></p>");
+				$("#message").click(function() { $(".stats").show(); Camp(); });
+				redraw();
+				return;
+			}, 1000);
+			return;
+		}		
 	}
+	// No effect
+	Message("Camp()", 
+		"<h1>" + rival.name + " " + WomanEatTitle(bCooked) + " Grapes</h1>\
+		<p>" + WomanEatDescription(bCooked) + " the grapes and " + rival.hisher() + " belly full</p>");		
 }
 
 // Domination Nut

@@ -49,7 +49,7 @@ function Forage()
 				if (val < 20) WanderFood("<h1>Found: Tough Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatDominationNutYou", "eatDominationNutWoman");
 				else if (val < 40) WanderFood("<h1>Found: Pretty Nut</h1><p>You find small nut, you feel the force of your ancestors in it</p>", "eatAllureNutYou", "eatAllureNutWoman");			
 				else if (val < 50) WanderFood("<h1>Found: Mushroom</h1><p>You find strange mushroom, with long and stiff shape, it may feed your clan</p>", "eatMushroomYou", "eatMushroomWoman");
-				else if (val < 80) WanderFood("<h1>Found: Red Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatDemonNutYou", "eatDemonNutWoman");
+				else if (val < 80) WanderFood("<h1>Found: Red Nut</h1><p>You find small red nut that smells of fire, it may feed your clan</p>", "eatDemonNutYou", "eatDemonNutWoman");
 				else if (val < 90) WanderFood("<h1>Found: Split Mushroom</h1><p>You find strange mushroom, with long and stiff shape and two stalks, it may feed your clan</p>", "eatTwinMushroomYou", "eatTwinMushroomWoman");
 				else if (val < 95) WanderNothing();
 				else WanderBattle("hot volcano");
