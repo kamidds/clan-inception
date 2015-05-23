@@ -1411,7 +1411,7 @@
 				ctx.lineWidth = 1.5;
 
 				ctx.strokeStyle = "black";
-				ctx.fillStyle = SKINCB;
+				ctx.fillStyle = SKINC;
 
 				ctx.beginPath();
 				
@@ -1546,10 +1546,11 @@
 						}	else if (skin < 100) {
 							var a = skin - 11;
 							SKINC = "rgb(" + Math.floor(227 - (a * 9.6)) + "," + Math.floor(161 - (a * 9.1)) + "," + Math.floor(115 - (a * 6.3)) + ")";
+							if (skin > 28) a = a - ((skin - 23) * 2.5);
 							SKINCB = "rgb(" + Math.floor(163 - (a * 12)) + "," + Math.floor(116 - (a * 10.8)) + "," + Math.floor(83 - (a * 7.3)) + ")";
 							LIPCOLOR = "rgb(" + Math.floor(153 - (a * 8.9)) + "," + Math.floor(82 - (a * 6.2)) + "," + Math.floor(78 - (a * 6.4)) + ")";
-							NIPPLESHADOW = "rgb(" + Math.floor(99 - (a * 9.9)) + "," + Math.floor(48 - (a * 7.2)) + "," + Math.floor(45 - (a * 7.4)) + ")";
-							EYELINER = "rgb(" + Math.floor(102 - (a * 8.9)) + "," + Math.floor(68 - (a * 6.6)) + "," + Math.floor(47 - (a * 4.4)) + ")";
+							NIPPLESHADOW = "rgb(" + Math.floor(99 - (a * 9.9)) + "," + Math.floor(48 - (a * 7.2)) + "," + Math.floor(45 - (a * 7.4)) + ")";							
+							EYELINER = "rgb(" + Math.floor(102 - (a * 8.9)) + "," + Math.floor(68 - (a * 6.6)) + "," + Math.floor(47 - (a * 4.4)) + ")";							
 						} else if (skin == 100) {
 							SKINC = "rgb(211,130,136)";
 							SKINCB = "rgb(184,45,45)";

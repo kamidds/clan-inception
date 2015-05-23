@@ -4,7 +4,9 @@ function insertCharacterCreationIO(){
     "<h1>Design Your Avatar</h1>\
     <h2>Name</h2>\
     <input id='player_name_input' value='"+randomMaleName()+"' placeholder='Name'/>\
-		<input type='checkbox' id='chkFuta'>Futanari</input>\
+		<input type='radio' name='chkGender' value='Male' checked>Male</input>\
+		<input type='radio' name='chkGender' value='Female'>Female</input>\
+		<input type='radio' name='chkGender' value='Futa'>Futanari</input>\
     <h2>Coloration</h2>\
     <table class='slidertable'>\
       <tr><td>Complexion: </td><td><div id='slider_skin'></div></td></tr>\
@@ -25,71 +27,97 @@ function insertCharacterCreationIO(){
 
 
   $("#slider_eyes").slider({value: player["physique"].irisc,min:1,max:30,slide:function(event, ui){player["physique"].irisc=ui.value; drawfigure('player_avatar', player);}});
-  $("#slider_skin").slider({value:player["physique"].skin,min:1,max:30,step:.1,slide:function(event, ui){player["physique"].skin=ui.value; drawfigure('player_avatar', player);}});
-  $("#slider_hair").slider({value:player["physique"].hairc,min:1,max:30,step:.1,slide:function(event, ui){player["physique"].hairc=ui.value; drawfigure('player_avatar', player);}});
+  $("#slider_skin").slider({value:player["physique"].skin,min:1,max:35,step:.1,slide:function(event, ui){player["physique"].skin=ui.value; drawfigure('player_avatar', player);}});
+  $("#slider_hair").slider({value:player["physique"].hairc,min:1,max:35,step:.1,slide:function(event, ui){player["physique"].hairc=ui.value; drawfigure('player_avatar', player);}});
   
   var pts = 10;
+	var gnd = "Male";
 	$("#CustomPoints").html(pts);
   
 
   $("#slider_maternalism").slider({value:51-player.maternalism,min:20,max:30,slide:function(event, ui)
   {
-	  var diff = player.maternalism - (51 - ui.value);
+		var base = $("input[name='chkGender']").val() == "Female" ? 100 : 51;
+	  var diff = player.maternalism - (base - ui.value);
 	  if (diff > pts) return false;
 	  pts -= diff;
 		$("#CustomPoints").html(pts);
-	  player.maternalism=51-ui.value; 
+	  player.maternalism = base - ui.value; 
 	  drawfigure('player_avatar', player);
   }
   });
   $("#slider_submissiveness").slider({value:51-player.submissiveness,min:20,max:30,slide:function(event, ui)
   {
-	  var diff = player.submissiveness - (51 - ui.value);
+		var base = gnd == "Female" ? 100 : 51;		
+	  var diff = player.submissiveness - (base - ui.value);
 	  if (diff > pts) return false;
 	  pts -= diff;
 		$("#CustomPoints").html(pts);
 
-	  player.submissiveness=51-ui.value; 
+	  player.submissiveness = base - ui.value; 
 	  drawfigure('player_avatar', player);}}
   );
   $("#slider_domesticity").slider({value:51-player.domesticity,min:20,max:30,slide:function(event, ui)
   {
-	  var diff = player.domesticity - (51 - ui.value);
+		var base = gnd == "Female" ? 100 : 51;		
+	  var diff = player.domesticity - (base - ui.value);
 	  if (diff > pts) return false;
 	  pts -= diff;
 		$("#CustomPoints").html(pts);
 
-	  player.domesticity=51-ui.value; 
+	  player.domesticity = base - ui.value; 
 	  drawfigure('player_avatar', player);}}
   );
   $("#slider_allure").slider({value:51-player.allure,min:20,max:30,slide:function(event, ui)
   {
-	  var diff = player.allure - (51 - ui.value);
+		var base = gnd == "Female" ? 100 : 51;		
+	  var diff = player.allure - (base - ui.value);
 	  if (diff > pts) return false;
 	  pts -= diff;
 		$("#CustomPoints").html(pts);
 
-	  player.allure=51-ui.value; 
+	  player.allure = base - ui.value; 
 	  drawfigure('player_avatar', player);}}
   );
   $("#slider_orientation").slider({value:51-player.orientation,min:20,max:30,slide:function(event, ui)
   {
-	  var diff = player.orientation - (51 - ui.value);
+		var base = gnd == "Female" ? 100 : 51;		
+	  var diff = player.orientation - (base - ui.value);
 	  if (diff > pts) return false;
 	  pts -= diff;
 		$("#CustomPoints").html(pts);
 
-	  player.orientation=51-ui.value; 
+	  player.orientation = base - ui.value; 
 	  drawfigure('player_avatar', player);}}
   );
-	$('#chkFuta').change(function() {
-		if($(this).is(":checked")) {
+	$("input[name='chkGender']").change(function(e){
+    var newgnd = $(this).val();
+		if (newgnd == "Futa") {
+			$("#player_name_input").val(randomFemaleName());
 			player.futa = 1;
-		} else {
+			if (gnd == "Female") {
+				$.each(AVATAR_TRAITS, function(index, trait){
+					player[trait] = player[trait] - 50;
+				});
+			}
+		} else if (newgnd == "Male") {
 			player.futa = 0;
+			$("#player_name_input").val(randomMaleName());
+			if (gnd == "Female") {
+				$.each(AVATAR_TRAITS, function(index, trait){
+					player[trait] = player[trait] - 50;
+				});
+			}			
+		} else if (newgnd == "Female") {
+			$("#player_name_input").val(randomFemaleName());
+			player.futa = 0;
+			$.each(AVATAR_TRAITS, function(index, trait){
+				player[trait] = player[trait] + 50;
+			});			
 		}
+		gnd = newgnd;
 		drawfigure('player_avatar', player);
-  });
+  })
 
   $("#player_name_input").click(function(){
     $("#player_name_input").focus();
