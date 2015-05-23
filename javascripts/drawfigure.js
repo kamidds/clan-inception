@@ -26,7 +26,7 @@
 				ctx.strokeStyle = SKINCB;
 				ctx.fillStyle = SKINC;
 				drawTestes(ctx);
-				var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 10);
+				var hasc = penis < 11 || (((avatar.Mods.futa > 0 && avatar != player) || avatar.futa > 0) && penis > 10);
 				//if (avatar.futa > 0) drawPenis(ctx, 0, 20, false);
 				
 				var ev = avatar.physique.gentialscnt - (Math.floor(avatar.physique.gentialscnt / 2) * 2);
@@ -133,9 +133,8 @@
 				
 				var ap = size;
 				if (cock) {
-					if ((avatar.Mods.futa + avatar.futa) > 0 && size > 10) ap = 11 - (avatar.Mods.futa + avatar.futa);
+					if (((avatar.Mods.futa > 0 && avatar != player) || avatar.futa > 0) && size > 10) ap = 11 - (avatar.futa > 0 ? avatar.futa : avatar.Mods.futa);
 					ap -= avatar.Mods.cock;
-					if (avatar.Mods.futa > 0 && !avatar.isFemale() && avatar.futa == 0) ap -= avatar.Mods.futa;
 				}
 				var a = (21 - ap) / 13;
 				if (a < 1) a = 1;
@@ -1713,7 +1712,7 @@
 						ctx.fill();
 						ctx.stroke();		
 						
-						var hasc = penis < 11 || ((avatar.Mods.futa + avatar.futa) > 0 && penis > 13);
+						var hasc = penis < 11 || (((avatar.Mods.futa > 0 && avatar != player) || avatar.futa > 0) && penis > 13);
 						var erect = avatar.desire > 50 && hasc == true;
 						if (hasc == true && erect == false) {
 							if (avatar.physique.breasts < 80) drawBellyButton(ctx);
