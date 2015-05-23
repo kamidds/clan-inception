@@ -35,7 +35,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Motherhood
   this.pregnancy = 0;
   this.children = 0;
-
+	this.pregnancyMessage = 0;
+	
   // Desire
   this.desire = 0;
 	
@@ -130,10 +131,16 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     return total/AVATAR_TRAITS.length;
   };
 	
-	this.isFemale = function() { return this.femininity() > 49; };
+    this.isFemale = function () { return this.femininity() > 49; };
 
-  this.masculinity = function() { return 100 - this.femininity(); };
-	
+    this.hasVagina = function () { return this.femininity() > 49 || this.futa > 0 || this.Mods.futa > 0; };
+
+    this.masculinity = function () { return 100 - this.femininity(); };
+
+    this.hasCock = function () { return this.femininity() < 50 || this.futa > 0 || this.Mods.futa > 0; };
+
+    this.isFutanari = function () { return this.hasCock && this.hasVagina; };
+
 	this.heshe = function() { return this.femininity() > 49 || this.futa > 0 ? "she" : "he"; }
 	this.HeShe = function() { return this.femininity() > 49 || this.futa > 0 ? "She" : "He"; }
 	this.himher = function() { return this.femininity() > 49 || this.futa > 0 ? "her" : "him"; }
@@ -162,17 +169,98 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     return this.pregnancy > 0;
   };
 
-  this.advancePregnancy = function() {
-    if (this.isPregnant()) {
-      this.pregnancy += 2.5;
-      if (this.pregnancy >= getRandomInt(90, 105)) {
-				this.activity = this == player ? "You" : this.HeShe();
-				this.activity  += " give birth to fine " + (Math.random() < 0.5 ? "son" : "daughter") + " last night. Your clan grow.";
-        this.pregnancy = 0;
-        this.children += 1;
-      }
-    }
-  };
+    this.advancePregnancy = function () {
+        if (this.isPregnant()) {
+
+            this.pregnancy += 2.5;
+
+            if (this.pregnancy >= 15 && this.pregnancy <= 25 && this.pregnancyMessage == 0) {
+
+                this.pregnancyMessage += 1;
+                //Player
+                if (this == player) {
+
+                    this.activity = "You feel strange in belly. You put hand on it. Belly feels soft and warm with Changra... you are with child!";
+
+                    if (player.isFemale()) {
+                        if (player.isFutanari()) {
+                            this.activity = this.activity + " You smile and pat belly. You make clan greater breeding woman and getting bred!";
+                        } else {
+                            this.activity = this.activity + " You smile and pat belly. You make clan greater with breeding more children!";
+                        }
+                    }
+                    if (!player.isFemale()) {
+                        this.activity = this.activity + " You frown. You should seed woman! Not get seed like woman!";
+                    }
+                }
+                    //NPC
+                else {
+                    this.activity = this.HeShe() + " come to you, " + this.himher() + " hand on stomach. " + this.HeShe() + " telling you that she is with child. You proudly rub " + this.himher() + " belly.";
+                }
+            }
+
+            if (this.pregnancy >= 48 && this.pregnancy <= 55 && this.pregnancyMessage == 1) {
+
+                this.pregnancyMessage += 1;
+
+                //Player
+                if (this == player) {
+
+                    this.activity = "Your belly is big from child, but still growing!";
+
+                    if (player.isFemale()) {
+                        if (player.isFutanari()) {
+                            this.activity = this.activity + " Your cock grow hard thinking about having more children.";
+                        } else {
+                            this.activity = this.activity + " You can't wait to have more children.";
+                        }
+                    }
+                    if (!player.isFemale()) {
+                        this.activity = this.activity + " You swear to gods to be more careful and not get bred again.";
+                    }
+                }
+                    //NPC
+                else {
+                    this.activity = "You see " + this.himher() + " with big belly. You smile.";
+                }
+            }
+
+            if (this.pregnancy >= 80 && this.pregnancyMessage == 2) {
+
+                this.pregnancyMessage += 1;
+
+                //Player
+                if (this == player) {
+
+                    this.activity = "Your belly is huge from child, you can feel it moving inside you!";
+
+                    if (player.isFemale()) {
+                        if (player.isFutanari()) {
+                            this.activity = this.activity + " Soon your clan will grow! You feel getting hard, thinking about getting bred again.";
+                        } else {
+                            this.activity = this.activity + "  Soon your clan will grow! You feel getting wet, thinking about having another child right after this.";
+                        }
+                    }
+                    if (!player.isFemale()) {
+                        this.activity = this.activity + " You hate belly. It huge hinderance.";
+                    }
+                }
+                    //NPC
+                else {
+                    this.activity = this.HeShe() + " is waddling, " + this.hisher() + " belly huge. Soon clan will have more children.";
+                    if (player.hasCock()) { this.activity = this.activity + " Your cock hard, wanting to " + this.himher() + " again."; }
+                }
+            }
+
+            if (this.pregnancy >= getRandomInt(90, 105)) {
+                this.activity = this == player ? "You" : this.HeShe();
+                this.activity += " give birth to fine " + (Math.random() < 0.5 ? "son" : "daughter") + " last night. Your clan grow.";
+                this.pregnancy = 0;
+                this.pregnancyMessage = 0;
+                this.children += 1;
+            }
+        }
+    };
 
   this.advanceDesire = function() {
     function calcDesire(subject, object) {
@@ -193,17 +281,146 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     this.desire += herDesire + playerDesire;
   };
 
-  this.fornicate = function() {
-    if ((!this.isPregnant()) && (this.futa > 0 || this.isFemale())){
-      var prob = this.maternalism - getRandomInt(50, 100);
-      if (prob > 0) { this.pregnancy = 2.5; }
-    }
-    this.desire = 0;
-		if (!player.isPregnant() && (this.Mods.futa > 0 || this.futa > 0 || !this.isFemale()) && (player.futa > 0 || player.isFemale())) {
-			var prob2= (player.maternalism + 50) - getRandomInt(50, 100);
-      if (prob2 > 0) { player.pregnancy = 2.5; }
-		}
-  };
+    this.fornicate = function (avatar) {
+
+        this.desire = 0;
+
+        //NPC only Vagina
+        if (!this.hasCock() && this.hasVagina()) {
+
+            if (player.hasCock()) {
+
+                avatar.PCfucksNPCvaginal(avatar);
+            }
+            else {
+                avatar.activity = avatar.HeShe() + " come to you and beg for release. You make " + avatar.himher() + " scream with tongue and finger. Then she licks you like shecat till you scream like beast.";
+            }
+        }
+
+        //NPC only Cock
+        if (this.hasCock() && !this.hasVagina()) {
+
+            if (player.hasVagina() && !player.hasCock) {
+                avatar.NPCfucksPCvaginal(avatar);
+            }
+
+            if (player.hasCock) {
+                if (!player.hasVagina) {
+
+                    avatar.PCwithDickNPCwithDick(avatar);
+
+                } else {
+
+                    var probPCfuck2 = getRandomInt(1, 100);
+
+                    if (!player.isPregnant()) { probPCfuck2 += 10; }
+
+                    if (probPCfuck2 > 60) {
+                        avatar.NPCfucksPCvaginal(avatar);
+
+                    } else {
+                        avatar.PCwithDickNPCwithDick(avatar);
+                    }
+                }
+            }
+        }
+
+        //NPC is futa
+        if (this.hasCock() && this.hasVagina()) {
+
+            var probPCfuck3 = getRandomInt(1, 100);
+
+            //player is male
+            if (player.hasCock && !player.hasVagina) {
+                if (probPCfuck3 < 80) { avatar.PCfucksNPCvaginal(avatar); }
+                else { avatar.PCwithDickNPCwithDick(avatar); }
+            }
+            //player is female
+            if (!player.hasCock && player.hasVagina) {
+                avatar.NPCfucksPCvaginal(avatar);
+            }
+
+            //player is futa
+            if (player.hasCock && player.hasVagina) {
+
+                if (!player.isPregnant()) { probPCfuck3 += 10; }
+
+                if (probPCfuck3 < 70) {
+                    avatar.PCfucksNPCvaginal(avatar);
+                }
+                else {
+                    avatar.NPCfucksPCvaginal(avatar);
+                }
+
+            }
+
+        }
+
+    };
+
+    this.PCwithDickNPCwithDick = function (avatar) {
+        var probPCgetFucked = getRandomInt(1, 100);
+
+        if (player.hasVagina) { probPCgetFucked -= 10; }
+
+        if (probPCgetFucked > 70) {
+            avatar.activity = avatar.HeShe() + " come to you at night. You look at cock and turn around, moving ass like woman. " + avatar.HeShe() + " takes invitation and fucks you in manhole. You moan like woman and release your seed on ground.";
+        } else {
+            avatar.activity = avatar.HeShe() + " come to you at night and in need. You push " + avatar.himher() + " on stomach and fuck manhole like pussy, releasing your seed in it.";
+        }
+    };
+
+
+    this.NPCfucksPCvaginal = function (avatar) {
+
+        var probPCgetFucked = getRandomInt(1, 100);
+
+        if (!player.isPregnant()) { probPCgetFucked += 20; }
+
+        if (probPCgetFucked < 70) {
+
+            avatar.activity = "You feel desire. You push " + avatar.himher() + " down and ride cock. You scream like shebeast as you come.";
+
+            if (player.hasCock) { avatar.activity = avatar.activity + " You coat " + avatar.himher() + " stomach with your seed."; }
+
+
+            if (!player.isPregnant()) {
+
+                var prob2 = (player.maternalism + 20) - getRandomInt(50, 100);
+
+                if (prob2 > 0) {
+                    player.pregnancy = 2.5;
+                    avatar.activity = "You feel desire. You push " + avatar.himher() + " down and ride cock. You scream like shebeast as you feel " + avatar.hisher() + " seed flowing in you.";
+                }
+            }
+
+        } else {
+            avatar.activity = "You overwhelmed from lust. You spread legs for " + avatar.himher() + " and get fucked.";
+
+            if (!player.isPregnant()) {
+
+                var prob2 = (player.maternalism + 50) - getRandomInt(50, 100);
+
+                if (prob2 > 0) {
+                    player.pregnancy = 2.5;
+                    avatar.activity = "You overwhelmed from lust. You spread legs for " + avatar.himher() + " to get fucked. " + avatar.HeShe() + " push deep inside. You moan like shebeast, as" + avatar.hisher + " seed erupts from cock inside you.";
+                }
+            }
+        }
+
+    };
+    this.PCfucksNPCvaginal = function (avatar) {
+        avatar.activity = avatar.HeShe() + " come to you and spread legs. You fuck like beast.";
+
+        if (!this.isPregnant()) {
+            var prob = this.maternalism - getRandomInt(50, 100);
+            if (prob > 0) {
+                this.pregnancy = 2.5;
+                avatar.activity = avatar.HeShe() + " come to you and spread legs like shebeast in need. You fuck like animal and fill " + avatar.himher() + " with seed.";
+            }
+        }
+    };
+
 
   this.confused = function(avatar) {
     avatar.activity = "She spend week wandering camp, muttering to self about how she man. Strong man. But she walk more and more like woman. She cry easier and easier like woman. Soon she forget how be man and only be woman for you.";
