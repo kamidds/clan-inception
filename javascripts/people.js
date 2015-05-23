@@ -75,6 +75,8 @@ function createSmith()
 	smith.futa = 0;
 
 	smith.Mods.infuse = 1;
+	smith.Mods.craftnipplerings = 1;
+	smith.items.nipplerings = 1;
 	smith.name = "Anhk";
 }
 
@@ -100,19 +102,29 @@ function MeetSmith()
 // Trade with the Smith
 function TradeSmith()
 {
-	advanceRound();
 	rival = smith;
 	redraw();
-	var canTeach = player.Mods.infuse == 0;
+	var canTeach = player.Mods.infuse == 0 || player.Mods.craftnipplerings > 0;
 	if (canTeach) {
 		$(".stats").hide();
 		$("#output").html("<h1>Trading</h1><p>You meet the woman and her clan again and talk of making and ancestors. She tell you she can teach you about</p>\
-		<div id='teach_buttons' class='push--top'>\
-		<button id='teach_infuse' class='btn btn-woman push--right'>Infuse</button>\
-		<button id='leave_btn' class='btn btn-woman push--right'>Leave</button>\
+		<div id='teach_buttons' class='push--top'>");
+		if (player.Mods.infuse == 0) {
+			$("#output").append("<button id='teach_infuse' class='btn btn-woman push--right'>Infuse</button>");
+		}
+		if (player.Mods.craftnipplerings == 0) {
+			$("#output").append("<button id='teach_rings' class='btn btn-woman push--right'>Nipple Rings</button>");
+		}	else {	
+			$("#output").append("<button id='buy_metal' class='btn btn-woman push--right'>Barter Metal</button>");
+		}
+			
+		$("#output").append("<button id='leave_btn' class='btn btn-woman push--right'>Leave</button>\
 		</div>");
 	
-		$("#teach_infuse").click(function(){TeachInfuse();});
+		if (player.Mods.infuse == 0) $("#teach_infuse").click(function(){TeachInfuse();});
+		if (player.Mods.craftnipplerings == 0) $("#teach_rings").click(function(){TeachNippleRings();});
+		else $("#buy_metal").click(function(){BuyMetal();});
+		
 		$("#leave_btn").click(function(){Camp();});
 		$("#output").append("<div id='train_output'></div>");
 
@@ -130,6 +142,28 @@ function TeachInfuse()
 		player.goods -= 10;
 		player.experience -= 5;
 		player.Mods.infuse = 1;
-		Message("Camp()", "<h1>Training</h1><p>She teach you how to cook things and chant over them to call the power of your ancestors into the thing and change it's power. You need to offer to your ancestors and give these things to the fire.</p><p>You leave her, knowing how to better build your clan.</p>");
+		Message("TradeSmith()", "<h1>Training</h1><p>She teach you how to cook things and chant over them to call the power of your ancestors into the thing and change it's power. You need to offer to your ancestors and give these things to the fire.</p><p>You leave her, knowing how to better build your clan.</p>");
+	}
+}
+
+function TeachNippleRings()
+{
+		if (player.goods < 10) $("#train_output").html("<p>You talk of this and she say you need to give her 2 hands of goods for her to teach you</p>");
+	else if (player.experience < 5) $("#train_output").html("<p>You not interested in training more now, maybe when you more of a man.</p>");
+	else {
+		player.goods -= 10;
+		player.experience -= 5;
+		player.Mods.craftnipplerings = 1;
+		Message("TradeSmith()", "<h1>Training</h1><p>She teach you about a thing called 'metal' a yellow or red thing you can easily make things from. It rare and only a few know how to find or make it. She show you how to make rings you put in a piercing into nipples. They make people desire to fuck more. You need metal to make these and she sell you metal for one hand of goods.</p><p>You can now craft these back at camp</p>");
+	}
+}
+
+function BuyMetal()
+{
+	if (player.goods < 5) $("#train_output").html("<p>You talk of this and she say you need to give her 1 hands of goods to buy metal</p>");
+	else {
+		player.goods -= 5;
+		player.metal += 1;
+		Message("TradeSmith()", "<h1>Barter Metal</h1><p>You barter for a bit of metal</p>");
 	}
 }

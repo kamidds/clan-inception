@@ -10,6 +10,12 @@ function Camp(){
 	$("#goods").show();
 	
 	$("#player_goods").html(player.goods);
+	if (player.Mods.craftnipplerings == 0) {
+		$("#metal_label").hide();
+	} else {
+		$("#metal_label").show();
+		$("#player_metal").html(player.metal);
+	}
 	
 	var ch = 0;
 	$.each(player.women, function( index, value ) {
@@ -18,7 +24,7 @@ function Camp(){
 	if (player.futa > 0) $("#player_kids").html(player.children + "/" + ch);
 	else $("#player_kids").html(ch);
 
-  	player.rest();
+  player.rest();
 	resetRival();
 	
 	$("#output").html("<h1>Camp - Week " + player.round + "</h1>");
@@ -41,22 +47,20 @@ function Camp(){
 	
 	//editPlayer();
 
+	$("#output").append(
+		"<button id='women_button' class='btn' title='Examine the women'>Women</button>\
+		<button id='forage_button' class='btn' title='Forage!'>Forage</button>\
+		<button id='hunt_button' class='btn' title='Hunt!'>Hunt</button>");
+
 	if (player.experience > 0) {
-		$("#output").append(
-			"<button id='women_button' class='btn' title='Examine the women'>Women</button>\
-			<button id='forage_button' class='btn' title='Forage!'>Forage</button>\
-			<button id='hunt_button' class='btn' title='Hunt!'>Hunt</button>\
-			<button id='exp_button' class='btn' title='Train yourself'>Train</button>\
-			<button id='load_button' class='btn' title='Load the Saved game'>Load</button>\
-			<button id='save_button' class='btn' title='Save the game'>Save</button>");
-	} else {
-		$("#output").append(
-				"<button id='women_button' class='btn' title='Examine the women'>Women</button>\
-				<button id='forage_button' class='btn' title='Forage!'>Forage</button>\
-				<button id='hunt_button' class='btn' title='Hunt!'>Hunt</button>\
-				<button id='load_button' class='btn' title='Load the Saved game'>Load</button>\
-				<button id='save_button' class='btn' title='Save the game'>Save</button>");
+		$("#output").append(" <button id='exp_button' class='btn' title='Train yourself'>Train</button>");
 	}
+	if (player.Mods.craftnipplerings > 0) {
+		$("#output").append(" <button id='craft_button' class='btn' title='Craft'>Craft</button>");
+	}	
+	$("#output").append(
+			" <button id='load_button' class='btn' title='Load the Saved game'>Load</button>\
+			<button id='save_button' class='btn' title='Save the game'>Save</button>");
 	
 	$("#output").append("<div id='camp_feed'></div>");		
 		
@@ -70,4 +74,5 @@ function Camp(){
 		saveGame("Camp()");
 	});
 	$("#exp_button").click(Train);
+	$("#craft_button").click(Craft);
 }

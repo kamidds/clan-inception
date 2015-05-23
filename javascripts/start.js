@@ -37,7 +37,7 @@ function insertCharacterCreationIO(){
 
   $("#slider_maternalism").slider({value:51-player.maternalism,min:20,max:30,slide:function(event, ui)
   {
-		var base = $("input[name='chkGender']").val() == "Female" ? 100 : 51;
+		var base = gnd == "Female" ? 100 : 51;
 	  var diff = player.maternalism - (base - ui.value);
 	  if (diff > pts) return false;
 	  pts -= diff;

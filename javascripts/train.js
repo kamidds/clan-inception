@@ -1,3 +1,6 @@
+// Training
+/*jshint multistr:true*/
+
 function Train()
 {
 	if ($("#train_buttons").is(":visible")) {

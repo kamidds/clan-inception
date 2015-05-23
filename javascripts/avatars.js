@@ -69,7 +69,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		"resistallure": 0,
 		"resistorientation": 0,
 		// Crafting
-		"infuse": 0
+		"infuse": 0,
+		"craftnipplerings": 0
 	};
 	this.getTrainingRanks = function(nc)
 	{
@@ -111,6 +112,12 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	
 	// Goods
 	this.goods = 0;
+	this.metal = 0;
+	
+	// Items
+	this.items = {
+		"nipplerings": 0
+	}
 	
 	// Methods
 		
@@ -180,6 +187,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
     }
 
     var herDesire = calcDesire(this, player);
+		if (this.items.nipplerings > 0) herDesire += 1;
     var playerDesire = calcDesire(player, this);
 
     this.desire += herDesire + playerDesire;
@@ -399,6 +407,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.futa)) that.Mods.futa = 0;
 		if (isNaN(that.Mods.balls)) that.Mods.balls = 0;
 		if (isNaN(that.Mods.infuse)) that.Mods.infuse = 0;
+		if (isNaN(that.Mods.craftnipplerings)) that.Mods.craftnipplerings = 0;
 		if (isNaN(that.Mods.pushsubmissiveness)) that.Mods.pushsubmissiveness = 0;
 		if (isNaN(that.Mods.pushdomesticity)) that.Mods.pushdomesticity = 0;
 		if (isNaN(that.Mods.pushmaternalism)) that.Mods.pushmaternalism = 0;
@@ -443,6 +452,11 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.futa)) that.futa = 0;
 		if (isNaN(that.physique.hairstyle)) that.physique.hairstyle = 1;
 		if (isNaN(that.goods)) that.goods = 0;
+		if (isNaN(that.metal)) that.metal = 0;
+		if (isNaN(that.items.nipplerings)) {
+			if (that == smith) that.items.nipplerings = 1;
+			else that.items.nipplerings = 0;
+		}
 	};
 	
 }

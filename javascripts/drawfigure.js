@@ -135,6 +135,7 @@
 				if (cock) {
 					if ((avatar.Mods.futa + avatar.futa) > 0 && size > 10) ap = 11 - (avatar.Mods.futa + avatar.futa);
 					ap -= avatar.Mods.cock;
+					if (avatar.Mods.futa > 0 && !avatar.isFemale() && avatar.futa == 0) ap -= avatar.Mods.futa;
 				}
 				var a = (21 - ap) / 13;
 				if (a < 1) a = 1;
@@ -147,13 +148,15 @@
 				var b = a / 2;
 				var c = a / 7;
 				var d = a / 5;
+				var l = avatar.Mods.cock;
+				if (avatar.Mods.futa > 0 && !avatar.isFemale() && avatar.futa == 0) l += avatar.Mods.futa;
 				var e;
-				if (cock) e = a / (5 + (avatar.Mods.cock / 2)); // width
+				if (cock) e = a / (5 + (l / 2)); // width
+
 				else e = a / 10;
 				var f = 1;
 				var y = 0;
 				var g = 0;
-				var l = avatar.Mods.cock;
 				
 				/*Penis*/
 				if (cock === true) {
@@ -470,6 +473,14 @@
 				ctx.strokeStyle = NIPPLESHADOW;
 				drawNipples(ctx, bsize, ypos);
 				ctx.stroke();
+				if (avatar.items.nipplerings > 0) {
+					ctx.strokeStyle = skin > 28 && skin < 100 ? SKINCB : "black";
+					drawNippleRings(ctx, bsize, ypos, 0, 3);
+					ctx.stroke();
+					ctx.strokeStyle = "grey";
+					drawNippleRings(ctx, bsize, ypos, 0.25, 1);				
+					ctx.stroke();
+				}
 				
 			}
 			function drawBreasts(ctx, bsize, ypos)
@@ -734,6 +745,44 @@
 				}
 			}
 		
+			function drawNippleRings(ctx, bsize, ypos, offset, wid)
+			{
+				ctx.beginPath();
+				ctx.lineWidth = wid;
+				var xpos = bLeft ? -1 * offset : offset;
+				
+				/*Nipples*/
+				var a = bsize;
+				if (bsize >= 11) {
+					if (bsize < 20) a = bsize - 11;
+					else a = bsize-20;
+				}
+				a = a * 0.9;
+				var b = a / 2;
+				var c = a / 3;
+				var d = a / 5;
+				var e = a / 10;
+				var x = 0;
+				if (shoulders < 10) x=shoulders * 6.3;
+				else if (shoulders > 20) x = 33;
+				else x = 73 - (shoulders * 2);
+				var y = nipples / 3.5;
+				if (y < 2) y = 2;
+				var z = 18 / 3.5;
+				
+				if (bsize < 11) {
+					xpos = 60 + (x / 10) - (e + (e / 2)) + xpos;
+					ypos = 111 + b + e - (x / 3) + ypos + z/2 + y/4 + offset;
+				} else if (bsize < 20) {
+					xpos = 60.01 + (x / 10) - (b + (nipples / 10)) + xpos;
+					ypos = 114.94 + a + d + (nipples / 10) - (x / 3) + ypos + z/2 + y/4 + offset;
+				} else {	
+					xpos = 55.96 + (x / 10) - (c + (nipples / 10)) + xpos;
+					ypos = 124.66 + (nipples / 10) + b - (x / 3) + ypos + z/2 + y/4 + offset;
+				}
+				
+				ctx.arc(xpos, ypos, z, 1.6 * Math.PI,	1.4 * Math.PI, false);
+			}	
 			
 			function drawHead(ctx)
 			{
@@ -1546,7 +1595,7 @@
 						}	else if (skin < 100) {
 							var a = skin - 11;
 							SKINC = "rgb(" + Math.floor(227 - (a * 9.6)) + "," + Math.floor(161 - (a * 9.1)) + "," + Math.floor(115 - (a * 6.3)) + ")";
-							if (skin > 28) a = a - ((skin - 23) * 2.5);
+							if (skin > 28) a = a - ((skin - 23) * 2.5);	// change colours to lighter so we do not get black on near black effects
 							SKINCB = "rgb(" + Math.floor(163 - (a * 12)) + "," + Math.floor(116 - (a * 10.8)) + "," + Math.floor(83 - (a * 7.3)) + ")";
 							LIPCOLOR = "rgb(" + Math.floor(153 - (a * 8.9)) + "," + Math.floor(82 - (a * 6.2)) + "," + Math.floor(78 - (a * 6.4)) + ")";
 							NIPPLESHADOW = "rgb(" + Math.floor(99 - (a * 9.9)) + "," + Math.floor(48 - (a * 7.2)) + "," + Math.floor(45 - (a * 7.4)) + ")";							
@@ -1647,9 +1696,11 @@
 						drawHairBack(ctx)
 						
 						// Draw left side, part 1
+						var bLeft = true;
 						drawHalfFigure1(ctx);
 						
 						// Draw right side, part 1
+						bLeft = false;
 						ctx.translate(78.6, 200);
 						ctx.scale(-1, 1);
 						ctx.translate(-78.6, -200);
@@ -1670,9 +1721,11 @@
 						}
 						
 						// Draw left side, part 2
+						bLeft = true;
 						drawHalfFigure2(ctx);
 						
 						// Draw right side, part 2
+						bLeft = false;
 						ctx.translate(78.6, 200);
 						ctx.scale(-1, 1);
 						ctx.translate(-78.6, -200);

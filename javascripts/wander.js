@@ -79,8 +79,10 @@ function Forage()
 			else if (val < 75) WanderFood("<h1>Found: White Nut</h1><p>You find small white nut that smells of milk, it may feed your clan</p>", "eatMilkNutYou", "eatMilkNutWoman");
 			else if (val < 90) WanderFood("<h1>Found: Melon</h1><p>You find strange melon, it may feed your clan</p>", "eatMelonYou", "eatMelonWoman");
 			else if (val < 95) {
-				if (smith.round > 0) TradeSmith();
-				else MeetSmith();
+				if (smith.round > 0) {
+					advanceRound();
+					TradeSmith();
+				}	else MeetSmith();
 			}
 			else WanderBattle("snow hills");
 		}
@@ -173,8 +175,10 @@ function Hunt()
 				return;
 			}
 			var val = getRandomInt(1, 7);
-			if (val < 3 && smith.round > 0) TradeSmith();
-			else WanderBattle("snow hills");
+			if (val < 3 && smith.round > 0) {
+				advanceRound();
+				TradeSmith();
+			}	else WanderBattle("snow hills");
 		}
 	);
 	$("#wander_button_swamp").click(
