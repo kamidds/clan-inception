@@ -72,7 +72,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		// Crafting
 		"infuse": 0,
 		"craftnipplerings": 0,
-		"craftcollar": 0
+		"craftcollar": 0,
+		"craftheadband": 0
 	};
 	this.getTrainingRanks = function(nc)
 	{
@@ -119,7 +120,8 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 	// Items
 	this.items = {
 		"nipplerings": 0,
-		"collar": 0
+		"collar": 0,
+		"headband": 0
 	}
 	
 	// Methods
@@ -623,6 +625,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 		if (isNaN(that.Mods.infuse)) that.Mods.infuse = 0;
 		if (isNaN(that.Mods.craftnipplerings)) that.Mods.craftnipplerings = 0;
 		if (isNaN(that.Mods.craftcollar)) that.Mods.craftcollar = 0;
+		if (isNaN(that.Mods.craftheadband)) that.Mods.craftheadband = 0;
 		if (isNaN(that.Mods.pushsubmissiveness)) that.Mods.pushsubmissiveness = 0;
 		if (isNaN(that.Mods.pushdomesticity)) that.Mods.pushdomesticity = 0;
 		if (isNaN(that.Mods.pushmaternalism)) that.Mods.pushmaternalism = 0;
@@ -673,6 +676,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 			else that.items.nipplerings = 0;
 		}
 		if (isNaN(that.items.collar)) that.items.collar = 0;
+		if (isNaN(that.items.headband)) that.items.headband = 0;
 	};
 	
 }

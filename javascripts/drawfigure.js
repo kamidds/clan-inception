@@ -20,6 +20,28 @@
 				context.fillStyle = gradient;
 				context.fill();
 			}
+			function drawEllipseByCenter(ctx, cx, cy, w, h) {
+				drawEllipse(ctx, cx - w/2.0, cy - h/2.0, w, h);
+			}
+
+			function drawEllipse(ctx, x, y, w, h) {
+				var kappa = .5522848,
+						ox = (w / 2) * kappa, // control point offset horizontal
+						oy = (h / 2) * kappa, // control point offset vertical
+						xe = x + w,           // x-end
+						ye = y + h,           // y-end
+						xm = x + w / 2,       // x-middle
+						ym = y + h / 2;       // y-middle
+
+				ctx.beginPath();
+				ctx.moveTo(x, ym);
+				ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+				ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+				ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+				ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+				//ctx.closePath(); // not used correctly, see comments (use to close off open path)
+				ctx.stroke();
+			}
 
 			
 			function drawNippleRings(ctx, bsize, ypos, offset, wid)
@@ -64,7 +86,9 @@
 			function drawCollar(ctx)
 			{
 				ctx.strokeStyle = "black";
-				ctx.fillStyle = "orange";			
+				if (avatar.items.collar == 1) ctx.fillStyle = "gold";
+				else if (avatar.items.collar == 2) ctx.fillStyle = "copper";
+				else ctx.fillStyle = "bronze";
 
 				ctx.beginPath();
 				ctx.lineWidth = 1.5;
@@ -104,11 +128,68 @@
 				ctx.fill();	
 				ctx.beginPath();
 				ctx.lineWidth = 0.5;
-				ctx.fillStyle = "red"
+				ctx.fillStyle = avatar == player ? "blue" : "red";
 				if (a < 11) ctx.arc(78, 63 - b + y, 2, 0, 2 * Math.PI, false);
 				else ctx.arc(78, 72 + y, 2, 0, 2 * Math.PI, false);
 				ctx.stroke();
 				ctx.fill();				
+			}
+			
+			function drawHeadBand(ctx)
+			{
+				ctx.strokeStyle = "black";
+				if (avatar.items.headband == 1) ctx.fillStyle = "silver";
+				else if (avatar.items.headband == 2) ctx.fillStyle = "gold";
+				else ctx.fillStyle = "copper";		
+
+				ctx.beginPath();
+				ctx.lineWidth = 1.5;
+				
+				/*  Head Band */
+				var a = face;
+				if (a >= 11) {
+					a = face - 11;
+					if (face > 20) a = 9;
+				}
+				var b = a / 2;
+				var c = a / 3;
+				var d = a / 5;
+				var e = a / 10;
+				var y = 14;
+				
+				if (a < 11) {
+					ctx.moveTo(59, 5 + c + y);
+					ctx.quadraticCurveTo(64, 7 + c + y, 79, 7 + c + y);
+					ctx.lineTo(79, 7 + c + y + 2);
+				} else {
+					ctx.moveTo(59 + d, 8.4 + e + y);
+					ctx.quadraticCurveTo(64, 10.4 + c + y, 78, 8.4 + e + y);
+					ctx.lineTo(79, 8.4 + e + y + 2);
+				}
+				y += 2;
+				if (a < 11) {
+					ctx.quadraticCurveTo(64, 7 + c + y, 59, 5 + c + y);
+					ctx.lineTo(59, 5 + c + y - 2);
+				} else {
+					ctx.quadraticCurveTo(64, 10.4 + c + y, 59 + d, 8.4 + e + y);
+					ctx.lineTo(59 + d, 8.4 + e + y - 2);
+				}
+				ctx.stroke();
+				ctx.fill();	
+				ctx.beginPath();
+				if (avatar.items.headband == 1) ctx.strokeStyle = "silver";
+				else if (avatar.items.headband == 2) ctx.strokeStyle = "gold";
+				else ctx.strokeStyle = "copper";				
+				ctx.lineWidth = 2;
+				y -= 2;
+				if (a < 11) {
+					ctx.moveTo(79, 7 + c + y);
+					ctx.lineTo(79, 7 + c + y + 2);
+				} else {
+					ctx.moveTo(78, 8.4 + e + y);
+					ctx.lineTo(79, 8.4 + e + y + 2);
+				}
+				ctx.stroke();
 			}
 	
 			function drawGenitals(ctx)
@@ -1580,11 +1661,13 @@
 				}
 				drawBoobs(ctx, breasts, 0);
 				
+				if (avatar.items.headband > 0) drawHeadBand(ctx);
+				
 				drawHairFront(ctx);
 				
 				drawHorns(ctx);	
 				
-				if (avatar.items.collar > 0) drawCollar(ctx);			
+				if (avatar.items.collar > 0) drawCollar(ctx);
 			}
 			
 			var canvas = document.getElementById(canvasname);
