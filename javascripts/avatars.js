@@ -655,7 +655,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 			that.pregnancy = 0;
 			that.children = 0;
 		}
-		if (that.pregnancy > 0 && !that.isFemale()) {
+		if (that.pregnancy > 0 && !(that.isFemale() || that.futa > 0)) {
 			that.pregnancy = 0;
 			that.children = 0;
 		}			
