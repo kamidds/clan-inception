@@ -400,7 +400,7 @@ function Avatar(submissiveness, domesticity, maternalism, allure, orientation) {
 
                 if (prob2 > 0) {
                     player.pregnancy = 2.5;
-                    avatar.activity = "You overwhelmed from lust. You spread legs for " + avatar.himher() + " to get fucked. " + avatar.HeShe() + " push deep inside. You moan like shebeast, as" + avatar.hisher + " seed erupts from cock inside you.";
+                    avatar.activity = "You overwhelmed from lust. You spread legs for " + avatar.himher() + " to get fucked. " + avatar.HeShe() + " push deep inside. You moan like shebeast, as" + avatar.hisher() + " seed erupts from cock inside you.";
                 }
             }
         }
