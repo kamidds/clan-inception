@@ -24,7 +24,7 @@ function Craft()
 		);
 	}
 	// Collar
-	if (player.Mods.craftnipplerings > 0) {
+	if (player.Mods.craftcollar > 0) {
 		$("#craft_buttons").append("<button id='craft_btn_2' class='btn btn-woman push--right' title='Craft a Torc Collar'>Torc</button>");
 		$("#craft_btn_2").click(
 			function(){

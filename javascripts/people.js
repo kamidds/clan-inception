@@ -117,9 +117,8 @@ function TradeSmith()
 		} else {
 			if (player.Mods.craftcollar == 0) {
 				$("#output").append("<button id='teach_collar' class='btn btn-woman push--right'>Torc</button>");
-			}	else {	
-				$("#output").append("<button id='buy_metal' class='btn btn-woman push--right'>Barter Metal</button>");
 			}
+			$("#output").append("<button id='buy_metal' class='btn btn-woman push--right'>Barter Metal</button>");
 		}
 			
 		$("#output").append("<button id='leave_btn' class='btn btn-woman push--right'>Leave</button>\
