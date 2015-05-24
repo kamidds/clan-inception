@@ -36,10 +36,10 @@ function Camp(){
 	}
 	$.each(player.women, function( index, value ) {
 		if (player.women[index].activity.indexOf("birth") != -1) {
-			if (!ps) {
+			if (ps == false) {
 				ps = true;
 				$("#output").append("<p align='left'>");
-			} else $("#output").append("<br/>");
+			}
 			$("#output").append(player.women[index].activity.split("She").join(player.women[index].name));
 		}
 	});
