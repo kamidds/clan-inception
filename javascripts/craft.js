@@ -81,6 +81,9 @@ function craftNippleRingsYou()
 {
 	player.metal -= 1;
 	player.items.nipplerings = 1;
+	player.changeNatural("orientation", -5);
+	player.orientation -= 5l;
+	player.capTraits();
 	redraw();
 	Message("Camp();Craft()", 
 		"<h1>Nipple Rings</h1>\
@@ -92,6 +95,9 @@ function craftNippleRingsWoman(index)
 	player.metal -= 1;
 	rival = player.women[index];
 	rival.items.nipplerings = 1;
+	rival.changeNatural("orientation", 5);
+	rival.orientation += 5;
+	rival.capTraits();
 	redraw();
 
 	Message("Camp();Craft()", 
