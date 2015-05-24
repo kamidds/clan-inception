@@ -114,8 +114,12 @@ function TradeSmith()
 		}
 		if (player.Mods.craftnipplerings == 0) {
 			$("#output").append("<button id='teach_rings' class='btn btn-woman push--right'>Nipple Rings</button>");
-		}	else {	
-			$("#output").append("<button id='buy_metal' class='btn btn-woman push--right'>Barter Metal</button>");
+		} else {
+			if (player.Mods.craftcollar == 0) {
+				$("#output").append("<button id='teach_collar' class='btn btn-woman push--right'>Torc</button>");
+			}	else {	
+				$("#output").append("<button id='buy_metal' class='btn btn-woman push--right'>Barter Metal</button>");
+			}
 		}
 			
 		$("#output").append("<button id='leave_btn' class='btn btn-woman push--right'>Leave</button>\
@@ -123,7 +127,10 @@ function TradeSmith()
 	
 		if (player.Mods.infuse == 0) $("#teach_infuse").click(function(){TeachInfuse();});
 		if (player.Mods.craftnipplerings == 0) $("#teach_rings").click(function(){TeachNippleRings();});
-		else $("#buy_metal").click(function(){BuyMetal();});
+		else {
+			if (player.Mods.craftcollar == 0) $("#teach_collar").click(function(){TeachCollar();});
+			$("#buy_metal").click(function(){BuyMetal();});
+		}
 		
 		$("#leave_btn").click(function(){Camp();});
 		$("#output").append("<div id='train_output'></div>");
@@ -148,13 +155,25 @@ function TeachInfuse()
 
 function TeachNippleRings()
 {
-		if (player.goods < 10) $("#train_output").html("<p>You talk of this and she say you need to give her 2 hands of goods for her to teach you</p>");
+	if (player.goods < 10) $("#train_output").html("<p>You talk of this and she say you need to give her 2 hands of goods for her to teach you</p>");
 	else if (player.experience < 5) $("#train_output").html("<p>You not interested in training more now, maybe when you more of a man.</p>");
 	else {
 		player.goods -= 10;
 		player.experience -= 5;
 		player.Mods.craftnipplerings = 1;
 		Message("TradeSmith()", "<h1>Training</h1><p>She teach you about a thing called 'metal' a yellow or red thing you can easily make things from. It rare and only a few know how to find or make it. She show you how to make rings you put in a piercing into nipples. They make people desire to fuck more. You need metal to make these and she sell you metal for one hand of goods.</p><p>You can now craft these back at camp</p>");
+	}
+}
+
+function TeachCollar()
+{
+	if (player.goods < 10) $("#train_output").html("<p>You talk of this and she say you need to give her 2 hands of goods for her to teach you</p>");
+	else if (player.experience < 5) $("#train_output").html("<p>You not interested in training more now, maybe when you more of a man.</p>");
+	else {
+		player.goods -= 10;
+		player.experience -= 5;
+		player.Mods.craftcollar = 1;
+		Message("TradeSmith()", "<h1>Training</h1><p>She teach you about how to make a collar out the yellow metal and a pretty stone, it make you a leader. It will stop any of your clan running away, especially if they men.</p><p>You can now craft these back at camp</p>");
 	}
 }
 

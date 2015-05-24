@@ -20,6 +20,96 @@
 				context.fillStyle = gradient;
 				context.fill();
 			}
+
+			
+			function drawNippleRings(ctx, bsize, ypos, offset, wid)
+			{
+				ctx.beginPath();
+				ctx.lineWidth = wid;
+				var xpos = bLeft ? -1 * offset : offset;
+				
+				/*Nipples*/
+				var a = bsize;
+				if (bsize >= 11) {
+					if (bsize < 20) a = bsize - 11;
+					else a = bsize-20;
+				}
+				a = a * 0.9;
+				var b = a / 2;
+				var c = a / 3;
+				var d = a / 5;
+				var e = a / 10;
+				var x = 0;
+				if (shoulders < 10) x=shoulders * 6.3;
+				else if (shoulders > 20) x = 33;
+				else x = 73 - (shoulders * 2);
+				var y = nipples / 3.5;
+				if (y < 2) y = 2;
+				var z = 18 / 3.5;
+				
+				if (bsize < 11) {
+					xpos = 60 + (x / 10) - (e + (e / 2)) + xpos;
+					ypos = 111 + b + e - (x / 3) + ypos + z/2 + y/4 + offset;
+				} else if (bsize < 20) {
+					xpos = 60.01 + (x / 10) - (b + (nipples / 10)) + xpos;
+					ypos = 114.94 + a + d + (nipples / 10) - (x / 3) + ypos + z/2 + y/4 + offset;
+				} else {	
+					xpos = 55.96 + (x / 10) - (c + (nipples / 10)) + xpos;
+					ypos = 124.66 + (nipples / 10) + b - (x / 3) + ypos + z/2 + y/4 + offset;
+				}
+				
+				ctx.arc(xpos, ypos, z, 1.6 * Math.PI,	1.4 * Math.PI, false);
+			}
+			
+			function drawCollar(ctx)
+			{
+				ctx.strokeStyle = "black";
+				ctx.fillStyle = "orange";			
+
+				ctx.beginPath();
+				ctx.lineWidth = 1.5;
+				
+				/*Collar*/
+				var a = shoulders;
+				if (a >= 11) {
+					a = shoulders - 11;
+					if (shoulders > 20) a = 9;
+				}
+				var b = a / 2;
+				var c = a / 3;
+				var d = a / 5;
+				var e = a / 10;
+				var f = a * 2;
+				var y = 6;
+				if (a < 11) {
+					ctx.moveTo(60 + e + b + d, 58 - b + y);
+					ctx.quadraticCurveTo(65 + e + b + d, 65 - b + y, 78, 65 - b + y);
+					ctx.lineTo(78, 68 - b + y);
+				} else {
+					ctx.moveTo(69, 53 + y);
+					ctx.quadraticCurveTo(74, 60 + y, 78, 74 + y);
+					ctx.lineTo(78, 77 + y);
+				}
+				ctx.strokeStyle = "black";
+				y += 3;
+				if (a < 11) {
+					ctx.quadraticCurveTo(65 + e + b + d, 65 - b + y, 60 + e + b + d, 58 - b + y);
+					ctx.lineTo(60 + e + b + d, 58 - b + y - 3);
+				} else {
+					ctx.quadraticCurveTo(74, 60 + y, 69, 53 + y);
+					ctx.lineTo(69, 53 + y - 3);
+				}	
+				
+				ctx.stroke();
+				ctx.fill();	
+				ctx.beginPath();
+				ctx.lineWidth = 0.5;
+				ctx.fillStyle = "red"
+				if (a < 11) ctx.arc(78, 63 - b + y, 2, 0, 2 * Math.PI, false);
+				else ctx.arc(78, 72 + y, 2, 0, 2 * Math.PI, false);
+				ctx.stroke();
+				ctx.fill();				
+			}
 	
 			function drawGenitals(ctx)
 			{
@@ -743,45 +833,6 @@
 					ctx.arc(55.96 + (x / 10) - (c + (nipples / 10)), 124.66 + (nipples / 10) + b - (x / 3) + ypos, y / 2, 1.3 - (nipples / 20), 3 + (nipples / 20), false);
 				}
 			}
-		
-			function drawNippleRings(ctx, bsize, ypos, offset, wid)
-			{
-				ctx.beginPath();
-				ctx.lineWidth = wid;
-				var xpos = bLeft ? -1 * offset : offset;
-				
-				/*Nipples*/
-				var a = bsize;
-				if (bsize >= 11) {
-					if (bsize < 20) a = bsize - 11;
-					else a = bsize-20;
-				}
-				a = a * 0.9;
-				var b = a / 2;
-				var c = a / 3;
-				var d = a / 5;
-				var e = a / 10;
-				var x = 0;
-				if (shoulders < 10) x=shoulders * 6.3;
-				else if (shoulders > 20) x = 33;
-				else x = 73 - (shoulders * 2);
-				var y = nipples / 3.5;
-				if (y < 2) y = 2;
-				var z = 18 / 3.5;
-				
-				if (bsize < 11) {
-					xpos = 60 + (x / 10) - (e + (e / 2)) + xpos;
-					ypos = 111 + b + e - (x / 3) + ypos + z/2 + y/4 + offset;
-				} else if (bsize < 20) {
-					xpos = 60.01 + (x / 10) - (b + (nipples / 10)) + xpos;
-					ypos = 114.94 + a + d + (nipples / 10) - (x / 3) + ypos + z/2 + y/4 + offset;
-				} else {	
-					xpos = 55.96 + (x / 10) - (c + (nipples / 10)) + xpos;
-					ypos = 124.66 + (nipples / 10) + b - (x / 3) + ypos + z/2 + y/4 + offset;
-				}
-				
-				ctx.arc(xpos, ypos, z, 1.6 * Math.PI,	1.4 * Math.PI, false);
-			}	
 			
 			function drawHead(ctx)
 			{
@@ -1531,7 +1582,9 @@
 				
 				drawHairFront(ctx);
 				
-				drawHorns(ctx);		
+				drawHorns(ctx);	
+				
+				if (avatar.items.collar > 0) drawCollar(ctx);			
 			}
 			
 			var canvas = document.getElementById(canvasname);
@@ -1740,6 +1793,7 @@
 							drawGenitals(ctx);
 							if (avatar.physique.breasts < 80) drawBellyButton(ctx);
 						}
+					
 					}
 				}
 			}
