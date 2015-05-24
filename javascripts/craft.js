@@ -150,7 +150,7 @@ function craftCollarWoman(index)
 		<p>You make the torc at fit it around " + rival.name + "'s neck, marking them as yours!</p>");			
 }
 
-// Collar
+// Head band
 
 function craftHeadbandYou()
 {
