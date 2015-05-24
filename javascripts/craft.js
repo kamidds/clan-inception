@@ -29,7 +29,7 @@ function Craft()
 		$("#craft_btn_2").click(
 			function(){
 				if (player.metal == 0) $("#craft_display").append("<p>You need metal to make this</p>");
-				if (player.goods == 0) $("#craft_display").append("<p>You need a pretty gem to make this</p>");
+				else if (player.goods == 0) $("#craft_display").append("<p>You need a pretty gem to make this</p>");
 				else CraftIt("Torc (Collar)", "collar", "craftCollarYou", "craftCollarWoman");
 			}
 		);
@@ -40,8 +40,18 @@ function Craft()
 		$("#craft_btn_3").click(
 			function(){
 				if (player.metal == 0) $("#craft_display").append("<p>You need metal to make this</p>");
-				if (player.goods == 0) $("#craft_display").append("<p>You need a pretty gem to make this</p>");
+				else if (player.goods == 0) $("#craft_display").append("<p>You need a pretty gem to make this</p>");
 				else CraftIt("Headband", "headband", "craftHeadbandYou", "craftHeadbandWoman");
+			}
+		);
+	}	
+	// Belly button Stud
+	if (player.Mods.craftbellybuttonstud > 0) {
+		$("#craft_buttons").append("<button id='craft_btn_4' class='btn btn-woman push--right' title='Craft a Belly Button Stud'>Belly Button Stud</button>");
+		$("#craft_btn_4").click(
+			function(){
+				if (player.goods == 0) $("#craft_display").append("<p>You need a pretty gem to make this</p>");
+				else CraftIt("Belly Button Stud", "bellybuttonstud", "craftBellyButtonStudYou", "craftBellyButtonStudWoman");
 			}
 		);
 	}		
@@ -86,6 +96,7 @@ function CraftIt(desc, itm, actionyou, actionwoman)
 	});	
 }
 
+
 // Nipple Rings
 
 function craftNippleRingsYou()
@@ -115,6 +126,7 @@ function craftNippleRingsWoman(index)
 		"<h1>Nipple Rings</h1>\
 		<p>You make the rings and with a sharp bone needle pierce " + rival.name + " nipples and fit the rings!</p>");			
 }
+
 
 // Collar
 
@@ -150,6 +162,7 @@ function craftCollarWoman(index)
 		<p>You make the torc at fit it around " + rival.name + "'s neck, marking them as yours!</p>");			
 }
 
+
 // Head band
 
 function craftHeadbandYou()
@@ -182,4 +195,37 @@ function craftHeadbandWoman(index)
 	Message("Camp();Craft()", 
 		"<h1>Torc</h1>\
 		<p>You make the headband and put it on " + rival.name + "'s head!</p>");			
+}
+
+
+// Belly Button Stud
+
+function craftBellyButtonStudYou()
+{
+	player.goods -= 1;
+	player.items.bellybuttonstud = 1;
+	player.changeNatural("maternalism", -5);
+	player.maternalism -= 5;
+	player.capTraits();
+	player.calcPhysique();
+	redraw();
+	Message("Camp();Craft()", 
+		"<h1>Belly Button Stud</h1>\
+		<p>You make the stud and with a sharp bone needle pierce your belly button and fit the stud.</p>");			
+}
+
+function craftBellyButtonStudWoman(index)
+{
+	player.goods -= 1;	
+	rival = player.women[index];
+	rival.items.bellybuttonstud = 1;
+	rival.changeNatural("maternalism", 5);
+	rival.maternalism += 5;
+	rival.capTraits();
+	rival.calcPhysique();
+	redraw();
+
+	Message("Camp();Craft()", 
+		"<h1>Belly Button Stud</h1>\
+		<p>ou make the stud and with a sharp bone needle pierce " + rival.name + "'s belly button and fit the stud.</p>");			
 }

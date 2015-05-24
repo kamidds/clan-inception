@@ -118,9 +118,12 @@ function TradeSmith()
 			if (player.Mods.craftcollar == 0) {
 				$("#output").append("<button id='teach_collar' class='btn btn-woman push--right'>Torc</button>");
 			}
+			if (player.Mods.craftbellybuttonstud == 0) {
+				$("#output").append("<button id='teach_bellybuttonstud' class='btn btn-woman push--right'>Belly Button Stud</button>");
+			}	
 			if (player.Mods.craftheadband == 0) {
 				$("#output").append("<button id='teach_headband' class='btn btn-woman push--right'>Headband</button>");
-			}			
+			}				
 			$("#output").append("<button id='buy_metal' class='btn btn-woman push--right'>Barter Metal</button>");
 		}
 			
@@ -132,6 +135,7 @@ function TradeSmith()
 		else {
 			if (player.Mods.craftcollar == 0) $("#teach_collar").click(function(){TeachCollar();});
 			if (player.Mods.craftheadband == 0) $("#teach_headband").click(function(){TeachHeadBand();});
+			if (player.Mods.craftbellybuttonstud == 0) $("#teach_bellybuttonstud").click(function(){TeachBellyButtonStud();});
 			$("#buy_metal").click(function(){BuyMetal();});
 		}
 		
@@ -189,6 +193,18 @@ function TeachHeadBand()
 		player.experience -= 5;
 		player.Mods.craftheadband = 1;
 		Message("TradeSmith()", "<h1>Training</h1><p>She teach you about how to make a band to wear on head out the yellow metal, it make you more handsome.</p><p>You can now craft these back at camp</p>");
+	}
+}
+
+function TeachBellyButtonStud()
+{
+	if (player.goods < 10) $("#train_output").html("<p>You talk of this and she say you need to give her 2 hands of goods for her to teach you</p>");
+	else if (player.experience < 5) $("#train_output").html("<p>You not interested in training more now, maybe when you more of a man.</p>");
+	else {
+		player.goods -= 10;
+		player.experience -= 5;
+		player.Mods.craftbellybuttonstud = 1;
+		Message("TradeSmith()", "<h1>Training</h1><p>She teach you about how to make a stud you pierce into your belly button, very little metal and pretty stone needed.</p><p>You can now craft these back at camp</p>");
 	}
 }
 

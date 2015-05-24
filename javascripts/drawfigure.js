@@ -114,7 +114,6 @@
 					ctx.quadraticCurveTo(74, 60 + y, 78, 74 + y);
 					ctx.lineTo(78, 77 + y);
 				}
-				ctx.strokeStyle = "black";
 				y += 3;
 				if (a < 11) {
 					ctx.quadraticCurveTo(65 + e + b + d, 65 - b + y, 60 + e + b + d, 58 - b + y);
@@ -190,6 +189,22 @@
 					ctx.lineTo(79, 8.4 + e + y + 2);
 				}
 				ctx.stroke();
+			}
+			
+			function drawBellyButtonStud(ctx)
+			{
+				/*Belly Button Stud*/
+				
+				var a = 21 - waist;
+				
+				ctx.beginPath();
+				ctx.lineWidth = 0.5;
+				ctx.fillStyle = avatar == player ? "blue" : "red";
+				ctx.strokeStyle = "black";
+				
+				ctx.arc(80, 162 + a/5, 3, 0, 2 * Math.PI, false);
+				ctx.stroke();
+				ctx.fill();
 			}
 	
 			function drawGenitals(ctx)
@@ -559,6 +574,8 @@
 				ctx.quadraticCurveTo(82, 162 + d, 80, 163 + d);
 				
 				ctx.stroke();
+				
+				if (avatar.items.bellybuttonstud > 0) drawBellyButtonStud(ctx);
 			}
 			
 			function drawHips(ctx)
